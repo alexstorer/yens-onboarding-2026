@@ -15,8 +15,8 @@ You'll pick up the ideas and habits for that step by step: how to size up what a
 before you run it, how to send it off and check how it went, how to fix it when something
 breaks, and how to write down what you did so you (or a labmate) can run it again.
 
-By the end you will have done it on real work: a hundred SEC filings processed by a job you
-sized yourself, then checked against what it actually used.
+By the end you will have done it on real work: nearly a thousand SEC filings processed by a
+job you sized yourself, then checked against what it actually used.
 
 Here's what we'll do today:
 
@@ -70,6 +70,3 @@ Three things need to be in place. **Say so now if any of them are missing:**
 Work through the sections in order — they build on each other, and the numbers you write
 down in one are the inputs to the next. Each page ends with **bonus** work, folded away,
 for when you finish early.
-
-**Take your own breaks** inside the work blocks. There is no whole-room break today;
-stand up and get coffee when your table reaches a natural stopping point.

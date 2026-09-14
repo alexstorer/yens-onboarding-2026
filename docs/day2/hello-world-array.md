@@ -102,7 +102,7 @@ Submit it:
 
 ```bash
 mkdir -p logs
-sbatch --reservation=class slurm/hello_array.slurm
+sbatch --reservation=class_cpu slurm/hello_array.slurm
 squeue --me
 ```
 {: .yens }

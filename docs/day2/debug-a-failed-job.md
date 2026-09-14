@@ -71,7 +71,7 @@ Your repo ships several Slurm scripts that are **deliberately broken**. Fix `slu
 Submit the first one:
 
 ```bash
-sbatch --reservation=class slurm/fix_me.slurm
+sbatch --reservation=class_cpu slurm/fix_me.slurm
 ```
 {: .yens }
 
@@ -122,7 +122,7 @@ Then resubmit — **keep debugging and resubmitting until the Slurm email says t
 Same drill, a different setup mistake. Submit it, watch it fail, and read its error log:
 
 ```bash
-sbatch --reservation=class slurm/fix_me_2.slurm
+sbatch --reservation=class_cpu slurm/fix_me_2.slurm
 squeue --me
 cat logs/fix_me_2_*.err
 ```
@@ -135,7 +135,7 @@ Troubleshoot with Claude in plan mode (`> Help me troubleshoot logs/fix_me_2_*.e
 One more, hiding yet another setup mistake. Same process:
 
 ```bash
-sbatch --reservation=class slurm/fix_me_3.slurm
+sbatch --reservation=class_cpu slurm/fix_me_3.slurm
 squeue --me
 cat logs/fix_me_3_*.err
 ```

@@ -133,7 +133,7 @@ plus queue jitter, not a hundred.
 | Runs clean, `results/` empty | Script computes `result` but never writes it. The likeliest single bug — the three snippets above only assemble if the last one is present. |
 | First filing skipped, last task `IndexError` | 1-based thinking: `filings[task_id - 1]`. Tasks and the list both count from 0 here, so no shift. |
 | All tasks overwrite one file | Output path not derived from the filing or the task ID. |
-| Job sits in `PD` far longer than expected | `--reservation=class` omitted, so they are queueing against the whole cluster. |
+| Job sits in `PD` far longer than expected | `--reservation=class_cpu` omitted, so they are queueing against the whole cluster. |
 | "It didn't work" with no detail | They have not opened a per-task `.err`. Point at one failing task's file, not the whole glob. |
 
 ## Done looks like

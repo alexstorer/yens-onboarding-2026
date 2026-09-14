@@ -22,9 +22,8 @@ ready for the next lecture. Put up a red sticky if you run into trouble. If you'
 fast, do the bonus exercises to level up (rather than moving ahead to future sections).
 
 {: .important }
-> Part 1 assumes only the two accounts from
-> **[Before You Arrive]({{ '/prework/' | relative_url }})**: a GitHub account and Claude
-> through Stanford. Everything else — the terminal, the Yens login, the access token — you
+> Part 1 assumes only two accounts: **a GitHub account** and **Claude
+> through Stanford**. Everything else — the terminal, the Yens login, the access token — you
 > set up here, starting from nothing. If either account is missing, flag it early rather
 > than falling behind.
 

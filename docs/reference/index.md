@@ -35,8 +35,6 @@ Slack channel is the place for questions.
 |---|---|
 | [Transferring Files (scp)]({{ '/reference/transferring-files/' | relative_url }}) | Copying files between your laptop and the cluster |
 | [Exploring Cluster Usage Data]({{ '/reference/cluster-usage-data/' | relative_url }}) | Reading a real Yens monitoring snapshot; per-user vs. whole-node limits |
-| [Parallelization Basics]({{ '/reference/parallelization/' | relative_url }}) | When parallelism helps, and the three shapes it takes on a cluster |
-| [Documenting Your Pipeline]({{ '/reference/documenting-your-pipeline/' | relative_url }}) | The README that makes a pipeline rerunnable by someone else |
 
 ## Going further
 
@@ -44,6 +42,5 @@ Optional, self-serve. Each stands alone — pick one up whenever you like.
 
 | Page | What it covers |
 |---|---|
-| [LLM-as-a-Judge]({{ '/reference/llm-as-a-judge/' | relative_url }}) | Scale a research judgment call: one model decides, a second checks it, your code routes the contested cases to a human |
 | [GPUs & Local LLMs]({{ '/day2/gpus/' | relative_url }}) | Local weights vs. the Gateway vs. a third party; GPU tiers and how to ask for one; serving and querying a model on cluster hardware |
 | [Handling LLM Failure Modes]({{ '/reference/llm-failure-modes/' | relative_url }}) | Hallucination, inconsistency, and validating output at scale |
