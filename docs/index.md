@@ -22,14 +22,6 @@ Please ensure you have the following ready for class:
 1. **A [GitHub account](https://github.com/signup)**
 2. **[Claude, through Stanford](https://uit.stanford.edu/service/claude)**
 
-{: .warning }
-> **Request Claude now, not the night before.** Approval goes through ServiceNow and is not
-> instant. It is the one item here with someone else in the loop.
-
-{: .note }
-> In class: put a **🟢 green sticky** on your laptop lid when you're done with a step,
-> and a **🔴 red sticky** if you're stuck, so an instructor can come to you.
-
 ---
 
 ## The Two Days

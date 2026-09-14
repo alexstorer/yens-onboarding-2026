@@ -43,6 +43,7 @@ permalink: /day2/submit-a-slurm-job/
 > cd ~/yens-onboarding-2026
 > source .venv/bin/activate
 > ```
+> {: .yens }
 
 ## Read the Queue First
 
@@ -54,6 +55,7 @@ Before you add a job to the queue, look at the queue.
 ```bash
 squeue
 ```
+{: .yens }
 
 Look at the columns:
 - **JOBID** — unique ID for each job
@@ -67,12 +69,14 @@ There is also a shorthand to filter to just your jobs:
 ```bash
 squeue --me
 ```
+{: .yens }
 
 You can also filter by partition — for example, to see only GPU jobs:
 
 ```bash
 squeue -p gpu
 ```
+{: .yens }
 
 Every `PD` job is waiting for a node with the resources it requested. When Slurm finds a matching node — it runs.
 
@@ -81,6 +85,7 @@ Now run `sinfo` to see the state of all nodes and the partitions they belong to:
 ```bash
 sinfo
 ```
+{: .yens }
 
 - How many compute nodes are currently idle (`STATE=idle`)?
 - What partitions exist? Which one would you use for a normal job?
@@ -97,6 +102,7 @@ sinfo
 ```bash
 deactivate
 ```
+{: .yens }
 
 `sbatch` copies your current shell's environment into the job by default, so if `.venv` is active when you submit, it **rides along** — and the job can quietly succeed even if the script forgot to activate it. Deactivate first so the job runs on only what the **script** sets up — the way it'll run for a teammate, or for you from a clean login.
 
@@ -107,6 +113,7 @@ Your repo already has a `slurm/` folder (with a few prepared scripts). Just make
 ```bash
 mkdir -p logs
 ```
+{: .yens }
 
 {: .warning }
 > **The `logs/` folder must exist before you submit.** Slurm opens your `--output`/`--error` files the moment the job starts — it does **not** create missing directories. If you point `--output` at `logs/…` but there's no `logs/` folder, the job **fails silently**: nothing runs and no log file appears to tell you why. Create it once, up front. If instead you point `--output` at a bare `extract.out` with no folder, the file lands in whatever directory you ran `sbatch` from.
@@ -126,6 +133,7 @@ The first line of every shell script is the **shebang**:
 ```bash
 #!/bin/bash
 ```
+{: .yens }
 
 The `#!` (the **shebang**) tells the operating system which **interpreter** — the program that reads your script and runs it line by line — to use for the rest of the file; here, the Bash shell at `/bin/bash`. Without it, the system doesn't know whether your script is Bash, Python, or something else. It has to be the very first line of the file.
 
@@ -142,6 +150,7 @@ These are instructions to the Slurm scheduler — add them at the top of the fil
 #SBATCH --mem=<RAM>
 #SBATCH --cpus-per-task=<cores>
 ```
+{: .yens }
 
 What each one is:
 
@@ -174,6 +183,7 @@ cd $HOME/yens-onboarding-2026
 # Activate your virtual environment
 source .venv/bin/activate
 ```
+{: .yens }
 
 {: .note }
 > **What's already installed.** Your `.venv` was built from `requirements.txt` on Day 1. Once it's activated, any job can use these packages:
@@ -198,6 +208,7 @@ The last line of the file is the actual work — the command Slurm will run on t
 ```bash
 python scripts/extract_form_3_batch.py
 ```
+{: .yens }
 
 This runs the **10-filing batch you profiled** — `scripts/extract_form_3_batch.py` loops over `NUM_FILINGS` (10) SEC Form 3 filings from `data/aws_links.csv` — so the `--time`, `--mem`, and `--cpus-per-task` you filled in above come straight from your Profiling README.
 
@@ -243,18 +254,21 @@ Save the file. Here's the whole script, with its four parts labeled:
 sbatch --reservation=class slurm/extract_form_3_batch.slurm
 # Submitted batch job 12345678
 ```
+{: .yens }
 
 Monitor the queue:
 
 ```bash
 squeue --me
 ```
+{: .yens }
 
 ### Cancel it
 
 ```bash
 scancel JOBID
 ```
+{: .yens }
 
 Replace `JOBID` with your job's actual number — the one `sbatch` printed (`Submitted batch job 12345678`) and that shows in `squeue --me`. It's not the literal word `JOBID`.
 
@@ -263,6 +277,7 @@ Confirm it is gone:
 ```bash
 squeue --me
 ```
+{: .yens }
 
 {: .note }
 > You may briefly see your job's status change to **CG** (completing) before it disappears from the queue — that's normal, not an error.
@@ -279,12 +294,14 @@ ml claude-code
 cd ~/yens-onboarding-2026
 claude
 ```
+{: .yens }
 
 **Then ask it** — replacing `SUNetID` with your own:
 
 ```
 > Add --mail-type=ALL and --mail-user=SUNetID@stanford.edu to the #SBATCH directives in slurm/extract_form_3_batch.slurm
 ```
+{: .claude }
 
 {: .warning }
 > **Use your own SUNet ID.** If the literal text `SUNetID@stanford.edu` ends up in the
@@ -298,6 +315,7 @@ and get your shell back. The two lines it should have added:
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=SUNetID@stanford.edu
 ```
+{: .yens }
 
 `ALL` sends an email when the job starts, ends, and fails — including a utilization summary showing how much CPU and RAM it actually used.
 
@@ -306,6 +324,7 @@ Resubmit:
 ```bash
 sbatch --reservation=class slurm/extract_form_3_batch.slurm
 ```
+{: .yens }
 
 Once your job runs, check your inbox. You should receive two emails: one when the job **starts** and one when it **ends**. The start email tells you when it began — compare that to when you submitted to see how long it **waited in the queue**. The end email includes a **utilization summary** (how much CPU time and memory the job actually used) and the job's **exit status**: `0` means success; any other value means it failed.
 
@@ -319,12 +338,14 @@ Everything so far has been batch submission — write a script, `sbatch` it, wai
 ```bash
 srun --reservation=class --pty --cpus-per-task=2 --mem=4G --time=00:30:00 bash
 ```
+{: .yens }
 
 Your interactive session is a Slurm job like any other — run `squeue --me` and you'll see it listed (state `R`) until you release it:
 
 ```bash
 squeue --me
 ```
+{: .yens }
 
 Once it drops you into a shell on your allocated node, you're on a fresh shell — do the same setup your batch script does, then run the script directly:
 
@@ -333,6 +354,7 @@ cd $HOME/yens-onboarding-2026   # into your project
 source .venv/bin/activate                   # activate your environment
 python scripts/extract_form_3_batch.py   # run it and watch the output live
 ```
+{: .yens }
 
 Because you're interactive, you see the output as it happens and can re-run instantly after a fix — no re-queuing. Type `exit` to release the allocation when you're done.
 
@@ -345,6 +367,7 @@ Submit it:
 ```bash
 sbatch --reservation=class slurm/mystery.slurm
 ```
+{: .yens }
 
 While your job is running you can SSH to the node it's on and watch it work. (Nodes are **shared** — other users' jobs run on them too — but your job has its own **dedicated cores and RAM**.)
 
@@ -353,6 +376,7 @@ First, run `squeue --me` to find which node it landed on — the `NODELIST` colu
 ```bash
 squeue --me
 ```
+{: .yens }
 
 Then SSH to that node and watch your processes live:
 
@@ -360,8 +384,9 @@ Then SSH to that node and watch your processes live:
 ssh SUNetID@yen10   # use your job's actual node
 htop -u SUNetID                  # or: top -u SUNetID
 ```
+{: .yens }
 
-You'll see the mystery script's Python workers pinning the cores you requested. Press `q` to quit `htop`, then `exit` to leave the node.
+You'll see the mystery script's Python workers pinning the cores you requested. Press <kbd>q</kbd> to quit `htop`, then `exit` to leave the node.
 
 {: .note }
 > You can only SSH to a compute node **while you have a job running on it** — once the job ends (or if you never had one there), SSH to that node is refused. You can't hop onto arbitrary compute nodes.
@@ -380,32 +405,37 @@ with `slurm/chain_step1.slurm` and `slurm/chain_step2.slurm` to run them.
 ```bash
 cat slurm/chain_step1.slurm slurm/chain_step2.slurm
 ```
+{: .yens }
 
 **Step 2 — have Claude add the email lines to step 2** *before* you submit, so you get a note when the chain finishes:
 
 ```
 > Add #SBATCH --mail-type=ALL and #SBATCH --mail-user=SUNetID@stanford.edu to slurm/chain_step2.slurm.
 ```
+{: .claude }
 
 **Step 3 — submit both back-to-back.** Step 1 runs for ~2 minutes, so fire them off one after the other and let it crunch while step 2 queues behind it. Submit step 1 and note the `JOBID` it prints:
 
 ```bash
 sbatch --reservation=class slurm/chain_step1.slurm
 ```
+{: .yens }
 
 Then submit step 2 right away, chained to the first — replace `JOBID` with step 1's ID:
 
 ```bash
 sbatch --reservation=class --dependency=afterok:JOBID slurm/chain_step2.slurm
 ```
+{: .yens }
 
 **Step 4 — watch the queue.** Both jobs are in, but step 2 waits its turn. `watch` re-runs a command every couple of seconds, so you can see the handoff happen live:
 
 ```bash
 watch squeue --me
 ```
+{: .yens }
 
-Step 1 shows `R` (running) while step 2 sits `PD` with reason `(Dependency)`. When step 1 finishes, step 2 flips to `R` on its own — you do nothing. Press `Ctrl-C` to stop watching.
+Step 1 shows `R` (running) while step 2 sits `PD` with reason `(Dependency)`. When step 1 finishes, step 2 flips to `R` on its own — you do nothing. Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop watching.
 
 {: .note }
 > 💡 If step 1 **fails**, `afterok` is never satisfied, so step 2's reason in `squeue` changes from `(Dependency)` to `(DependencyNeverSatisfied)`. That job will never run — but it won't clear itself either. It sits in the queue until **you** cancel it with `scancel JOBID`. Clear it, fix step 1, then requeue the chain.
@@ -415,6 +445,7 @@ Step 1 shows `R` (running) while step 2 sits `PD` with reason `(Dependency)`. Wh
 ```bash
 cat /scratch/users/SUNetID/chain_demo/step2_result.txt
 ```
+{: .yens }
 
 Step 2's number is computed from step 1's — proof the scratch file passed between them. Had step 1 failed, step 2 would never have started.
 
@@ -430,12 +461,14 @@ Fire a quick throwaway job at `dev` with `-p dev` (and `--wrap`, which runs an i
 ```bash
 sbatch --reservation=class -p dev --mail-type=ALL --mail-user=SUNetID@stanford.edu --wrap="hostname; sleep 30"
 ```
+{: .yens }
 
 Watch it — `dev` usually starts right away:
 
 ```bash
 squeue --me
 ```
+{: .yens }
 
 You'll get a completion email in a moment. Confirm it says the job completed.
 
@@ -449,6 +482,7 @@ requested — CPU cores, memory, and time limit:
 ```bash
 squeue -o "%.18i %.9P %.8j %.8u %.8T %.10M %.10l %.4C %.7m %.15R"
 ```
+{: .yens }
 
 The columns are: job ID, partition, job name, user, state, time elapsed, time limit, CPU
 cores requested, memory requested, and reason/node.
@@ -462,6 +496,7 @@ alias longsqueue='squeue -o "%.18i %.9P %.8j %.8u %.8T %.10M %.10l %.4C %.7m %.1
 EOF
 source ~/.bash_profile
 ```
+{: .yens }
 
 Now run `longsqueue`. If the alias comes back "not found", check the tail of the file with
 `tail -3 ~/.bash_profile` before appending again.
@@ -473,6 +508,7 @@ Pick any job from `squeue` and look up its full details:
 ```bash
 scontrol show job JOBID
 ```
+{: .yens }
 
 Three fields to pick out of the output:
 
@@ -555,6 +591,7 @@ ml claude-code
 cd ~/yens-onboarding-2026
 claude
 ```
+{: .yens }
 
 #### A global skill — distilled from the job you just ran
 
@@ -563,12 +600,14 @@ You already got a batch Slurm script working by hand. Rather than describe the Y
 ```
 > Read slurm/extract_form_3_batch.slurm and turn its reusable Yen conventions into a global skill at ~/.claude/skills/yen-slurm/SKILL.md: partition choice, email, %j log naming, always setting --time/--mem/--cpus-per-task, and checking current limits on [RCpedia](https://rcpedia.stanford.edu/_user_guide/slurm/#current-partitions-and-their-limits). Keep it short and repo-agnostic — no project paths.
 ```
+{: .claude }
 
 **Check what it wrote.** A good skill is short, and its **`description`** is what makes Claude reach for it later — so open the file and read it:
 
 ```bash
 cat ~/.claude/skills/yen-slurm/SKILL.md
 ```
+{: .yens }
 
 It should look something like this — a little frontmatter, then a few bullet conventions:
 
@@ -593,6 +632,7 @@ Then invoke it on a fresh job. Claude Code turns each skill's folder name into a
 ```
 > /yen-slurm write a Slurm job for a new run and save it as slurm/extract_form_3_batch_claude.slurm
 ```
+{: .claude }
 
 **Submit and review:** the conventions should come straight from the skill, matching what you hand-wrote.
 

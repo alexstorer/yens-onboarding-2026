@@ -43,6 +43,7 @@ permalink: /day2/resource-profile/
 > cd ~/yens-onboarding-2026
 > source .venv/bin/activate
 > ```
+> {: .yens }
 
 {: .important }
 > **Task:** Write down the resources you measured for the 10-filing run in your README.
@@ -78,12 +79,14 @@ ml claude-code
 cd ~/yens-onboarding-2026
 claude
 ```
+{: .yens }
 
 Then give it your measurements — fill in each `<...>` from your own run, brackets and all:
 
 ```
 > Add a "Resource Profile" section to README.md for scripts/extract_form_3_batch.py over 10 filings: ran on <node>, real <wall-clock time>, <cores> cores, <RAM> RES, <serial or parallel>. Add just that section and leave the rest of the file alone.
 ```
+{: .claude }
 
 **Read the diff before you approve it.** Two things to check:
 
@@ -98,5 +101,6 @@ Then `/exit` to get your shell back, and check the result:
 ```bash
 cat README.md
 ```
+{: .yens }
 
 </details>

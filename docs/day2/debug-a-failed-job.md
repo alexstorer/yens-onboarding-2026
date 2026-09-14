@@ -43,6 +43,7 @@ permalink: /day2/debug-a-failed-job/
 > cd ~/yens-onboarding-2026
 > source .venv/bin/activate
 > ```
+> {: .yens }
 
 ## Read your own job's logs
 
@@ -53,6 +54,7 @@ script's normal output, the `.err` file has any errors:
 cat logs/extract_*.out
 cat logs/extract_*.err
 ```
+{: .yens }
 
 A job that worked leaves an empty `.err`.
 
@@ -71,30 +73,35 @@ Submit the first one:
 ```bash
 sbatch --reservation=class slurm/fix_me.slurm
 ```
+{: .yens }
 
 Watch it move through the queue — `PD` (pending), then `R` (running), then gone once it finishes:
 
 ```bash
 squeue --me
 ```
+{: .yens }
 
 Once it's no longer in the queue, check how it ended:
 
 ```bash
 sacct -u SUNetID --format=JobID,JobName,State,Elapsed --starttime=today
 ```
+{: .yens }
 
 When it shows `FAILED`, read the error log to find out *why*:
 
 ```bash
 cat logs/fix_me_*.err
 ```
+{: .yens }
 
-**Put Claude Code in plan mode first** (press `Shift`+`Tab` to switch) so it lays out *what* it would change and *why* instead of editing right away. Then point it at the error log — a simple prompt is enough:
+**Put Claude Code in plan mode first** (press <kbd>Shift</kbd>+<kbd>Tab</kbd> to switch) so it lays out *what* it would change and *why* instead of editing right away. Then point it at the error log — a simple prompt is enough:
 
 ```
 > Help me troubleshoot logs/fix_me_*.err
 ```
+{: .claude }
 
 **Read the plan it comes back with.** If the fix makes sense, approve it and let Claude apply it — you're the reviewer.
 
@@ -103,6 +110,7 @@ You'll also want a completion email, so ask Claude to add the notification lines
 ```
 > Add #SBATCH --mail-type=ALL and #SBATCH --mail-user=SUNetID@stanford.edu to slurm/fix_me.slurm.
 ```
+{: .claude }
 
 Then resubmit — **keep debugging and resubmitting until the Slurm email says the job succeeded** (exit status `0`).
 
@@ -118,6 +126,7 @@ sbatch --reservation=class slurm/fix_me_2.slurm
 squeue --me
 cat logs/fix_me_2_*.err
 ```
+{: .yens }
 
 Troubleshoot with Claude in plan mode (`> Help me troubleshoot logs/fix_me_2_*.err`), approve the fix if it makes sense, have Claude add the email lines to `slurm/fix_me_2.slurm` too, and resubmit until the Slurm email says it succeeded.
 
@@ -130,6 +139,7 @@ sbatch --reservation=class slurm/fix_me_3.slurm
 squeue --me
 cat logs/fix_me_3_*.err
 ```
+{: .yens }
 
 Troubleshoot with Claude in plan mode, approve the fix, have Claude add the email lines to `slurm/fix_me_3.slurm`, and resubmit until it completes.
 
@@ -151,12 +161,14 @@ Point it at a file — one of the other broken scripts, say:
 ```bash
 claude -p "review scripts/extract_form_3_one_file_broken.py and explain what it does"
 ```
+{: .yens }
 
 Or **pipe** data straight into it. On Linux, every command-line program has two text streams: **standard input** (`stdin`, the text coming *in*) and **standard output** (`stdout`, the text it prints *out*). The pipe symbol `|` connects them — it takes the `stdout` of the command on its left and feeds it as the `stdin` of the command on its right. Because `claude -p` reads from `stdin`, you can pipe a file's contents straight into Claude instead of typing them. Take the `fix_me` error log you just read and let Claude diagnose it in one line:
 
 ```bash
 cat logs/fix_me_*.err | claude -p "this Slurm job failed — explain the error and suggest a fix"
 ```
+{: .yens }
 
 Because it's just another command that reads `stdin` and prints to `stdout`, you can drop `claude -p` **inside a Slurm job or a shell script** and let it work in **batch mode** — no interactive session at all.
 
@@ -170,6 +182,7 @@ cat results/*.json \
   | claude -p "Summarize what this run produced and flag anything unusual." \
   >> logs/run_summary.txt
 ```
+{: .yens }
 
 Submit a batch of these and you come back to finished jobs that have already **documented themselves** — what they did, when, and what to look at — without you watching a single one run.
 

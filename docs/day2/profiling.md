@@ -74,6 +74,7 @@ In your current terminal, run:
 ```bash
 hostname
 ```
+{: .yens }
 
 You will see something like `yen2`. Remember this — your second terminal must connect to the exact same node.
 
@@ -84,6 +85,7 @@ In the new terminal, SSH directly to that node by name (not the load-balanced `y
 ```bash
 ssh SUNetID@yen2.stanford.edu   # replace yen2 with whatever hostname showed above
 ```
+{: .laptop }
 
 {: .note }
 > Everything on this page runs from your clone, with the environment active:
@@ -92,6 +94,7 @@ ssh SUNetID@yen2.stanford.edu   # replace yen2 with whatever hostname showed abo
 > cd ~/yens-onboarding-2026
 > source .venv/bin/activate
 > ```
+> {: .yens }
 
 {: .note }
 > 💡 **Skip the second login.** A fresh `ssh` means another password + Duo prompt. To avoid re-authenticating, open a terminal through JupyterHub instead: browse to that node's hub (e.g. `https://yen2.stanford.edu/jupyter/`), then **New → Terminal**. You're already authenticated there, and it drops you onto that exact node — ideal for the second monitoring terminal.
@@ -102,6 +105,7 @@ Terminal 2:
 ```bash
 watch userload
 ```
+{: .yens }
 
 - `userload` shows how many **cores** you're using and what **% of the node's memory** you're holding — your total footprint across all your processes on this node:
 
@@ -120,6 +124,7 @@ Terminal 1:
 ```bash
 time python scripts/mystery_script.py
 ```
+{: .yens }
 
 {: .note }
 > **What's the `time` in front?** `time` is a wrapper — it runs whatever command follows (`python scripts/mystery_script.py`) exactly as normal, then, once it finishes, prints how long it took. It doesn't change what your script does; it just measures it. That's where the `real` / `user` / `sys` lines below come from.
@@ -138,11 +143,12 @@ sys     0m2.212s
 
 **Step 5 — Run the script again, this time watching it in `htop`.**
 
-First, in **Terminal 2**, stop `watch userload` by pressing **`Ctrl+C`**. Then start `htop`, filtered to just your own processes:
+First, in **Terminal 2**, stop `watch userload` by pressing <kbd>Ctrl</kbd>+<kbd>C</kbd>. Then start `htop`, filtered to just your own processes:
 
 ```bash
 htop -u SUNetID
 ```
+{: .yens }
 
 The `-u` flag limits `htop` to your processes, so the hundreds of other users' processes on
 the node don't drown yours out.
@@ -153,19 +159,19 @@ the node don't drown yours out.
 Some Yens have 256 cores, and if `htop` is drawing one bar per core the header fills the
 window and pushes the process list off the bottom.
 
-- **`H`** — hide threads, so each process is one row
-- **`t`** — tree mode, which nests the workers a process spawned underneath it. Useful
+- <kbd>H</kbd> — hide threads, so each process is one row
+- <kbd>t</kbd> — tree mode, which nests the workers a process spawned underneath it. Useful
   here, because that nesting is exactly what you are trying to count
 
 **To hide the header,** swap the per-core meters for a single average bar:
 
-1. **`F2`** — opens Setup, with **Meters** already selected on the left
-2. **`→`** to move into the **Left column** list
-3. **`↓`** to the CPU entry — it reads something like `CPUs (1/1) [Bar]`
-4. **`Delete`** to remove it
-5. **`→`** again to reach **Available meters**, then **`↓`** to **CPU average**
-6. **`Enter`** to add it back as one bar
-7. **`F10`** to leave Setup
+1. <kbd>F2</kbd> — opens Setup, with **Meters** already selected on the left
+2. <kbd>→</kbd> to move into the **Left column** list
+3. <kbd>↓</kbd> to the CPU entry — it reads something like `CPUs (1/1) [Bar]`
+4. <kbd>Delete</kbd> to remove it
+5. <kbd>→</kbd> again to reach **Available meters**, then <kbd>↓</kbd> to **CPU average**
+6. <kbd>Enter</kbd> to add it back as one bar
+7. <kbd>F10</kbd> to leave Setup
 
 You only do this once — `htop` writes it to `~/.config/htop/htoprc` and remembers it next
 time. If your header already shows a single `Avg[...]` bar, it is set up correctly and you
@@ -185,6 +191,7 @@ Now, in **Terminal 1**, run the script again and watch your rows in `htop` light
 ```bash
 time python scripts/mystery_script.py
 ```
+{: .yens }
 
 As the script runs, watch new `python` rows appear — that's it spawning work. Count them to answer "how many processes did it run?"
 
@@ -210,6 +217,7 @@ You saw about **4 `python` processes** in `htop` and roughly **4 Cores** in `use
 > cd ~/yens-onboarding-2026
 > source .venv/bin/activate
 > ```
+> {: .yens }
 
 {: .important }
 > **Task:** Profile the real batch script on 10 filings using the same two-terminal technique.
@@ -231,11 +239,13 @@ The script is set to process **10 filings** (see `NUM_FILINGS` near the top — 
 ```bash
 watch userload
 ```
+{: .yens }
 
 Terminal 1 — run it and note the `real`, `user`, and `sys` times when it finishes:
 ```bash
 time python scripts/extract_form_3_batch.py
 ```
+{: .yens }
 
 **Second run — watch the processes.** Switch Terminal 2 to `htop`, then run the script once more so you can see the processes live:
 
@@ -243,11 +253,13 @@ Terminal 2:
 ```bash
 htop -u SUNetID
 ```
+{: .yens }
 
 Terminal 1:
 ```bash
 time python scripts/extract_form_3_batch.py
 ```
+{: .yens }
 
 Watch Terminal 2 as the 10 filings process one after another.
 
@@ -324,11 +336,13 @@ Terminal 1 — run it:
 source .venv/bin/activate
 time python scripts/vectorize_demo.py
 ```
+{: .yens }
 
 Terminal 2 — watch the load while it runs:
 ```bash
 watch userload
 ```
+{: .yens }
 
 Both versions produce the identical result; the script prints how much faster the vectorized one was (often 10× or more). Notice the slow Python loop pins a core the whole time, while the NumPy version finishes almost before you can look at Terminal 2.
 
@@ -381,6 +395,7 @@ You don't need a fancy prompt. For example:
 ```
 > Would you help me find the RAM and number of cores on my laptop?
 ```
+{: .claude }
 
 </details>
 
@@ -431,6 +446,7 @@ You don't need a fancy prompt. For example:
 ```
 > Do you have on-demand VM pricing for a cloud VM (say AWS) with 256 cores and 1 TB of RAM?
 ```
+{: .claude }
 
 </details>
 

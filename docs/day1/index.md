@@ -32,9 +32,3 @@ and get coffee when you reach a natural stopping point.
 |---|---|---|
 | [Part 1 — Setup]({{ '/day1/part1/' | relative_url }}) | 9:00–10:30 | A machine you can reach, an identity it recognises, and an assistant that can drive both. Ends in a checkpoint |
 | [Part 2 — Python & AI]({{ '/day1/part2/' | relative_url }}) | 10:30–12:00 | A Python environment that travels, a key kept out of git, and a real extraction pipeline |
-
-{: .important }
-> Today assumes only the two accounts from **[Before You Arrive]({{ '/prework/' | relative_url }})**:
-> a GitHub account and Claude through Stanford. Everything else — the terminal, the Yens
-> login, the access token — you set up here, starting from nothing. If either account is
-> missing, flag it early rather than falling behind.

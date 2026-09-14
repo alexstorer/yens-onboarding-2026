@@ -43,6 +43,7 @@ permalink: /day2/rerun-safe-tasks/
 > cd ~/yens-onboarding-2026
 > source .venv/bin/activate
 > ```
+> {: .yens }
 
 {: .important }
 > **Task:** Make each array task skip work it has already done, then resubmit

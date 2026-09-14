@@ -43,6 +43,7 @@ permalink: /day2/loop-to-array/
 > cd ~/yens-onboarding-2026
 > source .venv/bin/activate
 > ```
+> {: .yens }
 
 {: .important }
 > **Task:** Turn Part 1's loop over filings into a job array that processes **100 filings**,
@@ -86,6 +87,7 @@ see the tasks start in parallel and drop off as they finish:
 ```bash
 watch squeue --me
 ```
+{: .yens }
 
 The thing to notice is the job IDs: an array shows up as many rows sharing one ID, with a
 task number after it — `12345678_0`, `12345678_1`, and so on — each moving through the same
@@ -99,6 +101,7 @@ task number after it — `12345678_0`, `12345678_1`, and so on — each moving t
 ```bash
 sacct -j JOBID --format=JobID,State,Elapsed,MaxRSS
 ```
+{: .yens }
 
 Compare that against what you estimated and wrote down. Over-asking for memory is the normal
 result, and worth noticing.
@@ -185,6 +188,7 @@ finished cleanly:
 ```bash
 sbatch --dependency=afterok:ARRAYJOBID slurm/merge_results.slurm
 ```
+{: .yens }
 
 It sits in the queue as `PD` until the array succeeds, then runs on its own. If any task
 fails, it never starts — which is what you want, rather than merging a half-finished
