@@ -248,10 +248,10 @@ Save the file. Here's the whole script, with its four parts labeled:
 ### Submit it
 
 {: .important }
-> **Today only:** this class has a dedicated Slurm reservation, `class`. Add `--reservation=class` to every `sbatch` (and `srun`) command today so your jobs run on the reserved nodes. It's a class-day flag — drop it for your own work after today.
+> **Today only:** this class has two dedicated Slurm reservations — `class_cpu` for the CPU jobs you write today, and `class_gpu` for the GPU bonus at the end of the day. Add `--reservation=class_cpu` to every `sbatch` (and `srun`) command from here on so your jobs run on the reserved nodes; the GPU page will tell you when to switch. It's a class-day flag — drop it for your own work after today.
 
 ```bash
-sbatch --reservation=class slurm/extract_form_3_batch.slurm
+sbatch --reservation=class_cpu slurm/extract_form_3_batch.slurm
 # Submitted batch job 12345678
 ```
 {: .yens }
@@ -322,7 +322,7 @@ and get your shell back. The two lines it should have added:
 Resubmit:
 
 ```bash
-sbatch --reservation=class slurm/extract_form_3_batch.slurm
+sbatch --reservation=class_cpu slurm/extract_form_3_batch.slurm
 ```
 {: .yens }
 
@@ -336,7 +336,7 @@ Once your job runs, check your inbox. You should receive two emails: one when th
 Everything so far has been batch submission — write a script, `sbatch` it, wait. Slurm also supports an interactive allocation on a dedicated node — handy when you're debugging and re-running over and over: you hold the allocation, so you don't re-queue for resources every time a job fails and you fix it:
 
 ```bash
-srun --reservation=class --pty --cpus-per-task=2 --mem=4G --time=00:30:00 bash
+srun --reservation=class_cpu --pty --cpus-per-task=2 --mem=4G --time=00:30:00 bash
 ```
 {: .yens }
 
@@ -365,7 +365,7 @@ Because you're interactive, you see the output as it happens and can re-run inst
 Submit it:
 
 ```bash
-sbatch --reservation=class slurm/mystery.slurm
+sbatch --reservation=class_cpu slurm/mystery.slurm
 ```
 {: .yens }
 
@@ -417,14 +417,14 @@ cat slurm/chain_step1.slurm slurm/chain_step2.slurm
 **Step 3 — submit both back-to-back.** Step 1 runs for ~2 minutes, so fire them off one after the other and let it crunch while step 2 queues behind it. Submit step 1 and note the `JOBID` it prints:
 
 ```bash
-sbatch --reservation=class slurm/chain_step1.slurm
+sbatch --reservation=class_cpu slurm/chain_step1.slurm
 ```
 {: .yens }
 
 Then submit step 2 right away, chained to the first — replace `JOBID` with step 1's ID:
 
 ```bash
-sbatch --reservation=class --dependency=afterok:JOBID slurm/chain_step2.slurm
+sbatch --reservation=class_cpu --dependency=afterok:JOBID slurm/chain_step2.slurm
 ```
 {: .yens }
 
@@ -459,7 +459,7 @@ The Yens have a dedicated **`dev` partition** for short, interactive debugging j
 Fire a quick throwaway job at `dev` with `-p dev` (and `--wrap`, which runs an inline command as a job). It's tiny, so it schedules fast, and it emails you when it finishes:
 
 ```bash
-sbatch --reservation=class -p dev --mail-type=ALL --mail-user=SUNetID@stanford.edu --wrap="hostname; sleep 30"
+sbatch --reservation=class_cpu -p dev --mail-type=ALL --mail-user=SUNetID@stanford.edu --wrap="hostname; sleep 30"
 ```
 {: .yens }
 

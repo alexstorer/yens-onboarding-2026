@@ -32,7 +32,7 @@ check you can run.
 
 | # | Skill | Where you learned it |
 |---|---|---|
-| 1 | Use the command line on your own laptop | [Command Line Basics]({{ '/reference/command-line-basics/' | relative_url }}) — pre-work |
+| 1 | Use the command line on your own laptop | [Command Line Basics]({{ '/reference/command-line-basics/' | relative_url }}) — optional reading |
 | 2 | Reach the Yens over SSH | [Connecting to the Yens]({{ '/day1/connect-to-the-yens/' | relative_url }}) |
 | 3 | Have git and Claude configured and authenticated | [Git & GitHub]({{ '/day1/git-and-github/' | relative_url }}) · [Working with Claude Code]({{ '/day1/claude-code/' | relative_url }}) |
 | 4 | Copy files between your laptop and the Yens | [Transferring Files]({{ '/reference/transferring-files/' | relative_url }}) |

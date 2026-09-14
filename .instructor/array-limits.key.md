@@ -20,7 +20,7 @@ hands information to a job.
 ## Route 1 — more filings per task (no offset needed)
 
 ```bash
-sbatch --reservation=class --array=0-99 slurm/extract_array.slurm
+sbatch --reservation=class_cpu --array=0-99 slurm/extract_array.slurm
 ```
 
 with the script taking a slice rather than a single item:
@@ -38,9 +38,9 @@ has to cover ten API calls, not one; that is the only directive that has to chan
 Both arrays must start at 0, so the second needs telling which slice is its own:
 
 ```bash
-sbatch --reservation=class --array=0-511 slurm/extract_array.slurm
+sbatch --reservation=class_cpu --array=0-511 slurm/extract_array.slurm
 
-sbatch --reservation=class --array=0-479 \
+sbatch --reservation=class_cpu --array=0-479 \
        --export=ALL,OFFSET=512 slurm/extract_array.slurm
 ```
 

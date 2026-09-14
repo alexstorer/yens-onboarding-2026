@@ -20,8 +20,9 @@ on the course website.
 | **Day 1** | Foundations & AI | SSH & the Yens file system · Git & GitHub · Claude Code · Python on the Yens · virtual environments · AI services & data privacy · Anthropic API keys · LLM extraction with Pydantic validation · Genre Tribunal capstone |
 | **Day 2** | The cluster | resource profiling · documenting what a job needs · writing & submitting `#SBATCH` jobs · reading logs & debugging failures · job arrays · rerun-safe tasks · array limits at scale · GPUs & local LLMs |
 
-Both days build one pipeline over the same dataset — SEC Form 3 filings — turning
-unstructured text into validated structured records, then scaling it across the cluster.
+The running project — the dataset and what you build each day — is described under
+[The Running Project](https://gsbdarc.github.io/yens-onboarding-2026/#the-running-project)
+on the course website.
 
 ## Running the Site Locally
 

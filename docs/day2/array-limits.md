@@ -67,7 +67,7 @@ one you can submit.
 Try to go past it and the submission is simply refused:
 
 ```bash
-sbatch --reservation=class --array=0-991 slurm/extract_array.slurm
+sbatch --reservation=class_cpu --array=0-991 slurm/extract_array.slurm
 ```
 {: .yens }
 
