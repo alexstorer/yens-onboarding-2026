@@ -163,6 +163,32 @@ See exactly what the second stage adds:
 diff scripts/extract_form_3_step1_basic.py scripts/extract_form_3_step2_logged.py
 ```
 
+{: .tip }
+> **Pro tip: Reading `diff` output**
+>
+> `diff first_file second_file` shows what changed from the first file to the second.
+> Here, the first file is Stage 1 and the second is Stage 2. It only compares the files;
+> it does not edit them.
+>
+> - `<` marks a line from the **first file** (Stage 1).
+> - `>` marks a line from the **second file** (Stage 2).
+> - `---` separates the old and new lines in a changed block.
+> - A label such as `11c12` means line **11** in the first file changed to line **12**
+>   in the second. The letters mean **c**hange, **a**dd, or **d**elete. A comma marks a
+>   line range, so `3,4` means lines 3 through 4.
+>
+> For example, this block shows the script name changing:
+>
+> ```text
+> 11c12
+> <     python3 scripts/extract_form_3_step1_basic.py
+> ---
+> >     python3 scripts/extract_form_3_step2_logged.py
+> ```
+>
+> Read `<` as “from Stage 1” and `>` as “from Stage 2.” These are output markers,
+> not commands to type. Unchanged lines are omitted; identical files produce no output.
+
 Then run it:
 
 ```bash
@@ -242,11 +268,11 @@ Run the final stage:
 python3 scripts/extract_form_3_one_file.py
 ```
 
-Inspect both artifacts:
+Read both result files with `cat`:
 
 ```bash
-sed -n '1,80p' results/form3_Cheniere_Energy_Inc.txt
-sed -n '1,80p' results/form3_result.json
+cat results/form3_Cheniere_Energy_Inc.txt
+cat results/form3_result.json
 ```
 
 ### Why Haiku First and Sonnet 5 Last?
