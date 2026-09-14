@@ -221,9 +221,8 @@ to GitHub, it is already somewhere else.
 
 ## Getting Data In and Out
 
-Knowing where data goes is half of it; putting it there is the other half. You will need
-this before the morning is out, and it is one of the six items on the
-[Part 1 Checkpoint]({{ '/day1/part1-checkpoint/' | relative_url }}):
+Knowing where data goes is half of it; putting it there is the other half. Three routes,
+depending on where the data is coming from — you will practice the first one below:
 
 - **From your laptop** — `scp`, covered in [Transferring Files]({{ '/reference/transferring-files/' | relative_url }}). Run it *from the laptop*, in its own terminal, not from inside your SSH session.
 - **From GitHub** — `git clone`, which is how the course repo gets here in [Git & GitHub]({{ '/day1/git-and-github/' | relative_url }}).

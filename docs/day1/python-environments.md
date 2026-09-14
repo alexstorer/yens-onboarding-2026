@@ -389,6 +389,86 @@ On the Yens, the environment's Python links to the system interpreter, and `pyve
 
 ---
 
+## Quiz
+
+Answer each one in your head, then open it to check.
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">1</span><span class="qtext">You activated the course environment, then opened a new SSH terminal. Is the environment active there too?</span></summary>
+
+**No. Activation applies to the terminal where you ran it.** In the new terminal, run:
+
+```bash
+source ~/yens-onboarding-2026/.venv/bin/activate
+which python3
+```
+{: .yens }
+
+The path should point inside the course repo's `.venv/`. You do not need to recreate
+the environment or reinstall its packages each time you connect.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">2</span><span class="qtext">You run <code>deactivate</code>. Have you deleted the environment or its packages?</span></summary>
+
+**No.** Deactivation removes the environment's directory from the front of this shell's
+`$PATH`. The `.venv/` folder and installed packages remain on disk. Activate it again to
+use them.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">3</span><span class="qtext">Why do we install packages with <code>python3 -m pip</code> instead of just <code>pip</code>?</span></summary>
+
+**It runs pip through the Python you selected.** A separate `pip` command might belong
+to another Python installation. After activating the environment, `python3 -m pip`
+installs packages for that environment's Python. Check `which python3` if you are unsure
+which interpreter is selected.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">4</span><span class="qtext">A package imports successfully in your terminal but fails in your notebook. What should you check first?</span></summary>
+
+**Check the notebook's kernel.** Activating an environment in a terminal does not change
+the notebook's Python. Select **GSB AI 2026**, then check the interpreter in a cell:
+
+```python
+import sys
+print(sys.executable)
+```
+
+The path should point inside the course repo's `.venv/`. If you just installed or upgraded
+a package in that environment, restart the kernel and rerun the cells.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">5</span><span class="qtext">A collaborator wants to run your project on another machine. Should you send them your <code>.venv/</code> folder?</span></summary>
+
+**Send the code and requirements files so they can rebuild the environment.** A virtual
+environment contains paths tied to the machine where it was created. Copying it can leave
+those paths pointing to missing files.
+
+Include the Python version and any data the project needs. Keep `.venv/` out of Git.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">6</span><span class="qtext">The course's <code>requirements.txt</code> has eight packages, but <code>pip freeze</code> lists many more. Did something go wrong?</span></summary>
+
+**No. Those packages have dependencies of their own.** `pip freeze` records the installed
+packages and their versions, including those dependencies. Save it as
+`requirements.lock.txt` to preserve the course's shorter `requirements.txt`.
+
+The recorded versions help reproduce the package setup, but they do not include Python,
+your input data, or your code.
+
+</details>
+
+---
+
 ## Skills Learned
 
 - Create and activate a project environment on the Yens

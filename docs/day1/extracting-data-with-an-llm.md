@@ -349,6 +349,82 @@ small run is an observation, not a universal performance claim.
 
 ---
 
+## Quiz
+
+Answer each one in your head, then open it to check.
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">1</span><span class="qtext">Your prompt asks for <code>NAME | ROLE</code>, and the call succeeds. Can your code assume the answer follows that format?</span></summary>
+
+**No. A successful request does not guarantee the requested format.** The basic call
+returns text that may differ from your instructions. For fields your code needs to use,
+define a Pydantic schema and pass it through the structured-output helper, as in Stage 3.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">2</span><span class="qtext">Pydantic accepts the extracted company name and filing date. Does that prove they match the filing?</span></summary>
+
+**No. Validation checks the schema, not the source facts.** A wrong company name can
+still be a string. In this lesson, `filing_date` is also a string, so the schema does not
+even require a particular date format.
+
+Compare extracted values with the original filing. Valid structure makes the result
+usable in code; checking the source tells you whether it is accurate.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">3</span><span class="qtext">After a structured-output call, <code>response.parsed_output</code> is <code>None</code>. Should you save an empty record and continue?</span></summary>
+
+**No. Record the failure and inspect `response.stop_reason`.** An empty record would
+hide the fact that extraction did not produce a usable result. The example raises an
+error here so you can investigate before treating the filing as complete.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">4</span><span class="qtext">You set <code>max_tokens=4096</code>. Will every response contain 4,096 tokens?</span></summary>
+
+**No. It is an output limit, not a requested response length.** The model may finish
+with fewer tokens. A limit that is too small can cut off the response before it is
+complete. Check the actual input and output counts in `response.usage` when measuring
+your run.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">5</span><span class="qtext">The project still has budget, but a call returns HTTP <code>429</code>. What might be happening?</span></summary>
+
+**The account may have hit a request or token rate limit.** Budget and traffic limits
+are separate. Read the error and follow its `retry-after` guidance instead of immediately
+rerunning the same request. More available money does not necessarily let you send more
+requests at once.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">6</span><span class="qtext">How would you use temperature and top-k to make an LLM's answers more consistent or more varied?</span></summary>
+
+**Lower temperature and a smaller top-k generally make answers more consistent.
+Higher values allow more variation.** On models that support these settings:
+
+- **Temperature** controls randomness when choosing the next token. Lower values favor
+  the most likely tokens; higher values give less likely tokens more chance.
+- **Top-k** limits the choices to the k most likely next tokens. A smaller k narrows
+  the choices; a larger k allows more options. With `top_k=1`, only the most likely
+  token is eligible at each step.
+
+For extraction, consistency is usually useful. For brainstorming, more variation may
+help. Even `temperature=0` does not guarantee identical results across repeated calls.
+Support varies by model, so check the
+[API documentation](https://platform.claude.com/docs/en/api/http/messages/create)
+before adding these settings.
+
+</details>
+
+---
+
 ## Skills Learned
 
 - Use `anthropic.Anthropic()` and the native Messages API
