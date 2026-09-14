@@ -20,10 +20,11 @@ You'll build a pipeline that labels movies, checks each label with a second mode
 flags cases for human review. Keep a record of how each decision was reached.
 
 {: .exercise }
-> **The challenge:** Classify the first **10 movies** in `data/top_rated_movies.csv`.
-> Have a different model check each classification, flag contested results in Python,
-> and write `results/genre_verdicts.json`. Commit your script, results, and a short README
-> section, then push them to your fork.
+> **The challenge:** Process all **10 movies** in `data/top_rated_movies.csv`.
+> Use **Haiku for classification** and **Sonnet for judging**, a different model for each
+> of the pipeline's two AI stages. Flag contested results in Python and write
+> `results/genre_verdicts.json`. Commit your script, results, and a short README section,
+> then push them to your fork.
 
 {: .note }
 > Start here in class and finish in your own time. An unfinished capstone does not block
@@ -45,7 +46,7 @@ flags cases for human review. Keep a record of how each decision was reached.
   <defs><marker id="genre-arrow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#e67e22"/></marker></defs>
 <rect x="36" y="16" width="588" height="88" rx="12" fill="#fff8ef" stroke="#e6cfa8" stroke-width="1.5"/>
 <text x="330" y="47" text-anchor="middle" font-size="16" font-weight="700" fill="#2c3e50">Movie input</text>
-<text x="330" y="75" text-anchor="middle" font-size="14" fill="#5b6472">id, title, and overview from the first 10 CSV rows</text>
+<text x="330" y="75" text-anchor="middle" font-size="14" fill="#5b6472">id, title, and overview for all 10 movies</text>
 <line x1="62" y1="106" x2="62" y2="142" stroke="#e67e22" stroke-width="2.5" marker-end="url(#genre-arrow)"/>
 <text x="82" y="129" font-size="14" fill="#b3611a">overview</text>
 <rect x="36" y="144" width="588" height="88" rx="12" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.5"/>
@@ -76,7 +77,7 @@ The judge gets a different model ID and does not receive the classifier's explan
 This reduces one source of influence, but it does not make the judgments statistically
 independent. The judge still sees the proposed label, and both models may make similar errors.
 
-## 1. Read the First 10 Movies
+## 1. Read the 10 Movies
 
 Create `day1/genre_tribunal.py` beside your `anthropic_test.ipynb` notebook. Run it from
 the `day1/` folder, so `../data/`, `../results/`, and `../.env` point to the repo root.
@@ -91,13 +92,14 @@ import pandas as pd
 load_dotenv("../.env")
 client = anthropic.Anthropic()
 
-df = pd.read_csv("../data/top_rated_movies.csv").head(10)
+df = pd.read_csv("../data/top_rated_movies.csv")
 for row in df.itertuples():
     print(row.id, row.title, row.overview[:80])
 ```
 
-Use `id`, `title`, and `overview`. The CSV has no genre column; you are creating the labels.
-Keep the run to ten movies while developing the pipeline. Each movie needs two model calls.
+The CSV contains ten movies. Use `id`, `title`, and `overview`; there is no genre column,
+so you are creating the labels. Each movie gets one classification call to Haiku and one
+judging call to Sonnet, for 20 model calls in a complete run without retries.
 
 ## 2. Classify Each Movie
 
