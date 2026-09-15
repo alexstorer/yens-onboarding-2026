@@ -140,3 +140,10 @@ an identity it recognizes, and a version-controlled place to put the results —
 assistant that can operate all of it on your behalf.
 
 Everything in Part 2 is what you *do* with that.
+
+**Be back and ready at 10:30** for the next lecture. If you finish early, the bonus
+exercises are the place to go rather than starting Part 2:
+
+- [Skip the repeated logins with SSH multiplexing]({{ '/day1/connect-to-the-yens/#bonus' | relative_url }}) — authenticate once instead of on every connection
+- [Investigate a well-kept repo]({{ '/day1/claude-code/#bonus--investigate-a-well-kept-repo' | relative_url }}) — ask Claude Code questions about a project you have never seen
+- [Put Claude Code to work]({{ '/day1/claude-code/#bonus--put-claude-code-to-work' | relative_url }}) — publish your own copy of this site from your fork, then change it
