@@ -79,12 +79,10 @@ push in check 3 proves the other half: if it asks you for a password, you ran
 ### 3 — git and GitHub, on this very site
 
 You already [forked and cloned]({{ '/day1/git-and-github/#fork-and-clone' | relative_url }})
-this course's repo. Worth noticing what that means: **the
-page you are reading is a file in it.** `docs/day1/part1-checkpoint.md` is this
-checkpoint. The site is not a separate thing the course publishes at you — it is
-markdown under version control, and you have a copy.
+this course's repo. Worth noticing what that means: **the page you are reading is a file
+in it.** `docs/day1/part1-checkpoint.md` is this checkpoint.
 
-So edit it. On the Yens:
+To make sure you can manipulate a repo, let's alter this one:
 
 ```bash
 cd ~/yens-onboarding-2026
@@ -97,7 +95,7 @@ git push -u origin checkpoint
 {: .yens }
 
 Then open your fork on GitHub and confirm the `checkpoint` branch is there with your
-commit on it. If the push succeeded without asking for a password, item 3 is genuinely
+commit on it. If the push succeeded without asking for a password, check 2 is genuinely
 working — that is the real thing this step tests.
 
 {: .note }
