@@ -324,6 +324,16 @@
 }
 .main-content .username-fill-status:empty { display: none; }
 
+/* A link waiting on a username has had its href stripped by username-fill.js,
+   so it must not keep inviting a click. Reads as body text with a dotted
+   underline, which pairs with the title attribute explaining how to enable it. */
+.main-content a.username-fill-pending {
+  color: inherit;
+  text-decoration: underline dotted #b9b2a6;
+  text-underline-offset: 0.18em;
+  cursor: help;
+}
+
 /* ── Where does this go? ──────────────────────────────────────────────────
    Half the commands in Part 1 run on the Yens and half on the student's own
    laptop, and running one in the wrong place is the commonest way to get
