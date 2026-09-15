@@ -157,6 +157,7 @@ Set up your copy of the course repo and make your first commit now.
 > **Exercise:** Fork the course repo, clone it to the Yens, authenticate with GitHub, create a branch, commit a file, and push it back to your fork.
 
 **Step 1 — Fork the course repo**
+{: #fork-and-clone }
 
 A **fork** is your own copy of the course repo, living under your GitHub account. Everything you write over the next two days goes here — it's yours to keep after the course ends.
 

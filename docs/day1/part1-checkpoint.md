@@ -78,7 +78,8 @@ push in check 3 proves the other half: if it asks you for a password, you ran
 
 ### 3 — git and GitHub, on this very site
 
-You already forked and cloned this course's repo. Worth noticing what that means: **the
+You already [forked and cloned]({{ '/day1/git-and-github/#fork-and-clone' | relative_url }})
+this course's repo. Worth noticing what that means: **the
 page you are reading is a file in it.** `docs/day1/part1-checkpoint.md` is this
 checkpoint. The site is not a separate thing the course publishes at you — it is
 markdown under version control, and you have a copy.
