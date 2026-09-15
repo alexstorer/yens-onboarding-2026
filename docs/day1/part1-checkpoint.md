@@ -18,7 +18,7 @@ to skip over some material in Part 1, that's OK! You can always come back and re
 later.
 
 {: .important }
-> **If one of these fails, put up a red sticky right away.** Part 2 will build on this, so
+> **If one of these fails, put up a 🔴 red sticky right away.** Part 2 will build on this, so
 > let's get it straightened out as soon as possible.
 
 ---
