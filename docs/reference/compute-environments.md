@@ -140,6 +140,3 @@ The three numbers every script needs — **compute time**, **cores**, and **RAM*
 ones you measure in [1. Profile]({{ '/day2/profiling/' | relative_url }}) and then
 declare in [3. Submit]({{ '/day2/submit-a-slurm-job/' | relative_url }}). You cannot read
 them off the code; you have to measure them while it runs.
-
-For how work splits across cores and nodes, see
-[Parallelization Basics]({{ '/reference/parallelization/' | relative_url }}).

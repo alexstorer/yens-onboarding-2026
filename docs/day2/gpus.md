@@ -16,14 +16,13 @@ permalink: /day2/gpus/
 > 🟢 **Green sticky** = I have done 1–4 and am moving on to the bonus work, and I am ready
 > to help my table.
 
-{: .note }
-> Everything on this page runs from your clone, with the environment active:
->
-> ```bash
-> cd ~/yens-onboarding-2026
-> source .venv/bin/activate
-> ```
-> {: .yens }
+Everything on this page runs from your clone, with the environment active:
+
+```bash
+cd ~/yens-onboarding-2026
+source .venv/bin/activate
+```
+{: .yens }
 
 Everything today has run on CPUs, against a model living on somebody else's servers. This
 page is the other axis: **hardware you ask for by name, and models that run on it.**
@@ -186,7 +185,7 @@ You request a GPU the same way you set any other resource in a Slurm script — 
 #SBATCH --partition=gpu       # the GPU partition (confirm the name for your setup)
 #SBATCH --gres=gpu:1          # request one GPU
 ```
-{: .yens }
+{: .file }
 
 Just like the `#SBATCH` directives you wrote on Day 2, this tells the scheduler what your job needs — here, one GPU. Match the partition name (and any specific-node targeting) to your cluster's current setup.
 
@@ -194,7 +193,8 @@ Just like the `#SBATCH` directives you wrote on Day 2, this tells the scheduler 
 > **For interactive work** — exploring, pulling a model, quick tests — you don't need a batch script. Grab a GPU node directly with `srun --pty`, the same command you used for a CPU allocation on [Day 2]({{ '/day2/' | relative_url }}), plus the GPU flags:
 >
 > ```bash
-> srun --partition=gpu --gres=gpu:1 --cpus-per-task=4 --mem=16G --time=01:00:00 --pty bash
+> srun --partition=gpu --gres=gpu:1 --cpus-per-task=4 --mem=16G \
+>      --time=01:00:00 --reservation=class_gpu --pty bash
 > ```
 > {: .yens }
 >
@@ -237,7 +237,7 @@ the shortest Slurm script you have seen today, and two directives are new:
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 ```
-{: .yens }
+{: .file }
 
 `--gres` is "generic resource". `gpu:1` asks for one GPU on the node you land on. Miss it
 out and you get a slot on a GPU node with **no GPU allocated to you** — the job runs,
@@ -248,15 +248,17 @@ about.
 
 ```bash
 mkdir -p logs
-sbatch --reservation=class slurm/gpu_check.slurm
+sbatch --reservation=class_gpu slurm/gpu_check.slurm
 squeue --me
 ```
 {: .yens }
 
 {: .note }
-> **Today the reservation covers the GPU nodes too**, so this should start quickly rather
-> than queueing behind the rest of the cluster. That is a luxury of a reserved teaching
-> session — drop `--reservation=class` for your own work afterwards, and expect to wait.
+> **The GPU nodes have their own reservation today, `class_gpu`**, so this should start
+> quickly rather than queueing behind the rest of the cluster. Note it is a different name
+> from the `class_cpu` you have used all morning — the CPU reservation does not admit GPU
+> jobs. That quick start is a luxury of a reserved teaching session; drop
+> `--reservation=class_gpu` for your own work afterwards, and expect to wait.
 
 Once it finishes:
 
@@ -321,7 +323,7 @@ table skips to the next step and waits for a URL.
 
 ```bash
 srun --partition=gpu --gres=gpu:1 --cpus-per-task=8 --mem=16G \
-     --time=01:00:00 --reservation=class --pty bash
+     --time=01:00:00 --reservation=class_gpu --pty bash
 ```
 {: .yens }
 
@@ -504,10 +506,11 @@ covers the current approach for the larger ones.
 
 **Choosing a model.** Leaderboards measure what the leaderboard measures, which is rarely
 your task. [LLM Benchmarks for Researchers](https://rcpedia.stanford.edu/blog/2026/07/14/llm-benchmarks-for-researchers/)
-covers reading benchmarks honestly, and the
-[LLM-as-a-Judge]({{ '/reference/llm-as-a-judge/' | relative_url }}) and
-[Failure Modes]({{ '/reference/llm-failure-modes/' | relative_url }}) reference pages cover
-building an evaluation of your own — which is the only benchmark that answers your question.
+covers reading benchmarks honestly. For building an evaluation of your own — the only
+benchmark that answers your question — the [Day 1 capstone]({{ '/day1/capstone/' | relative_url }})
+has one model check another's work, and
+[Failure Modes]({{ '/reference/llm-failure-modes/' | relative_url }}) covers validating
+output at scale.
 
 ---
 

@@ -14,6 +14,8 @@ Yesterday's script runs, on one filing at a time, on an interactive Yen node you
 with everyone else. This part is finding out what it actually costs — and then handing it
 to the scheduler instead of holding a terminal open.
 
+**9:00 to 10:30.** A short lecture, then the work block.
+
 ---
 
 ## Hands-On Lab

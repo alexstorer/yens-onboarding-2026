@@ -210,6 +210,78 @@ variables when they differ between a laptop, the Yens, and a production job.
 
 ---
 
+## Quiz
+
+Answer each one in your head, then open it to check.
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">1</span><span class="qtext">You copied <code>.env</code> into your repo, but <code>ls</code> does not show it. Did the copy fail?</span></summary>
+
+**Not necessarily. Files starting with a dot are hidden by default.** Run `ls -a` to
+include them in the listing. The leading dot does not encrypt the file or prevent other
+programs from reading it.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">2</span><span class="qtext">You activated <code>.venv</code>. Does that also load the API key from <code>.env</code>?</span></summary>
+
+**No. They do different jobs.** `.venv/` contains your Python environment and packages.
+`.env` is a text file holding settings such as `ANTHROPIC_API_KEY`. In this exercise,
+`load_dotenv(...)` reads those settings into the Python process.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">3</span><span class="qtext">Your notebook is running in <code>day1/</code>, and <code>.env</code> is at the repo root. Which path should you give <code>load_dotenv</code>?</span></summary>
+
+**`"../.env"`.** The `..` means the parent directory, one level above `day1/`:
+
+```python
+load_dotenv("../.env")
+```
+
+You can keep one `.env` at the repo root instead of copying it into each notebook folder.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">4</span><span class="qtext">The notebook prints <code>ANTHROPIC_API_KEY loaded: True</code>. Have you confirmed that Anthropic accepts the key?</span></summary>
+
+**No. You have only confirmed that the variable has a value.** An invalid or revoked
+key can still produce `True`. Creating the client also does not test the key with the
+service. The API call in the next section checks whether the request is accepted.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">5</span><span class="qtext">How can you check that Git will normally leave your <code>.env</code> file out of commits?</span></summary>
+
+**Check the ignore rule and the file's status:**
+
+```bash
+git check-ignore -v .env
+git status --short --ignored .env
+```
+{: .yens }
+
+You should see a matching `.gitignore` rule and `!! .env`. A hidden filename alone does
+not make Git ignore a file. If it was already tracked, adding an ignore rule does not
+remove it from tracking.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">6</span><span class="qtext">You accidentally commit a key, then delete it in the next commit. Is that enough?</span></summary>
+
+**No. The earlier commit still contains it.** Tell the instructor or key owner so they
+can replace the key. Removing it from the current file does not make the old credential
+unavailable to someone who already has a copy.
+
+</details>
+
+---
+
 ## Skills Learned
 
 - Keep `ANTHROPIC_API_KEY` in `.env`, not in code or notebook output

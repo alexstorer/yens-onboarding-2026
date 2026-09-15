@@ -329,6 +329,76 @@ Claude edits the `.ipynb` **file on disk**. Switch back to the notebook tab and 
 
 ---
 
+## Quiz
+
+Answer each one in your head, then open it to check.
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">1</span><span class="qtext">You load a Python module, then run <code>python3</code> again. Why might a different Python start?</span></summary>
+
+**The module changes the search order in `$PATH`.** It adds its Python directory near
+the front, so the shell finds that executable before the one it used previously.
+Run `which python3` before and after loading the module to compare the paths.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">2</span><span class="qtext">Your plotting code saved <code>my_plot.png</code>, but you cannot find it in the repo. Where should you look?</span></summary>
+
+**Check the directory where you started Python.** A relative filename such as
+`my_plot.png` is saved in the current working directory. If you started Python from
+your home directory, look there. After leaving Python, run `pwd` and `ls` to check.
+
+Starting Python from `~/yens-onboarding-2026` keeps the exercise's output in the repo.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">3</span><span class="qtext">The plotting code ran over SSH, but no plot window appeared. Did it fail?</span></summary>
+
+**Not necessarily.** In this terminal session, there is no graphical display for
+`plt.show()` to open a window. Check whether `fig.savefig(...)` created `my_plot.png`,
+then open that file in JupyterHub's image viewer. In a notebook, the plot can appear
+below the cell instead.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">4</span><span class="qtext">You run a cell in the Yens JupyterHub from your laptop's browser. Which computer runs the Python code?</span></summary>
+
+**The Yen hosting your notebook kernel.** Your laptop displays the interface and results.
+The notebook uses the cluster's computing resources and files, which is why you can see
+the same `my_plot.png` through both JupyterHub and your SSH session.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">5</span><span class="qtext">Your prompt shows <code>&gt;&gt;&gt;</code>. Can you type <code>ls</code> or <code>cd</code> there to navigate?</span></summary>
+
+**You are inside Python, so shell commands do not work there.** Run `exit()` to return
+to the terminal's shell, then use `ls` or `cd`. The prompt helps you check which program
+is waiting for your input.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">6</span><span class="qtext">You want to run the full plotting sequence again without entering each line or clicking notebook cells. What should you save?</span></summary>
+
+**A Python script**, such as `plotting_code.py`. Save the code in that file, then run it
+from the shell in the folder containing it:
+
+```bash
+python3 plotting_code.py
+```
+{: .yens }
+
+Python executes the script from top to bottom. Keep the `fig.savefig(...)` line so the
+run produces an image file you can open afterward.
+
+</details>
+
+---
+
 ## 🧠 Skills Learned
 
 - You can open JupyterHub on the Yens and run Python from any browser
