@@ -18,7 +18,7 @@ to skip over some material in Part 1, that's OK! You can always come back and re
 later.
 
 {: .important }
-> **If one of these fails, put up a red sticky right away.** Part 2 will build on this, so
+> **If one of these fails, put up a 🔴 red sticky right away.** Part 2 will build on this, so
 > let's get it straightened out as soon as possible.
 
 ---
@@ -78,25 +78,23 @@ push in check 3 proves the other half: if it asks you for a password, you ran
 
 ### 3 — git and GitHub, on this very site
 
-You already forked and cloned this course's repo. Worth noticing what that means: **the
-page you are reading is a file in it.** `docs/day1/part1-checkpoint.md` is this
-checkpoint. The site is not a separate thing the course publishes at you — it is
-markdown under version control, and you have a copy.
+You already [forked and cloned]({{ '/day1/git-and-github/#fork-and-clone' | relative_url }})
+this course's repo. Worth noticing what that means: **the page you are reading is a file
+in it.** `docs/day1/part1-checkpoint.md` is this checkpoint.
 
-So edit it. On the Yens:
+To make sure you can manipulate a repo, let's alter this one:
 
 ```bash
 cd ~/yens-onboarding-2026
 git checkout -b checkpoint
-echo "- I got to the Part 1 checkpoint" >> notes.md
+echo "- Updated notes.md by hand for the Part 1 checkpoint" >> notes.md
 git add notes.md
-git commit -m "Note reaching the Part 1 checkpoint"
+git commit -m "Using git manually to update notes.md for Part 1 checkpoint"
 git push -u origin checkpoint
 ```
 {: .yens }
 
-Then open your fork on GitHub and confirm the `checkpoint` branch is there with your
-commit on it. If the push succeeded without asking for a password, item 3 is genuinely
+Then open <a href="https://github.com/YOUR_GITHUB_USERNAME/yens-onboarding-2026/commits/checkpoint" target="_blank" rel="noopener noreferrer">the <code>checkpoint</code> branch on your fork</a> and confirm your commit is on it. If the push succeeded without asking for a password, check 2 is genuinely
 working — that is the real thing this step tests.
 
 {: .note }
@@ -105,12 +103,15 @@ working — that is the real thing this step tests.
 
 ### 4 — Let Claude drive
 
-The same operation, asked for rather than typed. In Claude Code, on the Yens:
+The same operation, asked for rather than typed. From `~/yens-onboarding-2026` on the
+Yens — the same directory you were just in, so Claude is working in the repo and on the
+`checkpoint` branch — launch `claude` and press <kbd>Shift</kbd>+<kbd>Tab</kbd> until the
+mode line reads **plan mode**, so you get to read what it intends before anything happens:
 
 ```
-> Use the github-for-research skill. Add a line to notes.md saying I finished the
-> Part 1 checkpoint, commit it on the current branch with a message explaining why,
-> and push.
+> Use the github-for-research skill. Add a line to notes.md saying I used Claude Code to
+> update the notes to complete the Part 1 checkpoint, commit it on the current branch
+> with a message explaining why, and push.
 ```
 {: .claude }
 
@@ -128,19 +129,9 @@ but not *why*, tell it so and have it try again.
 
 ## Before You Move On
 
-{: .note }
-> 🟢 **Green sticky** = all four ran &nbsp;&nbsp; 🔴 **Red sticky** = one of them didn't
->
-> Put the sticky up before you take a break, not after — an instructor can come to you
-> while you are away from the keyboard anyway.
+**Be back and ready at 10:30** for the next lecture. If you finish early, the bonus
+exercises are the place to go rather than starting Part 2:
 
-If you are green on all four, you have a working research setup: a machine you can reach,
-an identity it recognizes, and a version-controlled place to put the results — plus an
-assistant that can operate all of it on your behalf.
-
-Everything in Part 2 is what you *do* with that.
-
-{: .aside }
-> Nothing here is specific to this course. The same four are what a new collaborator on
-> any Stanford research project needs on their first day, and roughly the checklist worth
-> running whenever you get access to an unfamiliar machine.
+- [Skip the repeated logins with SSH multiplexing]({{ '/day1/connect-to-the-yens/#bonus' | relative_url }}) — authenticate once instead of on every connection
+- [Investigate a well-kept repo]({{ '/day1/claude-code/#bonus--investigate-a-well-kept-repo' | relative_url }}) — ask Claude Code questions about a project you have never seen
+- [Put Claude Code to work]({{ '/day1/claude-code/#bonus--put-claude-code-to-work' | relative_url }}) — publish your own copy of this site from your fork, then change it

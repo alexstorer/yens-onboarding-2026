@@ -62,12 +62,26 @@
     return value;
   }
 
+  // A link whose href still holds a placeholder would send the student to a
+  // literal YOUR_GITHUB_USERNAME account, so offer no link at all until there is
+  // a name to put in it. The text stays; only the href goes.
+  var PENDING = 'username-fill-pending';
+  var PENDING_HINT = 'Type your GitHub username on Git & GitHub for Research to enable this link';
+
   function apply(name) {
     collect().forEach(function (rec) {
       rec.node.nodeValue = fill(rec.original, name);
     });
     collectLinks().forEach(function (rec) {
-      rec.el.setAttribute('href', fill(rec.original, name));
+      if (name) {
+        rec.el.setAttribute('href', fill(rec.original, name));
+        rec.el.removeAttribute('title');
+        rec.el.classList.remove(PENDING);
+      } else {
+        rec.el.removeAttribute('href');
+        rec.el.setAttribute('title', PENDING_HINT);
+        rec.el.classList.add(PENDING);
+      }
     });
   }
 
@@ -83,7 +97,10 @@
   var status = document.getElementById('gh-username-status');
 
   if (input && stored) input.value = stored;
-  if (stored) { apply(stored); report(status, stored); }
+
+  // Unconditional: with no name this is what strips the placeholder hrefs.
+  apply(stored);
+  report(status, stored);
 
   if (!input) return;   // a page with no box still gets the stored name applied
 
