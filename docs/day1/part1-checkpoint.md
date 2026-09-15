@@ -94,8 +94,7 @@ git push -u origin checkpoint
 ```
 {: .yens }
 
-Then open your fork on GitHub and confirm the `checkpoint` branch is there with your
-commit on it. If the push succeeded without asking for a password, check 2 is genuinely
+Then open <a href="https://github.com/YOUR_GITHUB_USERNAME/yens-onboarding-2026/commits/checkpoint" target="_blank" rel="noopener noreferrer">the <code>checkpoint</code> branch on your fork</a> and confirm your commit is on it. If the push succeeded without asking for a password, check 2 is genuinely
 working — that is the real thing this step tests.
 
 {: .note }
@@ -104,7 +103,9 @@ working — that is the real thing this step tests.
 
 ### 4 — Let Claude drive
 
-The same operation, asked for rather than typed. In Claude Code, on the Yens:
+The same operation, asked for rather than typed. Launch `claude` on the Yens, then press
+<kbd>Shift</kbd>+<kbd>Tab</kbd> until the mode line reads **plan mode** — so you get to
+read what it intends before anything happens:
 
 ```
 > Use the github-for-research skill. Add a line to notes.md saying I finished the
