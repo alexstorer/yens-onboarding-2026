@@ -103,9 +103,10 @@ working — that is the real thing this step tests.
 
 ### 4 — Let Claude drive
 
-The same operation, asked for rather than typed. Launch `claude` on the Yens, then press
-<kbd>Shift</kbd>+<kbd>Tab</kbd> until the mode line reads **plan mode** — so you get to
-read what it intends before anything happens:
+The same operation, asked for rather than typed. From `~/yens-onboarding-2026` on the
+Yens — the same directory you were just in, so Claude is working in the repo and on the
+`checkpoint` branch — launch `claude` and press <kbd>Shift</kbd>+<kbd>Tab</kbd> until the
+mode line reads **plan mode**, so you get to read what it intends before anything happens:
 
 ```
 > Use the github-for-research skill. Add a line to notes.md saying I finished the
