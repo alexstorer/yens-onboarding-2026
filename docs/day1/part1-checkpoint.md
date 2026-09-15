@@ -87,7 +87,7 @@ To make sure you can manipulate a repo, let's alter this one:
 ```bash
 cd ~/yens-onboarding-2026
 git checkout -b checkpoint
-echo "- I got to the Part 1 checkpoint" >> notes.md
+echo "- Updated notes.md by hand for the Part 1 checkpoint" >> notes.md
 git add notes.md
 git commit -m "Using git manually to update notes.md for Part 1 checkpoint"
 git push -u origin checkpoint
