@@ -140,8 +140,3 @@ an identity it recognizes, and a version-controlled place to put the results —
 assistant that can operate all of it on your behalf.
 
 Everything in Part 2 is what you *do* with that.
-
-{: .aside }
-> Nothing here is specific to this course. The same four are what a new collaborator on
-> any Stanford research project needs on their first day, and roughly the checklist worth
-> running whenever you get access to an unfamiliar machine.
