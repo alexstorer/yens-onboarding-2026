@@ -16,14 +16,13 @@ permalink: /day2/gpus/
 > 🟢 **Green sticky** = I have done 1–4 and am moving on to the bonus work, and I am ready
 > to help my table.
 
-{: .note }
-> Everything on this page runs from your clone, with the environment active:
->
-> ```bash
-> cd ~/yens-onboarding-2026
-> source .venv/bin/activate
-> ```
-> {: .yens }
+Everything on this page runs from your clone, with the environment active:
+
+```bash
+cd ~/yens-onboarding-2026
+source .venv/bin/activate
+```
+{: .yens }
 
 Everything today has run on CPUs, against a model living on somebody else's servers. This
 page is the other axis: **hardware you ask for by name, and models that run on it.**
@@ -186,7 +185,7 @@ You request a GPU the same way you set any other resource in a Slurm script — 
 #SBATCH --partition=gpu       # the GPU partition (confirm the name for your setup)
 #SBATCH --gres=gpu:1          # request one GPU
 ```
-{: .yens }
+{: .file }
 
 Just like the `#SBATCH` directives you wrote on Day 2, this tells the scheduler what your job needs — here, one GPU. Match the partition name (and any specific-node targeting) to your cluster's current setup.
 
@@ -238,7 +237,7 @@ the shortest Slurm script you have seen today, and two directives are new:
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 ```
-{: .yens }
+{: .file }
 
 `--gres` is "generic resource". `gpu:1` asks for one GPU on the node you land on. Miss it
 out and you get a slot on a GPU node with **no GPU allocated to you** — the job runs,

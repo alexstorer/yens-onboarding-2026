@@ -10,6 +10,12 @@ permalink: /day2/part2/
 
 # Part 2 — Submit a Job Array
 
+Part 1 got one job onto the scheduler. This part is the jump from one to many: a single
+submission that fans out into hundreds of tasks, made safe to rerun, then pushed up
+against the ceiling the scheduler actually enforces.
+
+**10:30 to noon.** A short lecture, then the work block.
+
 ---
 
 ## Hands-On Lab

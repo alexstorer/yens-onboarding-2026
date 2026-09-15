@@ -69,25 +69,22 @@ We saw above that comparing outputs between models is a basic robustness check. 
 **1. Call both models inside the loop.** Start from the batch script you ran on Day 2, `scripts/extract_form_3_batch.py`, which already loops over filings from `data/aws_links.csv`. For each filing, make the same call twice — once per model — and save the answers side by side, in a dataframe or similar. Everything else stays as it was: the prompt, the schema, the loop.
 
 {: .tip }
-> **Swapping in a second model is a one-line change.** The Stanford AI API Gateway serves many models behind one endpoint, so the same client reaches both — only the `model` argument changes:
+> **Swapping in a second model is a one-line change.** The same Anthropic client reaches every model
+> the course key can use — only the `model` argument changes:
 >
 > ```python
-> import os
-> from openai import OpenAI
+> import anthropic
 >
-> client = OpenAI(
->     base_url="https://aiapi-prod.stanford.edu/v1",
->     api_key=os.getenv("STANFORD_API_KEY"),
-> )
+> client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY from the environment
 >
-> MODEL_A = "gemini-2.5-flash-lite"     # the model extract_form_3_batch.py uses
-> MODEL_B = "gpt-4.1"                   # a second model, e.g., from a different lab —
->                                       # `client.models.list()` shows everything
->                                       # your key can reach, as on Day 1
+> MODEL_A = "claude-haiku-4-5"    # the model extract_form_3_batch.py uses
+> MODEL_B = "claude-sonnet-5"     # a slower, stronger second opinion
 >
 > # same call for each — only the model name changes
-> answer_a = client.chat.completions.create(model=MODEL_A, messages=messages)
-> answer_b = client.chat.completions.create(model=MODEL_B, messages=messages)
+> answer_a = client.messages.parse(model=MODEL_A, max_tokens=4096, system=system_prompt,
+>                                  messages=messages, output_format=Form3Filing)
+> answer_b = client.messages.parse(model=MODEL_B, max_tokens=4096, system=system_prompt,
+>                                  messages=messages, output_format=Form3Filing)
 > ```
 >
 > And if you had a local LLM server running, you could of course compare against a local model too — that's a second client pointed at the server's own `base_url`, as in [GPUs & Local LLMs]({{ '/day2/gpus/' | relative_url }}).

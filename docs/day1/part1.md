@@ -29,7 +29,7 @@ fast, do the bonus exercises to level up (rather than moving ahead to future sec
 
 ---
 
-## Sections
+## Hands-On Lab
 
 Work through them in order — each builds on the one before.
 

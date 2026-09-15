@@ -10,9 +10,10 @@ permalink: /
 A two-day, hands-on introduction to research computing and AI tools at Stanford GSB,
 for incoming PhD students and faculty. Over two mornings you will get onto the Yens
 cluster, put your work under version control, learn to drive it with Claude Code, and
-build a Python environment that travels. Then you will pick an AI service your data is
-allowed to use, extract structured records from public filings and validate them, and
-finish by measuring what that job needs and scaling it across the cluster with Slurm.
+build a Python environment anyone can rebuild. Then you will pick an AI service your
+data is allowed to use, extract structured records from public filings and validate
+them, and finish by measuring what that job needs and scaling it across the cluster
+with Slurm.
 
 ---
 
