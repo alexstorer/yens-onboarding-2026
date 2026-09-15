@@ -324,7 +324,7 @@ Then prove it works. Make a file that looks like a leaked credential and check t
 cannot see it:
 
 ```bash
-echo "STANFORD_API_KEY=not-a-real-key" > .env
+echo "ANTHROPIC_API_KEY=not-a-real-key" > .env
 git status --short
 ```
 {: .yens }

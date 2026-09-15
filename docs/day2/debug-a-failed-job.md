@@ -36,14 +36,13 @@ permalink: /day2/debug-a-failed-job/
   <circle cx="630" cy="80" r="20" fill="#f3f4f7" stroke="#6a7280" stroke-width="3"/><text x="630" y="87" text-anchor="middle" font-size="20" font-weight="700" fill="#6a7280">5</text>
 </svg>
 
-{: .note }
-> Everything on this page runs from your clone, with the environment active:
->
-> ```bash
-> cd ~/yens-onboarding-2026
-> source .venv/bin/activate
-> ```
-> {: .yens }
+Everything on this page runs from your clone, with the environment active:
+
+```bash
+cd ~/yens-onboarding-2026
+source .venv/bin/activate
+```
+{: .yens }
 
 ## Read your own job's logs
 
@@ -119,7 +118,7 @@ Then resubmit — **keep debugging and resubmitting until the Slurm email says t
 
 **Bonus — Debug `fix_me_2.slurm`**
 
-Same drill, a different setup mistake. Submit it, watch it fail, and read its error log:
+Same drill, a different script. Submit it, watch it fail, and read its error log:
 
 ```bash
 sbatch --reservation=class_cpu slurm/fix_me_2.slurm
@@ -132,7 +131,7 @@ Troubleshoot with Claude in plan mode (`> Help me troubleshoot logs/fix_me_2_*.e
 
 **Bonus — Debug `fix_me_3.slurm`**
 
-One more, hiding yet another setup mistake. Same process:
+One more. Same process:
 
 ```bash
 sbatch --reservation=class_cpu slurm/fix_me_3.slurm
@@ -159,6 +158,7 @@ Everything above used Claude Code **interactively**. For a quick, one-off questi
 Point it at a file — one of the other broken scripts, say:
 
 ```bash
+ml claude-code
 claude -p "review scripts/extract_form_3_one_file_broken.py and explain what it does"
 ```
 {: .yens }

@@ -87,14 +87,13 @@ ssh SUNetID@yen2.stanford.edu   # replace yen2 with whatever hostname showed abo
 ```
 {: .laptop }
 
-{: .note }
-> Everything on this page runs from your clone, with the environment active:
->
-> ```bash
-> cd ~/yens-onboarding-2026
-> source .venv/bin/activate
-> ```
-> {: .yens }
+Everything on this page runs from your clone, with the environment active:
+
+```bash
+cd ~/yens-onboarding-2026
+source .venv/bin/activate
+```
+{: .yens }
 
 {: .note }
 > 💡 **Skip the second login.** A fresh `ssh` means another password + Duo prompt. To avoid re-authenticating, open a terminal through JupyterHub instead: browse to that node's hub (e.g. `https://yen2.stanford.edu/jupyter/`), then **New → Terminal**. You're already authenticated there, and it drops you onto that exact node — ideal for the second monitoring terminal.
@@ -195,34 +194,51 @@ time python scripts/mystery_script.py
 
 As the script runs, watch new `python` rows appear — that's it spawning work. Count them to answer "how many processes did it run?"
 
-**Think these through before you reveal the answer:**
-- How long did it take, and how much RAM did it peak at?
-- How many CPU cores did it use?
-- How many processes did it run?
-- Is it therefore **serial** (one core) or **parallel** (multiple)?
+Answer each one in your head, then open it to check.
 
-<details markdown="1">
-<summary>✅ Check your answer</summary>
+<details class="quiz" markdown="1">
+<summary><span class="qnum">1</span><span class="qtext">How long did it take, and how much RAM did it peak at?</span></summary>
 
-You saw about **4 `python` processes** in `htop` and roughly **4 Cores** in `userload` — no accident. Open `scripts/mystery_script.py` and you'll find `num_cores = 4`: the script deliberately starts 4 worker processes, one per core, which is exactly what made it a **parallel, multi-core** program. The amount of parallelism is a **choice in the code** — change that number and the processes and cores you'd see change with it.
+**Read them off your own two terminals** — `real` from `time` in Terminal 1, and the peak `RES`
+you watched in `htop`. You cannot get either by reading the code, which is the point of
+profiling.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">2</span><span class="qtext">How many cores did it use, and how many processes did it run?</span></summary>
+
+**About 4 of each.** Roughly **4 Cores** in `userload`, and about **4 <code>python</code>
+processes** in `htop` — one process per core.
+
+</details>
+
+<details class="quiz" markdown="1">
+<summary><span class="qnum">3</span><span class="qtext">Serial or parallel, and what decided it?</span></summary>
+
+**Parallel, and the script decided.** Open `scripts/mystery_script.py` and you will find
+`num_cores = 4`: it deliberately starts four worker processes, one per core, which is exactly
+what made it a multi-core program.
+
+So the amount of parallelism is a **choice in the code**. Change that number and the processes
+and cores you see change with it.
 
 </details>
 
 ## The Batch Script
 
-{: .note }
-> Everything on this page runs from your clone, with the environment active:
->
-> ```bash
-> cd ~/yens-onboarding-2026
-> source .venv/bin/activate
-> ```
-> {: .yens }
+Everything on this page runs from your clone, with the environment active:
+
+```bash
+cd ~/yens-onboarding-2026
+source .venv/bin/activate
+```
+{: .yens }
 
 {: .important }
 > **Task:** Profile the real batch script on 10 filings using the same two-terminal technique.
 
-Now apply the same technique to a **real workload**. `scripts/extract_form_3_batch.py` — committed in the repo, so everyone has it — runs the same Form 3 extraction you did on Day 1 with `extract_form_3_one_file.py`, but loops over many filings instead of one. Process **10 filings** and profile it. (If you finished the Day 1 capstone and have your own batch script, profile that one instead — the numbers are what matter, not whose script produced them.)
+Now apply the same technique to a **real workload**. `scripts/extract_form_3_batch.py` — committed in the repo, so everyone has it — runs the same Form 3 extraction you did on Day 1 with `extract_form_3_one_file.py`, but loops over many filings instead of one. Process **10 filings** and profile it.
 
 First, open the script so you know what you're profiling — `cat scripts/extract_form_3_batch.py` (or open it in JupyterHub).
 
@@ -278,49 +294,66 @@ Watch Terminal 2 as the 10 filings process one after another.
 > - **`user`** — CPU time your code used across all cores (if `user` > `real`, it ran on multiple cores in parallel)
 > - **`sys`** — CPU time spent on OS-level work (file I/O, memory allocation)
 
-Think about each of these before revealing the answer:
+Answer each one in your head, then open it to check.
 
-<details markdown="1">
-<summary>❓ Question 1</summary>
+<details class="quiz" markdown="1">
+<summary><span class="qnum">1</span><span class="qtext">You watched <code>userload</code> through the whole run. What did Cores and % Mem do?</span></summary>
 
-What did we observe in `userload` while the 10 filings ran — what happened to **Cores** and **% Mem**?
-
-</details>
-
-<details markdown="1">
-<summary>❓ Question 2</summary>
-
-Why do the **Cores** stay near 0, even with 10 filings running?
+**Barely moved.** Both sat near the baseline you noted before starting — Cores well under 1,
+% Mem showing 0. Ten filings went through and the display hardly changed.
 
 </details>
 
-<details markdown="1">
-<summary>❓ Question 3</summary>
+<details class="quiz" markdown="1">
+<summary><span class="qnum">2</span><span class="qtext">Ten filings took about 20 seconds, yet Cores stayed near 0. Where did the time go?</span></summary>
 
-Why does **% Mem** stay near 0?
+**Into waiting on the network.** The job spends almost all its time waiting for the Anthropic
+API to answer, so it barely touches the CPU. That makes it **I/O-bound** — unlike the mystery
+script, which was **CPU-bound** and doing real math.
+
+The `time` output is the fingerprint. A typical run: `real 0m22.5s`, `user 0m1.9s`,
+`sys 0m0.5s` — roughly 2 seconds of actual work against 20 of waiting. Whenever `real` ≫ `user`,
+you are looking at a job that mostly waits.
+
+Per-filing times vary too: each takes however long the API takes, so ten filings is not exactly
+ten times one.
 
 </details>
 
-<details markdown="1">
-<summary>❓ Question 4</summary>
+<details class="quiz" markdown="1">
+<summary><span class="qnum">3</span><span class="qtext">% Mem reads 0 as well. Does that mean the script uses no memory?</span></summary>
 
-Is this script **serial** or **parallel**?
+**No — two things are true at once.** The script really does hold little memory, because it
+handles one filing at a time rather than loading all ten. But even a few hundred MB would still
+print `0%`, because that column measures your share of the node's whole ~1 TB. On a node that
+big, almost any single job rounds to zero.
+
+When you want the real number, read **`RES`** in `htop` instead.
 
 </details>
 
-<details markdown="1">
-<summary>✅ Check your answer</summary>
+<details class="quiz" markdown="1">
+<summary><span class="qnum">4</span><span class="qtext">Serial or parallel — and which number in your own output settles it?</span></summary>
 
-- **Cores and % Mem barely moved.** The job spends almost all its time **waiting on the Anthropic API** to answer, not computing — so it barely touches the CPU. That makes it an **I/O-bound** job (waiting on the network), unlike the mystery script, which was **CPU-bound** (doing math).
-- **`% Mem` reading 0 is two things at once.** The script really does hold little memory, because it handles one filing at a time rather than loading all ten. But even a few hundred MB would still show `0%`, because that column measures your share of the node's whole ~1 TB. On a node that big, almost any single job rounds to zero — so read `RES` in `htop` when you want the real number.
-- **`real` is large, `user` is small.** `real` (wall-clock) is big because you waited on the API; `user` (actual CPU time) is tiny because the CPU had little to do. That gap — `real` ≫ `user` — is the fingerprint of a job that mostly waits.
+**Serial.** A single `python` process in `htop`, and `userload` under 1 Core.
 
-A typical run: `real 0m22.5s`, `user 0m1.9s`, `sys 0m0.5s` — about 2 seconds of real work, ~20 seconds spent waiting. In `htop` you'll see just **one `python` process**, and **under 1 Core** in `userload`.
+The timing agrees. `user` above `real` is what parallel looks like: the mystery script ran
+`real 0m31s` against `user 2m0s`, because four cores were each clocking up CPU time while the
+wall clock ran once. Here `user` came in far *below* `real`, so only one core was ever busy.
 
-Two more things worth knowing:
+</details>
 
-- **Per-filing times vary** — each takes however long the API takes, so 10 filings isn't exactly 10× one.
-- **Why the script sets `OPENBLAS_NUM_THREADS=1`.** Libraries like NumPy and pandas try to speed up math by grabbing *every* core on the machine — 256 on Yen2, for example. But the Yens enforce [per-user limits](https://rcpedia.stanford.edu/_policies/user_limits/) on how much CPU one person can use, so grabbing all 256 doesn't help — it just crowds a pile of threads onto the cores you're actually allowed, which can make the job *slower*. Setting it to `1` keeps the job to what it needs. The habit: on a shared node, don't let a library grab the whole machine — keep its thread count within your limits.
+<details class="quiz" markdown="1">
+<summary><span class="qnum">5</span><span class="qtext">The script sets <code>OPENBLAS_NUM_THREADS=1</code>. Why cap a library's threads on a 256-core node?</span></summary>
+
+**Because you are not allowed all 256.** Libraries like NumPy and pandas try to speed up math by
+grabbing *every* core on the machine — 256 on Yen2, for example. But the Yens enforce
+[per-user limits](https://rcpedia.stanford.edu/_policies/user_limits/) on how much CPU one person
+can use, so grabbing all of them does not help: it crowds a pile of threads onto the cores you
+actually have, which can make the job **slower**.
+
+The habit: on a shared node, do not let a library grab the whole machine — keep its thread count
+inside your limits.
 
 </details>
 

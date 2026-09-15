@@ -40,6 +40,11 @@ Here's what we'll do today:
   <circle cx="630" cy="80" r="20" fill="#f3f4f7" stroke="#6a7280" stroke-width="3"/><text x="630" y="87" text-anchor="middle" font-size="20" font-weight="700" fill="#6a7280">5</text>
 </svg>
 
+| Part | Clock | What it delivers |
+|---|---|---|
+| [Part 1 — Profile & Submit a Job]({{ '/day2/part1/' | relative_url }}) | 9:00–10:30 | Measure what the script needs, declare it, and submit |
+| [Part 2 — Submit a Job Array]({{ '/day2/part2/' | relative_url }}) | 10:30–noon | One submission, many tasks — up to ~992 filings |
+
 ---
 
 ## Day 1 Recap
@@ -47,10 +52,8 @@ Here's what we'll do today:
 Where yesterday left you:
 
 - Built a virtual environment on the Yens and installed dependencies from `requirements.txt`
-- Ran `scripts/extract_form_3_one_file.py` in three stages — calls the language model to
-  extract structured fields from one SEC Form 3 filing, with logging and a validated
-  result file
-- Used Pydantic to validate and structure the LLM output
+- Ran `scripts/extract_form_3_one_file.py` interactively, pulling fields out of one SEC
+  Form 3 filing and validating them with Pydantic
 
 ---
 
