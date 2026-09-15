@@ -89,7 +89,7 @@ cd ~/yens-onboarding-2026
 git checkout -b checkpoint
 echo "- I got to the Part 1 checkpoint" >> notes.md
 git add notes.md
-git commit -m "Note reaching the Part 1 checkpoint"
+git commit -m "Using git manually to update notes.md for Part 1 checkpoint"
 git push -u origin checkpoint
 ```
 {: .yens }
@@ -109,9 +109,9 @@ Yens — the same directory you were just in, so Claude is working in the repo a
 mode line reads **plan mode**, so you get to read what it intends before anything happens:
 
 ```
-> Use the github-for-research skill. Add a line to notes.md saying I finished the
-> Part 1 checkpoint, commit it on the current branch with a message explaining why,
-> and push.
+> Use the github-for-research skill. Add a line to notes.md saying I used Claude Code to
+> update the notes to complete the Part 1 checkpoint, commit it on the current branch
+> with a message explaining why, and push.
 ```
 {: .claude }
 
