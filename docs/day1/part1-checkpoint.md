@@ -129,18 +129,6 @@ but not *why*, tell it so and have it try again.
 
 ## Before You Move On
 
-{: .note }
-> 🟢 **Green sticky** = all four ran &nbsp;&nbsp; 🔴 **Red sticky** = one of them didn't
->
-> Put the sticky up before you take a break, not after — an instructor can come to you
-> while you are away from the keyboard anyway.
-
-If you are green on all four, you have a working research setup: a machine you can reach,
-an identity it recognizes, and a version-controlled place to put the results — plus an
-assistant that can operate all of it on your behalf.
-
-Everything in Part 2 is what you *do* with that.
-
 **Be back and ready at 10:30** for the next lecture. If you finish early, the bonus
 exercises are the place to go rather than starting Part 2:
 
