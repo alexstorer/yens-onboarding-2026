@@ -62,7 +62,7 @@ A job that worked leaves an empty `.err`.
 {: .important }
 > **Task:** Submit a deliberately broken job, read the error log it leaves behind, and fix it with Claude as your reviewer. Reading a failed job's `.err` is the first debugging skill you will actually need on the cluster.
 
-Your repo ships several Slurm scripts that are **deliberately broken**. Fix `slurm/fix_me.slurm` here; the others are waiting for you in the [Bonus](#bonus) section. **Work with Claude**: point Claude Code at the job's error log and ask it to explain what went wrong and propose a fix. **Read its explanation, and if the fix makes sense, approve it** and let Claude apply it — you're the reviewer, so don't accept a change you don't understand.
+Your repo ships several Slurm scripts that are **deliberately broken**. Fix `slurm/fix_me.slurm` here; the others are folded away as bonus work at the end of the page. **Work with Claude**: point Claude Code at the job's error log and ask it to explain what went wrong and propose a fix. **Read its explanation, and if the fix makes sense, approve it** and let Claude apply it — you're the reviewer, so don't accept a change you don't understand.
 
 {: .note }
 > 💡 **Let it fail before you fix it.** A `logs/fix_me_*.err` file has to exist for you to read, and a bonus exercise later reuses it — so submit it and let it fail rather than reading the script and spotting the bug by eye.
@@ -159,9 +159,23 @@ Point it at a file — one of the other broken scripts, say:
 
 ```bash
 ml claude-code
-claude -p "review scripts/extract_form_3_one_file_broken.py and explain what it does"
+claude -p "review scripts/extract_form_3_one_file_broken.py and explain what it does" \
+  --disallowedTools "Read(./slurm/**)" "Read(./docs/**)"
 ```
 {: .yens }
+
+{: .note }
+> **Why the `--disallowedTools` flags.** Left to itself, Claude reads whatever it thinks is
+> relevant — including the `.slurm` wrappers holding the other exercises' planted bugs, and
+> these pages. Denying those two directories puts the answers out of reach, and it tells you
+> when it hits the fence: *"`slurm/` is in a directory blocked by this session's permission
+> settings."* Scoping what an agent can see is a habit worth having anyway — the same flag
+> keeps a model away from data it is not allowed to read.
+>
+> A fence is not a guarantee, though. Those paths are relative to where you run the command,
+> so anything outside this repo is still fair game — and an agent will describe the wrong
+> copy of a file as confidently as the right one, line numbers and all. Check that what it
+> tells you matches the file in front of you.
 
 Or **pipe** data straight into it. On Linux, every command-line program has two text streams: **standard input** (`stdin`, the text coming *in*) and **standard output** (`stdout`, the text it prints *out*). The pipe symbol `|` connects them — it takes the `stdout` of the command on its left and feeds it as the `stdin` of the command on its right. Because `claude -p` reads from `stdin`, you can pipe a file's contents straight into Claude instead of typing them. Take the `fix_me` error log you just read and let Claude diagnose it in one line:
 
@@ -182,7 +196,7 @@ cat results/*.json \
   | claude -p "Summarize what this run produced and flag anything unusual." \
   >> logs/run_summary.txt
 ```
-{: .yens }
+{: .file }
 
 Submit a batch of these and you come back to finished jobs that have already **documented themselves** — what they did, when, and what to look at — without you watching a single one run.
 
