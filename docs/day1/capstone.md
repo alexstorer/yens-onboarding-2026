@@ -278,5 +278,3 @@ proposed change and the cases that motivated it.
 You used the Yens, a Python environment, an API key loaded from `.env`, structured model
 responses, validation, logging, and Git. You also made a research decision explicit in
 code: when a model's output needs human review.
-
-Day 2 covers measuring resource use and running jobs through the cluster scheduler.

@@ -112,8 +112,8 @@ Two parts to read:
 - **The table below** is one row per process — the same fields as your CSV: `PID`, `USER`, `%CPU`, `%MEM`, `TIME+`, `S` (status), `COMMAND`.
 
 While it's running, try these keys:
-- `P` — sort by CPU (the default) · `M` — sort by memory
-- `u`, then type a username and press Enter — show only that person's processes
-- `q` — quit
+- <kbd>P</kbd> — sort by CPU (the default) · <kbd>M</kbd> — sort by memory
+- <kbd>u</kbd>, then type a username and press <kbd>Enter</kbd> — show only that person's processes
+- <kbd>q</kbd> — quit
 
-Watch for a few seconds: which processes churn near a full core, and which just sit `S` (sleeping)? Press `q` to quit when you're done.
+Watch for a few seconds: which processes churn near a full core, and which just sit `S` (sleeping)? Press <kbd>q</kbd> to quit when you're done.

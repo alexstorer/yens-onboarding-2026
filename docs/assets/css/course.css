@@ -344,14 +344,16 @@
    block on the page — measured, not assumed. */
 .main-content div.highlighter-rouge.yens,
 .main-content div.highlighter-rouge.laptop,
-.main-content div.highlighter-rouge.claude {
+.main-content div.highlighter-rouge.claude,
+.main-content div.highlighter-rouge.file {
   border: 0;
   border-radius: 0;
   background: none;
 }
 .main-content div.highlighter-rouge.yens::before,
 .main-content div.highlighter-rouge.laptop::before,
-.main-content div.highlighter-rouge.claude::before {
+.main-content div.highlighter-rouge.claude::before,
+.main-content div.highlighter-rouge.file::before {
   display: inline-block;
   position: relative;
   z-index: 1;
@@ -370,7 +372,8 @@
 }
 .main-content div.highlighter-rouge.yens > div.highlight,
 .main-content div.highlighter-rouge.laptop > div.highlight,
-.main-content div.highlighter-rouge.claude > div.highlight {
+.main-content div.highlighter-rouge.claude > div.highlight,
+.main-content div.highlighter-rouge.file > div.highlight {
   border-top-left-radius: 0;     /* the tab sits on this corner */
   border-left-width: 3px;
 }
@@ -401,6 +404,19 @@
 }
 .main-content div.highlighter-rouge.claude > div.highlight {
   border-left-color: #c2410c;
+}
+
+/* Not a terminal at all -- lines that belong *inside* a file. Green rather
+   than a fourth warm tone: at 0.68rem uppercase a reader picks the hue before
+   the words, and cardinal, navy and rust are already spoken for. #166534 is
+   6.55:1 on the tab fill, so it clears AA for small text. */
+.main-content div.highlighter-rouge.file::before {
+  content: "\01F4C4  Text File";
+  color: #166534;
+  border-left-color: #166534;
+}
+.main-content div.highlighter-rouge.file > div.highlight {
+  border-left-color: #166534;
 }
 
 /* ── Keys look like keys ──────────────────────────────────────────────────

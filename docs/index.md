@@ -8,27 +8,19 @@ permalink: /
 # Yens Onboarding 2026
 
 A two-day, hands-on introduction to research computing and AI tools at Stanford GSB,
-for incoming PhD students and faculty. Over two mornings you will build one real
-pipeline end to end: get onto the Yens cluster, put your work under version control,
-choose an approved AI route, extract public filings with Anthropic's API, and scale
-the whole thing across the cluster with Slurm.
+for incoming PhD students and faculty. Over two mornings you will get onto the Yens
+cluster, put your work under version control, learn to drive it with Claude Code, and
+build a Python environment anyone can rebuild. Then you will pick an AI service your
+data is allowed to use, extract structured records from public filings and validate
+them, and finish by measuring what that job needs and scaling it across the cluster
+with Slurm.
 
 ---
 
 ## Before You Arrive
 
-Please ensure you have the following ready for class:
-
-1. **A [GitHub account](https://github.com/signup)**
+1. **[A GitHub account](https://github.com/signup)**
 2. **[Claude, through Stanford](https://uit.stanford.edu/service/claude)**
-
-{: .warning }
-> **Request Claude now, not the night before.** Approval goes through ServiceNow and is not
-> instant. It is the one item here with someone else in the loop.
-
-{: .note }
-> In class: put a **🟢 green sticky** on your laptop lid when you're done with a step,
-> and a **🔴 red sticky** if you're stuck, so an instructor can come to you.
 
 ---
 
@@ -50,23 +42,17 @@ Please ensure you have the following ready for class:
 
 Both mornings run 9:00–12:00 and share the same shape: a short lecture at 9:00 and again
 at 10:30, each opening into a long block where you work at your own pace. There are no
-scheduled breaks — take your own when you reach a stopping point. The
-[Reference]({{ '/reference/' | relative_url }}) section holds the material we could not
-fit — local LLMs, LLM-as-a-judge, `scp`, and more.
+scheduled breaks — take your own when you reach a stopping point.
 
 ---
 
 ## The Running Project
 
-Both days build one pipeline over the same dataset: **SEC Form 3 filings**, the public
-disclosures insiders file when they acquire a position in a company. They are
-unstructured text, and the job is to turn them into structured records you can
-analyze.
+**SEC Form 3 filings** are the public disclosures insiders file when they acquire a
+position in a company. They are unstructured text, and the job is to turn them into
+structured records you can analyze.
 
 | | What you build |
 |---|---|
 | **Day 1** | A script that reads one filing, extracts fields with an LLM, and validates them. Then ten filings. |
 | **Day 2** | The same work, profiled, submitted to Slurm, and scaled with a job array. Plus the README that makes it rerunnable. |
-
-Your `README.md` is the deliverable that grows across both days. It is also the thing
-your future self will thank you for.

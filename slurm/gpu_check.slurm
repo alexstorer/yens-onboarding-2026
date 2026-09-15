@@ -16,13 +16,13 @@
 #                        GPU node with no GPU allocated to you, and nvidia-smi
 #                        shows nothing.
 #
-# The class reservation covers the GPU nodes too, so pass it on the command line
-# like every other job today -- it is deliberately not baked in here, so the
-# script still works unchanged after the class reservation is gone.
+# The GPU nodes have their own reservation, class_gpu -- not the class_cpu used by
+# every other job today -- so pass it on the command line. It is deliberately not
+# baked in here, so the script still works unchanged after the reservation is gone.
 #
 # Run from the repo root:
 #     mkdir -p logs
-#     sbatch --reservation=class slurm/gpu_check.slurm
+#     sbatch --reservation=class_gpu slurm/gpu_check.slurm
 
 echo "Node:        $(hostname)"
 echo "Job ID:      $SLURM_JOB_ID"

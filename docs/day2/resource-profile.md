@@ -36,13 +36,13 @@ permalink: /day2/resource-profile/
   <circle cx="630" cy="80" r="20" fill="#f3f4f7" stroke="#6a7280" stroke-width="3"/><text x="630" y="87" text-anchor="middle" font-size="20" font-weight="700" fill="#6a7280">5</text>
 </svg>
 
-{: .note }
-> Everything on this page runs from your clone, with the environment active:
->
-> ```bash
-> cd ~/yens-onboarding-2026
-> source .venv/bin/activate
-> ```
+Everything on this page runs from your clone, with the environment active:
+
+```bash
+cd ~/yens-onboarding-2026
+source .venv/bin/activate
+```
+{: .yens }
 
 {: .important }
 > **Task:** Write down the resources you measured for the 10-filing run in your README.
@@ -69,7 +69,8 @@ Fill in the actual numbers from your `time`, `userload`, and `htop` output.
 <details markdown="1">
 <summary>⭐ Bonus — let Claude write it into the README</summary>
 
-You have the numbers; the fiddly part is the markdown. Hand that half over.
+You already have the numbers. Turning them into a formatted README section is the tedious
+half — hand that to Claude.
 
 Start Claude Code in your repo:
 
@@ -78,16 +79,19 @@ ml claude-code
 cd ~/yens-onboarding-2026
 claude
 ```
+{: .yens }
 
-Then give it your measurements — fill in each `<...>` from your own run, brackets and all:
+Then give it your measurements. The `<...>` are placeholders — replace the whole thing,
+brackets included: `yen2`, not `<yen2>`.
 
 ```
 > Add a "Resource Profile" section to README.md for scripts/extract_form_3_batch.py over 10 filings: ran on <node>, real <wall-clock time>, <cores> cores, <RAM> RES, <serial or parallel>. Add just that section and leave the rest of the file alone.
 ```
+{: .claude }
 
 **Read the diff before you approve it.** Two things to check:
 
-- **The numbers are yours.** Claude cannot run your job, so any figure you do not
+- **The numbers are yours.** Claude did not watch your run, so any figure you do not
   hand it, it will invent — and it will look reasonable. That matters more here than
   anywhere else today: these numbers become the `--time` and `--mem` on the next page, so a
   made-up one turns into a job that gets killed or waits far longer than it needs to.
@@ -98,5 +102,6 @@ Then `/exit` to get your shell back, and check the result:
 ```bash
 cat README.md
 ```
+{: .yens }
 
 </details>

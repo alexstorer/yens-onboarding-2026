@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Before You Go"
-nav_order: 4
+nav_order: 6
 permalink: /before-you-go/
 ---
 

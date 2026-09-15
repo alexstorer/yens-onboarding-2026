@@ -20,12 +20,12 @@ then finish the capstone in your own time.
 
 {: .important }
 > This part assumes the [Part 1 Checkpoint]({{ '/day1/part1-checkpoint/' | relative_url }})
-> passed. If any of its six items is still broken, fix that first — a venv you cannot
+> passed. If any of its four items is still broken, fix that first — a venv you cannot
 > create or a fork you cannot push to will stop you here rather than politely waiting.
 
 ---
 
-## Sections
+## Hands-On Lab
 
 Work through them in order — each builds on the one before.
 
@@ -41,5 +41,4 @@ Work through them in order — each builds on the one before.
 {: .note }
 > The capstone builds on the extraction lesson: use the same API and validation skills
 > to classify movies and check the labels with a second model. You are not expected to finish the capstone in the room — carry on with it in
-> your own time. Day 2 does not depend on it: it profiles the copy of the batch script
-> that ships in the repo, so everyone starts Day 2 from the same working code.
+> your own time.

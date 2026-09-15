@@ -22,15 +22,14 @@ ready for the next lecture. Put up a red sticky if you run into trouble. If you'
 fast, do the bonus exercises to level up (rather than moving ahead to future sections).
 
 {: .important }
-> Part 1 assumes only the two accounts from
-> **[Before You Arrive]({{ '/prework/' | relative_url }})**: a GitHub account and Claude
-> through Stanford. Everything else — the terminal, the Yens login, the access token — you
+> Part 1 assumes only two accounts: **a GitHub account** and **Claude
+> through Stanford**. Everything else — the terminal, the Yens login, the access token — you
 > set up here, starting from nothing. If either account is missing, flag it early rather
 > than falling behind.
 
 ---
 
-## Sections
+## Hands-On Lab
 
 Work through them in order — each builds on the one before.
 
@@ -40,10 +39,10 @@ Work through them in order — each builds on the one before.
 | [Your Data on the Yens]({{ '/day1/your-data/' | relative_url }}) | 💻 Hands-on | 5 min | Home, projects and scratch — which are backed up, how to check your quota, and what's eating it |
 | [Git & GitHub for Research]({{ '/day1/git-and-github/' | relative_url }}) | 💻 Hands-on | 13 min | Fork, clone, branch, commit, push — and why a research project wants version control |
 | [Working with Claude Code]({{ '/day1/claude-code/' | relative_url }}) | 📖 Read + 💻 hands-on | 22 min | Concepts first, then you set it up, learn the controls, and give it a real task |
-| [Part 1 Checkpoint]({{ '/day1/part1-checkpoint/' | relative_url }}) | ✅ Checkpoint | 10 min | Ten minutes proving the six things Part 2 depends on actually work |
+| [Part 1 Checkpoint]({{ '/day1/part1-checkpoint/' | relative_url }}) | ✅ Checkpoint | 10 min | Ten minutes proving the four things the rest of the course depends on actually work |
 
 {: .note }
 > The checkpoint closes Part 1, and everything in
-> [Part 2]({{ '/day1/part2/' | relative_url }}) assumes all six of its items work — so run
+> [Part 2]({{ '/day1/part2/' | relative_url }}) assumes all four of its items work — so run
 > it before you move on, while there is still someone circulating who can help with
 > whatever is broken.

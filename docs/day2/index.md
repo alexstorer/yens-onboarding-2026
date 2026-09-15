@@ -15,8 +15,8 @@ You'll pick up the ideas and habits for that step by step: how to size up what a
 before you run it, how to send it off and check how it went, how to fix it when something
 breaks, and how to write down what you did so you (or a labmate) can run it again.
 
-By the end you will have done it on real work: a hundred SEC filings processed by a job you
-sized yourself, then checked against what it actually used.
+By the end you will have done it on real work: nearly a thousand SEC filings processed by a
+job you sized yourself, then checked against what it actually used.
 
 Here's what we'll do today:
 
@@ -40,6 +40,11 @@ Here's what we'll do today:
   <circle cx="630" cy="80" r="20" fill="#f3f4f7" stroke="#6a7280" stroke-width="3"/><text x="630" y="87" text-anchor="middle" font-size="20" font-weight="700" fill="#6a7280">5</text>
 </svg>
 
+| Part | Clock | What it delivers |
+|---|---|---|
+| [Part 1 — Profile & Submit a Job]({{ '/day2/part1/' | relative_url }}) | 9:00–10:30 | Measure what the script needs, declare it, and submit |
+| [Part 2 — Submit a Job Array]({{ '/day2/part2/' | relative_url }}) | 10:30–noon | One submission, many tasks — up to ~992 filings |
+
 ---
 
 ## Day 1 Recap
@@ -47,10 +52,8 @@ Here's what we'll do today:
 Where yesterday left you:
 
 - Built a virtual environment on the Yens and installed dependencies from `requirements.txt`
-- Ran `scripts/extract_form_3_one_file.py` in three stages — calls the language model to
-  extract structured fields from one SEC Form 3 filing, with logging and a validated
-  result file
-- Used Pydantic to validate and structure the LLM output
+- Ran `scripts/extract_form_3_one_file.py` interactively, pulling fields out of one SEC
+  Form 3 filing and validating them with Pydantic
 
 ---
 
@@ -70,6 +73,3 @@ Three things need to be in place. **Say so now if any of them are missing:**
 Work through the sections in order — they build on each other, and the numbers you write
 down in one are the inputs to the next. Each page ends with **bonus** work, folded away,
 for when you finish early.
-
-**Take your own breaks** inside the work blocks. There is no whole-room break today;
-stand up and get coffee when your table reaches a natural stopping point.
