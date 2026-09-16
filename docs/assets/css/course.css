@@ -324,14 +324,87 @@
 }
 .main-content .username-fill-status:empty { display: none; }
 
-/* A link waiting on a username has had its href stripped by username-fill.js,
-   so it must not keep inviting a click. Reads as body text with a dotted
-   underline, which pairs with the title attribute explaining how to enable it. */
-.main-content a.username-fill-pending {
+/* A link waiting on a value has had its href stripped by personalize.js, so it
+   must not keep inviting a click. Reads as body text with a dotted underline,
+   which pairs with the title attribute explaining how to enable it. */
+.main-content a.personalize-pending {
   color: inherit;
   text-decoration: underline dotted #b9b2a6;
   text-underline-offset: 0.18em;
   cursor: help;
+}
+
+/* ── Sidebar personalization ───────────────────────────────────────────────
+   Two fields in the sidebar footer, so a student sets their SUNet ID and
+   GitHub name once and every command on the site fills itself in. The slot
+   this lands in (nav_footer_custom) is small-print territory, so the whole
+   block runs a step down in size and leans on the sidebar's own rules for
+   width. Rendered twice per page — desktop sidebar and mobile footer — which
+   is why nothing here keys off an id. */
+.personalize {
+  margin-bottom: 0.9rem;
+  padding: 0.7rem 0.75rem 0.55rem;
+  border: 1px solid #e4e0da;
+  border-left: 3px solid #8c1515;
+  border-radius: 5px;
+  background: #f7f5f2;
+  text-align: left;
+}
+.personalize-title {
+  margin: 0 0 0.25rem;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #8c1515;
+}
+.personalize-blurb {
+  margin: 0 0 0.6rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #6a6459;
+}
+.personalize-row {
+  display: block;
+  margin-bottom: 0.45rem;
+  cursor: text;
+}
+.personalize-name {
+  display: block;
+  margin-bottom: 0.12rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #55524d;
+}
+.personalize-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid #cfc8bd;
+  border-radius: 4px;
+  background: #fff;
+  font-family: "Source Code Pro", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: #1c1e21;
+}
+.personalize-input:focus {
+  outline: none;
+  border-color: #8c1515;
+  box-shadow: 0 0 0 2px rgba(140, 21, 21, 0.15);
+}
+.personalize-status {
+  margin: 0.1rem 0 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #1a7f5a;
+}
+.personalize-status:empty { display: none; }
+.personalize-credit {
+  margin: 0;
+  font-size: 0.7rem;
+  color: #8a857c;
 }
 
 /* ── Where does this go? ──────────────────────────────────────────────────

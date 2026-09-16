@@ -124,7 +124,7 @@ ssh SUNetID@yen.stanford.edu
 ```
 {: .laptop }
 
-Replace `SUNetID` with your Stanford username. When prompted for your password, type your Stanford password (nothing will appear — that's normal). You will be prompted for Duo two-factor authentication.
+The username is your Stanford one — set your SUNet ID in the sidebar and every command on the site fills it in for you. When prompted for your password, type your Stanford password (nothing will appear — that's normal). You will be prompted for Duo two-factor authentication.
 
 **Identify your node:**
 ```bash

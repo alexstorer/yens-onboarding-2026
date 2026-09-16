@@ -323,7 +323,7 @@ claude
 ```
 {: .yens }
 
-**Then ask it** — replacing `SUNetID` with your own:
+**Then ask it** — the address below is filled in from your sidebar, so read it back before you send it:
 
 ```
 > Add --mail-type=ALL and --mail-user=SUNetID@stanford.edu to the #SBATCH directives in slurm/extract_form_3_batch.slurm
@@ -331,9 +331,9 @@ claude
 {: .claude }
 
 {: .warning }
-> **Use your own SUNet ID.** If the literal text `SUNetID@stanford.edu` ends up in the
-> script, the job still runs and still reports success — the email just goes nowhere, and
-> nothing tells you. Check the line before you resubmit.
+> **Use your own SUNet ID.** If an unfilled placeholder ends up in the script instead of
+> your own address, the job still runs and still reports success — the email just goes
+> nowhere, and nothing tells you. Check the line before you resubmit.
 
 Claude will show you the change before writing it. Approve it, then `/exit` to leave Claude
 and get your shell back. The two lines it should have added:

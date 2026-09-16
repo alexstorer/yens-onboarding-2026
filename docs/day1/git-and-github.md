@@ -24,7 +24,7 @@ Version control tracks every change you make to a project — who changed what, 
 > **Type your GitHub username** and every command on these pages fills itself in, so you can
 > copy and paste them without editing. It stays in this browser.
 >
-> <span class="username-fill-field"><label class="username-fill-prefix" for="gh-username">github.com/</label><input id="gh-username" type="text" placeholder="username" spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="off"></span> <span id="gh-username-status" class="username-fill-status"></span>
+> <span class="username-fill-field"><label class="username-fill-prefix" for="gh-username">github.com/</label><input id="gh-username" class="personalize-input" data-personalize="github" type="text" placeholder="username" spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="off"></span> <span class="username-fill-status" data-personalize-status></span>
 
 <svg viewBox="0 0 760 176" role="img" aria-labelledby="gd1-title" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;max-width:680px;height:auto;margin:1.5rem auto" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
   <title id="gd1-title">Git saves snapshots on your machine; GitHub stores them in the cloud. You push commits up to your fork and pull updates back down.</title>
