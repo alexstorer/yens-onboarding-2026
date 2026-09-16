@@ -86,7 +86,7 @@ sinfo
 ```
 {: .yens }
 
-Answer each one in your head, then open it to check.
+Answer each one from your own output, then open it to check.
 
 <details class="quiz" markdown="1">
 <summary><span class="qnum">1</span><span class="qtext">How many compute nodes are currently idle?</span></summary>
@@ -323,7 +323,7 @@ claude
 ```
 {: .yens }
 
-**Then ask it** — replacing `SUNetID` with your own:
+**Then ask it** — the address below is filled in from your sidebar, so read it back before you send it:
 
 ```
 > Add --mail-type=ALL and --mail-user=SUNetID@stanford.edu to the #SBATCH directives in slurm/extract_form_3_batch.slurm
@@ -331,9 +331,9 @@ claude
 {: .claude }
 
 {: .warning }
-> **Use your own SUNet ID.** If the literal text `SUNetID@stanford.edu` ends up in the
-> script, the job still runs and still reports success — the email just goes nowhere, and
-> nothing tells you. Check the line before you resubmit.
+> **Use your own SUNet ID.** If an unfilled placeholder ends up in the script instead of
+> your own address, the job still runs and still reports success — the email just goes
+> nowhere, and nothing tells you. Check the line before you resubmit.
 
 Claude will show you the change before writing it. Approve it, then `/exit` to leave Claude
 and get your shell back. The two lines it should have added:
@@ -365,7 +365,11 @@ Once your job runs, check your inbox. You should receive two emails: one when th
 > comfort. The floor is your profiling numbers: ask for less than the job actually needs and
 > Slurm kills it for exceeding `--mem` or `--time`, which costs you the whole run.
 
-<details markdown="1">
+{: .important }
+> **Finish all four pages before you start any bonus.** The numbers you write down on one
+> page are the inputs to the next, and Part 2 assumes all four are done.
+
+<details id="bonus-other-ways" markdown="1">
 <summary>⭐ Bonus — other ways to run and inspect jobs</summary>
 
 **Bonus — Go Interactive Instead of Batch**
@@ -567,9 +571,10 @@ Slurm attaches to each partition saying how much of it a single user may take. C
 two with `sacctmgr show qos gpu` against `sacctmgr show qos normal` (or read the
 [current partitions and their limits](https://rcpedia.stanford.edu/_user_guide/slurm/#current-partitions-and-their-limits)).
 When would you request one over the other?
+
 </details>
 
-<details markdown="1">
+<details id="bonus-claude-skill" markdown="1">
 <summary>⭐ Bonus — turn this into a Claude skill</summary>
 
 You just wrote a Slurm script by hand and got it working. That working setup is the raw

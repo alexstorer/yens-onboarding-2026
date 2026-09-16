@@ -1,6 +1,8 @@
 # SLURM Skills — Reference Key
 
-**Instructor use only.** Students have **Claude** write two skills on the Day 2 "Writing a SLURM Job with Claude" page and then review the scripts Claude produces. There's no single right answer — these are reference models. The teaching point is the **scope split**: a *project* skill holds repo-specific facts (committed in `.claude/skills/`), a *global* skill holds Yen conventions that apply everywhere (in `~/.claude/skills/`).
+**Instructor use only.** In the ⭐ *Bonus — turn this into a Claude skill* block on Day 2's Submit page (`docs/day2/submit-a-slurm-job.md`, anchor `#bonus-claude-skill`), students have **Claude** write a **global** skill distilled from the Slurm job they wrote by hand, then review what it produces. There's no single right answer — both skills below are reference models.
+
+The page explains the **scope split** before they write anything, so expect questions on it: a *project* skill holds repo-specific facts (committed in the repo's `.claude/skills/`), a *global* skill holds Yen conventions that apply everywhere (in `~/.claude/skills/`). Section 1 is the project model — students are not asked to build it, but it is what "repo-specific" looks like.
 
 ## 1. Project skill — `.claude/skills/form3-slurm/SKILL.md` (repo-specific)
 

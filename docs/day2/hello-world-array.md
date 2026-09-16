@@ -161,7 +161,7 @@ The task number is what makes this general. Every task runs the identical script
   <text x="376" y="112" font-size="12" fill="#6a7280">read by bash as <tspan font-family="'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, monospace">$SLURM_ARRAY_TASK_ID</tspan></text>
 
   <rect x="16" y="124" width="688" height="76" rx="10" fill="#eef5ff" stroke="#bcd4f2" stroke-width="1.5"/>
-  <text x="36" y="154" font-size="14" fill="#2c3e50"><tspan font-weight="700">your .slurm</tspan><tspan font-size="12.5" fill="#6a7280"> passes it to Python as a command-line argument</tspan></text>
+  <text x="36" y="154" font-size="14" fill="#2c3e50"><tspan font-weight="700">your Slurm script</tspan><tspan font-size="12.5" fill="#6a7280"> passes it to Python as a command-line argument</tspan></text>
   <text x="36" y="184" font-size="12.5" fill="#2c3e50" font-family="'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, monospace">python scripts/extract_array.py "$SLURM_ARRAY_TASK_ID"</text>
 
   <line x1="360" y1="202" x2="360" y2="230" stroke="#c2cad4" stroke-width="2" marker-end="url(#handover-ah)"/>

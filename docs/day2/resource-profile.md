@@ -66,7 +66,11 @@ Now that you've profiled **10 filings**, write down what you measured. Open the 
 
 Fill in the actual numbers from your `time`, `userload`, and `htop` output.
 
-<details markdown="1">
+{: .important }
+> **Finish all four pages before you start any bonus.** The numbers you write down on one
+> page are the inputs to the next, and Part 2 assumes all four are done.
+
+<details id="bonus-claude-readme" markdown="1">
 <summary>⭐ Bonus — let Claude write it into the README</summary>
 
 You already have the numbers. Turning them into a formatted README section is the tedious

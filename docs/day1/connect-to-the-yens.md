@@ -24,6 +24,13 @@ first time. Where your files go once you are there is the next section,
 > that was never provisioned is the one problem on this page you cannot solve on your own —
 > flag it and an instructor will come to you.
 
+{: .tip }
+> **New to the terminal, or lost partway through?** Work through
+> <a href="https://gsbdarc.github.io/gsb-research-computing-ai-skills/day1/command-spire/" target="_blank" rel="noopener noreferrer">the command line walkthrough</a>
+> from our research computing course, at your own pace — `pwd`, `ls`, `cd`, and the
+> difference between an absolute and a relative path. Nothing here depends on finishing it
+> first.
+
 ---
 
 ## Why Use a Server at All?
@@ -42,6 +49,22 @@ The Yens are available to all researchers at GSB — faculty, PhD students, post
 
 {: .note }
 > *"My regression on the full sample took 14 hours. My laptop died at hour 6. I lost everything. Two days later I reran it on the Yens and went to sleep. It finished while I was gone."* — PhD Student
+
+---
+
+## What Is a SUNet ID?
+
+Your SUNet ID is your Stanford username — the part before `@stanford.edu`, not your full
+email address. It is how every Stanford system knows who you are, and on the Yens it is
+where your files live: your home directory is `/home/users/SUNetID/` and your scratch
+space is `/scratch/users/SUNetID/`. It is also the username in every `ssh` command you are
+about to run. (It is not your GitHub username — that one comes up in the next section.)
+
+{: .tip }
+> **Type your SUNet ID** and every command on these pages fills itself in, so you can copy
+> and paste them without editing. It stays in this browser.
+>
+> <span class="personalize-field"><input id="sunet-id" data-personalize="sunet" type="text" placeholder="jdoe" spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="off"><label class="personalize-affix personalize-affix-end" for="sunet-id">@stanford.edu</label></span> <span class="personalize-field-status" data-personalize-status></span>
 
 ---
 
@@ -115,8 +138,8 @@ The **CPU** is the processor chip. **Cores** are the individual workers inside i
 
 Log in to the Yens for the first time and get your bearings.
 
-{: .important }
-> **Task:** Connect to the Yens cluster over SSH, identify which interactive Yen you landed on, and read the login banner.
+{: .exercise }
+> Connect to the Yens cluster over SSH, identify which interactive Yen you landed on, and read the login banner.
 
 **Connect:**
 ```bash
@@ -124,7 +147,7 @@ ssh SUNetID@yen.stanford.edu
 ```
 {: .laptop }
 
-Replace `SUNetID` with your Stanford username. When prompted for your password, type your Stanford password (nothing will appear — that's normal). You will be prompted for Duo two-factor authentication.
+The username is your Stanford one — set your SUNet ID in the sidebar and every command on the site fills it in for you. When prompted for your password, type your Stanford password (nothing will appear — that's normal). You will be prompted for Duo two-factor authentication.
 
 **Identify your node:**
 ```bash
@@ -140,7 +163,7 @@ whoami        # confirm you are logged in as yourself
 ```bash
 ls ~                              # your home directory on the Yens
 pwd                               # /home/users/SUNetID
-ls /scratch/users/$USER           # your personal scratch — created for you automatically
+ls /scratch/users/SUNetID         # your personal scratch — created for you automatically
 ls /yen/projects/                 # shared project storage
 ```
 {: .yens }
@@ -153,12 +176,12 @@ ls /yen/projects/                 # shared project storage
 >
 > <kbd>Tab</kbd> is also the fastest way to check a path *before* you run something. If it refuses to complete, what you have typed so far doesn't exist — a wrong directory caught in a keystroke instead of in an error message. Try it now: type `ls /yen/pro` and press <kbd>Tab</kbd>.
 >
-> Both are features of the **shell**, not of the Yens, so they work the same in a terminal on your laptop. More in [Command Line Basics]({{ '/reference/command-line-basics/' | relative_url }}).
+> Both are features of the **shell**, not of the Yens, so they work the same in a terminal on your laptop.
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 ---
 
