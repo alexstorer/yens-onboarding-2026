@@ -575,6 +575,22 @@ tspan.personalize-token-unset {
   border-left-color: #166534;
 }
 
+/* The tab butts against the box's top-left corner, so that corner has to be
+   square — but the corner, and the border it belongs to, are on `pre.highlight`
+   (see the box-edge rule near the top of this file), not on `div.highlight`.
+   The two `> div.highlight` rules above therefore never reached anything: the
+   box kept its 6px radius, which is the notch that shows beside the tab and
+   moves with the zoom level, and the 3px coloured edge never drew at all.
+   Squaring the corner on the element that actually has the border.
+
+   Scoped to `.file` on purpose — the other three tabs have the identical bug,
+   and this is the one we are checking against the live site first. If it holds,
+   fold all four into one selector group and delete the inert rules. */
+.main-content div.highlighter-rouge.file > div.highlight > pre.highlight {
+  border-top-left-radius: 0;
+  border-left: 3px solid #166534;
+}
+
 /* ── Keys look like keys ──────────────────────────────────────────────────
    A key set as inline code (`Shift+Tab`) reads as something you'd type at a
    prompt, which is exactly wrong for something you press. Written as
