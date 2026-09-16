@@ -20,6 +20,13 @@ In **Git & GitHub for Research** you worked through fork, clone, branch, commit,
 
 **Claude Code** is an AI assistant that lives in your terminal: you describe what you want in plain English, and it does the work — running commands, editing files, and handling git for you.
 
+{: .note }
+> **We teach Claude Code, but we have no preference.** OpenAI's **Codex** is the other
+> widely used terminal assistant, and it is on the Yens too — `ml codex`. Almost
+> everything in this section is about how tools of this kind work, what they can reach,
+> and what you must not feed them; that carries over. We picked one so the exercises could
+> give you exact commands to follow. Use whichever you prefer, or both.
+
 You just saw *why* keeping your work in GitHub is worth the trouble (see [Git & GitHub for Research]({{ '/day1/git-and-github/' | relative_url }})) — and those are exactly the habits Claude Code can handle for you. You will **not** memorize the commands for any of it. You say *"log this as an issue"* or *"try this on a branch,"* and Claude Code does it. Git is one of the most heavily documented tools in existence — decades of commands, error messages, and public questions and answers — so its workflow is something Claude knows cold rather than something you have to spell out. It can also read the repository's actual state as it goes, so it checks where it is instead of guessing.
 
 **Getting access.** You don't need a personal account. Stanford runs **Claude for Education** — a secure, university-managed environment — and it's **free for everyone at Stanford**.
