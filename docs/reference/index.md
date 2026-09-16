@@ -12,8 +12,6 @@ permalink: /reference/
 | Page | What it covers |
 |---|---|
 | [Command Line]({{ '/reference/command-line/' | relative_url }}) | Where to learn the shell — a map into our research computing course |
-| [Transferring Files (scp)]({{ '/reference/transferring-files/' | relative_url }}) | Copying files between your laptop and the cluster |
-| [Bulk File Operations]({{ '/reference/bulk-file-operations/' | relative_url }}) | Wildcards, pipes, `grep`, `cut`, `sort`, `uniq`, and auditing a data delivery |
 | [Handling LLM Failure Modes]({{ '/reference/llm-failure-modes/' | relative_url }}) | Hallucination, inconsistency, and validating output at scale |
 | [Exploring Cluster Usage Data]({{ '/reference/cluster-usage-data/' | relative_url }}) | Reading a real Yens monitoring snapshot; per-user vs. whole-node limits |
 | [Compute Environments]({{ '/reference/compute-environments/' | relative_url }}) | The hardware terms Day 2 uses — cores, RAM and disk, and how laptop, cluster and cloud differ |
