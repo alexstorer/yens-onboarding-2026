@@ -507,8 +507,8 @@ covers the current approach for the larger ones.
 **Choosing a model.** Leaderboards measure what the leaderboard measures, which is rarely
 your task. [LLM Benchmarks for Researchers](https://rcpedia.stanford.edu/blog/2026/07/14/llm-benchmarks-for-researchers/)
 covers reading benchmarks honestly. For building an evaluation of your own — the only
-benchmark that answers your question — the [Day 1 capstone]({{ '/day1/capstone/' | relative_url }})
-has one model check another's work, and
+benchmark that answers your question — start with the source checks in the
+[Day 1 Part 2 checkpoint]({{ '/day1/extracting-data-with-an-llm/#completion-check' | relative_url }}), and
 [Failure Modes]({{ '/reference/llm-failure-modes/' | relative_url }}) covers validating
 output at scale.
 

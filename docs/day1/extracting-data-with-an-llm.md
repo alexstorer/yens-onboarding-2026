@@ -1,17 +1,19 @@
 ---
 layout: default
-title: "Extracting Data with an LLM"
+title: "Part 2 Checkpoint: Extracting Data with an LLM"
 parent: "Part 2 — Python & AI"
 grand_parent: "Day 1 — Foundations & AI"
 nav_order: 5
 permalink: /day1/extracting-data-with-an-llm/
 ---
 
-# Extracting Data with an LLM
+# Part 2 Checkpoint: Extracting Data with an LLM
 
-You will make a live call to Anthropic's Messages API, then turn a public SEC Form 3
-filing into a validated Python object. The code grows in three deliberately small stages:
-a minimal call, a logged and saved result, and schema-constrained structured output.
+This checkpoint brings together your Python environment, API key, notebook, and scripts.
+You'll make a live API call, then turn a public SEC Form 3 filing into a validated Python
+object. The code grows in three stages: a minimal call, a logged and saved result, and
+structured output checked against a schema. The final challenge uses the extracted name
+to find and summarize a web page. Day 2 uses the same extraction script.
 
 {: .important }
 > **Data boundary:** These exercises use public, Low Risk SEC filings. The course's direct
@@ -21,10 +23,10 @@ a minimal call, a logged and saved result, and schema-constrained structured out
 
 ---
 
-## Exercise
+## The Checkpoint
 
 {: .important }
-> **In this section:** Make a native Anthropic API call, read a Form 3 filing, use Haiku
+> **Complete these checks:** Make an API call, read a Form 3 filing, use Haiku
 > while iterating, switch to Sonnet 5 for the final extraction, and validate the response
 > against a Pydantic model.
 
@@ -44,6 +46,7 @@ import anthropic
 load_dotenv("../.env")
 client = anthropic.Anthropic()
 ```
+{: .notebook }
 
 Now send one request:
 
@@ -62,6 +65,7 @@ answer = "".join(
 ).strip()
 print(answer)
 ```
+{: .notebook }
 
 Anthropic's native Messages API puts the system instruction in the top-level `system`
 argument. The conversation in `messages` contains user and assistant turns; there is no
@@ -83,6 +87,7 @@ After the call above, inspect its usage:
 print("input:", response.usage.input_tokens)
 print("output:", response.usage.output_tokens)
 ```
+{: .notebook }
 
 Use these counts with the current model price to estimate cost. Measure several
 representative filings before estimating a full run.
@@ -116,6 +121,7 @@ scripts:
 cd ~/yens-onboarding-2026
 head -40 data/sec_filings/Cheniere_Energy_Inc.txt
 ```
+{: .yens }
 
 Form 3 is an ownership filing. The useful facts are spread through SEC headers and XML,
 which makes it a good example of turning unstructured text into a record.
@@ -141,6 +147,7 @@ response = client.messages.create(
     ],
 )
 ```
+{: .file }
 
 Run the complete script from the repository root:
 
@@ -148,6 +155,7 @@ Run the complete script from the repository root:
 source .venv/bin/activate
 python3 scripts/extract_form_3_step1_basic.py
 ```
+{: .yens }
 
 The `[:4000]` slice is a simple input guard for the first experiment. It limits cost and
 makes the amount sent easy to reason about. It is not a general document-chunking strategy.
@@ -162,6 +170,7 @@ See exactly what the second stage adds:
 ```bash
 diff scripts/extract_form_3_step1_basic.py scripts/extract_form_3_step2_logged.py
 ```
+{: .yens }
 
 {: .tip }
 > **Pro tip: Reading `diff` output**
@@ -194,6 +203,7 @@ Then run it:
 ```bash
 python3 scripts/extract_form_3_step2_logged.py
 ```
+{: .yens }
 
 New behavior:
 
@@ -212,6 +222,7 @@ Compare the final stage with Stage 2:
 ```bash
 diff scripts/extract_form_3_step2_logged.py scripts/extract_form_3_one_file.py
 ```
+{: .yens }
 
 The schema is ordinary Pydantic:
 
@@ -227,6 +238,7 @@ class Form3Filing(BaseModel):
     company_cik: str
     filing_date: str
 ```
+{: .file }
 
 The final call passes that class directly to Anthropic's structured-output helper:
 
@@ -246,6 +258,7 @@ if result is None:
         f"No structured output returned (stop reason: {response.stop_reason})"
     )
 ```
+{: .file }
 
 `output_format=Form3Filing` does two connected jobs: the SDK turns the model into a JSON
 schema for constrained generation, then parses and validates the returned JSON as a
@@ -267,6 +280,7 @@ Run the final stage:
 ```bash
 python3 scripts/extract_form_3_one_file.py
 ```
+{: .yens }
 
 Read both result files with `cat`:
 
@@ -274,6 +288,7 @@ Read both result files with `cat`:
 cat results/form3_Cheniere_Energy_Inc.txt
 cat results/form3_result.json
 ```
+{: .yens }
 
 ### Why Haiku First and Sonnet 5 Last?
 
@@ -306,32 +321,257 @@ Before scaling:
 5. add bounded retries that respect `retry-after` and avoid repeating successful work
 6. require human review before using results for consequential decisions
 
-The [Day 1 Part 2 Capstone]({{ '/day1/capstone/' | relative_url }}) applies these skills
-to ten movie overviews, using a second model to check each classification.
+## 7. Final Challenge: Research the Person You Extracted
+
+{: .exercise }
+> Use the person identified in `results/form3_Cheniere_Energy_Inc.txt` to search the
+> web through the Anthropic API. Open the first returned result, summarize the page,
+> and save the summary with its source.
+
+Your pipeline now has another step:
+
+**Filing → extracted person → web search → first result → page summary**
+
+### Start from Your Saved Result
+
+Return to `day1/anthropic_test.ipynb`, where your API client is already set up.
+Run Stage 3 before starting: it writes JSON to `form3_Cheniere_Energy_Inc.txt`.
+Stage 2 writes plain text to the same filename, which this cell cannot load as JSON.
+
+```python
+import json
+from pathlib import Path
+
+filing = json.loads(
+    Path("../results/form3_Cheniere_Energy_Inc.txt").read_text()
+)
+person = filing["insider_name"]
+company = filing["company_name"]
+query = f"{person} {company} biography"
+print(query)
+```
+{: .notebook }
+
+Check the extracted name against the filing before searching. Including the company
+helps distinguish people who share a name.
+
+### Build Two API Calls
+
+Use `client.messages.create()` with the same Sonnet model and `thinking={"type": "disabled"}`
+as Stage 3. Give each call a `max_tokens` limit, such as `2048`.
+
+1. **Search.** Ask the model to search for `query`. Add `tools=[search_tool]` to the
+   request using the definition below and name the response `search_response`.
+   Inspect the `web_search_tool_result` block and
+   select the first item in its result list in Python. Save its title and URL.
+2. **Read and summarize.** Make a second request with `tools=[fetch_tool]`. Put the
+   selected URL in the user message and ask the model to fetch it, then write a
+   three-sentence summary of what the page says about the person. Include the extracted
+   name and company so it can flag a possible mismatch. Ask for citations and the source URL.
+   Name this response `summary_response`.
+
+These are server tools: Anthropic runs the search and fetch during the API requests.
+[Web search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)
+finds pages; [web fetch](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool)
+reads a selected page.
+
+```python
+search_tool = {
+    "type": "web_search_20250305",
+    "name": "web_search",
+    "max_uses": 1,
+}
+fetch_tool = {
+    "type": "web_fetch_20250910",
+    "name": "web_fetch",
+    "max_uses": 1,
+    "max_content_tokens": 10000,
+    "citations": {"enabled": True},
+}
+```
+{: .notebook }
+
+<details markdown="1">
+<summary>Hint: find the first search result</summary>
+
+If your first API response is named `search_response`, inspect its tool output:
+
+```python
+search_results = []
+for block in search_response.content:
+    if block.type == "web_search_tool_result":
+        if not isinstance(block.content, list):
+            raise RuntimeError(f"Search failed: {block.content}")
+        search_results.extend(block.content)
+
+if not search_results:
+    raise RuntimeError("No search results returned. Inspect the response.")
+
+first_result = search_results[0]
+print(first_result.title)
+print(first_result.url)
+```
+{: .notebook }
+
+The first result means the first item returned by this API search. Your browser may
+show a different order. Use the tool's URL, rather than a URL generated in the model's prose.
+
+</details>
+
+### Display a Readable Response
+
+`print(response)` shows the whole API object: text, tool calls, citations, and encrypted
+metadata. Run this helper cell once to display the answer as Markdown with source links.
+You can use it with either response.
+
+```python
+from IPython.display import display, Markdown
+
+def show_response(response):
+    text_parts = []
+    sources = {}
+
+    for block in response.content:
+        if block.type == "text":
+            text_parts.append(block.text)
+            for citation in block.citations or []:
+                url = getattr(citation, "url", None)
+                if url:
+                    sources[url] = citation.title or url
+
+        # Fetch citations refer to a document; its URL is in the tool result.
+        elif block.type == "web_fetch_tool_result":
+            result = block.content
+            if result.type == "web_fetch_result":
+                sources[result.url] = result.content.title or result.url
+
+    answer = "".join(text_parts)
+    display(Markdown(answer or "No text returned. Inspect the full response."))
+
+    if sources:
+        links = "\n".join(
+            f"- [{title}]({url})" for url, title in sources.items()
+        )
+        display(Markdown("### Source pages\n\n" + links))
+```
+{: .notebook }
+
+After each API call, pass its response to the helper:
+
+```python
+show_response(search_response)
+show_response(summary_response)
+```
+{: .notebook }
+
+If you named your response `response`, use `show_response(response)` instead. This only
+formats the display; it makes no new API calls and keeps the original object available
+for checking tool results and saving citation metadata.
+
+### Check and Save Your Summary
+
+Open the selected URL in your browser. Does it describe the person in the filing?
+Can you find support on the page for each statement in the summary? A current biography
+may describe a different role from the one held on the filing date.
+
+Save `../results/insider_web_summary.json` from your notebook with:
+
+- the extracted name and company, search query, and search date
+- the first result's title and URL
+- the three-sentence summary and the response's citation metadata
+- your identity check: `match`, `uncertain`, or `different_person`, with a brief reason
+
+If there are no results, the page cannot be fetched, or it describes someone else,
+record that outcome and leave the person summary empty. Do not silently substitute a
+later result or fill gaps from the model's memory. Check for a successful
+`web_fetch_tool_result` before treating the response as a page summary.
+
+<details markdown="1">
+<summary>Help with web tool responses</summary>
+
+Tool errors can appear inside an otherwise successful API response. Inspect the result
+blocks as well as the text. If `stop_reason` is `pause_turn`, follow the
+[continuation instructions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools)
+before treating the response as finished. Search access also depends on the course
+account's tool settings; ask the instructor if the API reports that search is disabled.
+
+Keep the citations attached to text blocks when saving the response. Calling
+`block.model_dump()` preserves those fields. Web pages are source material, so your
+prompt should ask the model to summarize their content and ignore instructions embedded
+in the page.
+
+</details>
+
+## Completion Check
+
+Before moving on, confirm that:
+
+- Your notebook uses the **GSB AI 2026** kernel, loads the key, and receives an API response.
+- You can find the input and output token counts from that notebook call.
+- All three extraction stages ran, and `form3_extract.log` records the run.
+- `results/form3_result.json` contains the five fields in `Form3Filing`.
+- You compared the extracted values with `data/sec_filings/Cheniere_Energy_Inc.txt`
+  and recorded any differences. Passing schema validation alone does not confirm accuracy.
+- `results/insider_web_summary.json` records your first-result summary, source, and
+  identity check, or explains why the lookup could not produce a summary.
+
+Save `day1/anthropic_test.ipynb`. Add a short **Part 2 checkpoint** entry to `notes.md`
+with the model used for the final extraction and what you found when checking the
+extraction and web summary.
+Then save your work on your current branch and push it to your fork:
+
+```bash
+cd ~/yens-onboarding-2026
+git add day1/anthropic_test.ipynb results/form3_result.json results/insider_web_summary.json notes.md
+git commit -m "Complete Part 2 extraction checkpoint"
+git push
+```
+{: .yens }
+
+Open your fork on GitHub and confirm that the notebook, results, and notes are on your
+branch. Keep `.env` out of the commit.
+
+{: .note }
+> 🟢 **Green sticky** = the checks passed and my work is pushed &nbsp;&nbsp;
+> 🔴 **Red sticky** = I need help with a check
+>
+> Put a sticky note on your laptop lid so instructors can see where you are.
+
+Day 2 starts by measuring what this extraction script needs before running it with Slurm.
 
 ---
 
-## Optional Practice
+## Bonus
 
-### List Models Available to the Course Key
+{: .note }
+> Finished early? Try any of these.
+
+Return to `day1/anthropic_test.ipynb` and run these in new cells after the client setup
+from Step 1.
+
+**Bonus 1: List Models Available to the Course Key**
 
 ```python
 models = client.models.list(limit=20)
 for model in models.data:
     print(model.id)
 ```
+{: .notebook }
 
 Model availability belongs to the Anthropic organization and may change. The core scripts
 require both `claude-haiku-4-5` and `claude-sonnet-5`; do not silently substitute a model
 if either is missing.
 
-### Count Input Tokens Before Generating
+**Bonus 2: Count Input Tokens Before Generating**
 
 Anthropic does not provide its own embedding model, so the old course's embeddings example
 does not map to the native client. Use the native token-counting endpoint instead—directly
 useful when sizing this pipeline:
 
 ```python
+from pathlib import Path
+
+filing_text = Path("../data/sec_filings/Cheniere_Energy_Inc.txt").read_text()
 count = client.messages.count_tokens(
     model="claude-haiku-4-5",
     system="You extract data from SEC filings.",
@@ -339,6 +579,7 @@ count = client.messages.count_tokens(
 )
 print(count.input_tokens)
 ```
+{: .notebook }
 
 Read Anthropic's
 <a href="https://platform.claude.com/docs/en/api/python/messages/count_tokens" target="_blank" rel="noopener noreferrer">token-counting API documentation</a>
@@ -346,7 +587,7 @@ and its
 <a href="https://platform.claude.com/docs/en/build-with-claude/embeddings" target="_blank" rel="noopener noreferrer">embeddings guidance</a>
 if a future project needs semantic search.
 
-### Compare the Two Course Models
+**Bonus 3: Compare the Two Course Models**
 
 Ask both models the same small, public-data question and record live usage rather than
 copying a fixed benchmark:
@@ -369,6 +610,7 @@ for model in ["claude-haiku-4-5", "claude-sonnet-5"]:
     ).strip()
     print(model, comparison.usage, text, sep="\n")
 ```
+{: .notebook }
 
 Compare answer quality, input/output tokens, latency you observe, and current price. One
 small run is an observation, not a universal performance claim.
@@ -460,3 +702,5 @@ before adding these settings.
 - Treat `parsed_output` as validated structure while still checking for no output
 - Read input/output token usage and distinguish it from rate-limit headroom
 - Build from a notebook experiment to a logged, reproducible script in small stages
+- Check an extraction against its source and save the result to your fork
+- Use web search and page retrieval to produce a summary with a source and identity check

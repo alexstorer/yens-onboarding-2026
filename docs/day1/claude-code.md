@@ -399,7 +399,7 @@ Now ask the same things in plain English — and notice the first sentence:
 {: .important }
 > **Bonus:** Publish your own copy of this site from your fork, then have Claude Code make a real change to it and open a pull request. Both walk the same loop a pro uses: plan, approve, act, review.
 
-Optional — the Day 1 capstone only needs the exercise from Git & GitHub for Research. This is extra practice.
+This is extra practice. Publishing a site is not required for the Day 1 checkpoints.
 
 <details markdown="1">
 <summary>Publish your own copy of the site</summary>

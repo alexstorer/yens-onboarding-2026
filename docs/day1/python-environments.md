@@ -9,7 +9,7 @@ permalink: /day1/python-environments/
 
 # Python Environments
 
-A virtual environment gives a project its own Python packages. In this section, you'll create one, install the course dependencies, and make it available to JupyterHub notebooks. You'll also record the installed versions and use another project's requirements file to run its code.
+A virtual environment gives a project its own Python packages. In this section, you'll create one, install the course dependencies, make it available to JupyterHub notebooks, and record the installed versions. A bonus exercise uses another project's requirements file to run its code.
 
 {: .important }
 > **In this section:** Create and activate a virtual environment on the Yens, install packages, and register a Jupyter kernel.
@@ -51,7 +51,7 @@ Create the environment at the repo root using the system Python:
 {: .yens }
 
 {: .note }
-> Use `~/yens-onboarding-2026/.venv` for the rest of this course, including Day 2. Potion Brawl in Step 6 is a separate project and gets its own environment.
+> Use `~/yens-onboarding-2026/.venv` for the rest of this course, including Day 2. The Potion Brawl bonus is a separate project and gets its own environment.
 
 ---
 
@@ -197,6 +197,7 @@ import anthropic
 print(sys.executable)
 print("dotenv and anthropic are available!")
 ```
+{: .notebook }
 
 The interpreter path should end in `yens-onboarding-2026/.venv/bin/python3`, and both imports should succeed.
 
@@ -268,7 +269,12 @@ python3 -m pip install -r requirements.lock.txt
 
 ---
 
-## Step 6: Run Another Project
+## Bonus
+
+{: .note }
+> Finished early? Try any of these.
+
+**Bonus 1: Run Another Project (Potion Brawl)**
 
 The repo includes **Potion Brawl**, a simulation in which three potion types interact using rock-paper-scissors rules. You'll use its requirements file to install its dependencies in a separate environment.
 
@@ -357,9 +363,7 @@ The path should point to `~/yens-onboarding-2026/.venv/bin/python3`.
 
 ---
 
-## Optional Practice
-
-### Find the Kernel Configuration
+**Bonus 2: Find the Kernel Configuration**
 
 List the registered kernels from your Yen terminal:
 
@@ -377,7 +381,7 @@ cat ~/.local/share/jupyter/kernels/gsb-ai-2026/kernel.json
 
 The file points to your environment's Python. Deleting that environment leaves the kernel entry pointing to a missing interpreter.
 
-### Inspect the Environment's Paths
+**Bonus 3: Inspect the Environment's Paths**
 
 ```bash
 ls -l ~/yens-onboarding-2026/.venv/bin/python
@@ -438,6 +442,7 @@ the notebook's Python. Select **GSB AI 2026**, then check the interpreter in a c
 import sys
 print(sys.executable)
 ```
+{: .notebook }
 
 The path should point inside the course repo's `.venv/`. If you just installed or upgraded
 a package in that environment, restart the kernel and rerun the cells.

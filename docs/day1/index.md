@@ -17,7 +17,7 @@ that same script across the cluster.
 | Part | Clock | What it delivers |
 |---|---|---|
 | [Part 1 — Setup]({{ '/day1/part1/' | relative_url }}) | 9:00–10:30 | Accounts, access and Claude Code — ending in a checkpoint |
-| [Part 2 — Python & AI]({{ '/day1/part2/' | relative_url }}) | 10:30–noon | Reproducible Python, keys handled safely, and a filing turned into data |
+| [Part 2 — Python & AI]({{ '/day1/part2/' | relative_url }}) | 10:30–noon | Reproducible Python and API keys, ending in an LLM extraction checkpoint |
 
 Every section is written to be worked through yourself rather than followed along: the
 commands, the checks, and what to do when something goes wrong are all on the page.

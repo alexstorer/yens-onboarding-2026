@@ -278,7 +278,7 @@ git push -u origin experiment
 > This pushes your **branch**, not `main`. Your work is safely on GitHub, but `main` is untouched — which is exactly the point of branching. To fold the branch into `main`, open a pull request on your fork and merge it.
 
 {: .important }
-> Each day's capstone is handed in the same way — a `git push` to your fork. Come back to these steps whenever you need to save work.
+> Save your checkpoint work with a `git push` to your fork. Come back to these steps whenever you need to save work.
 
 {: .note }
 > 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
