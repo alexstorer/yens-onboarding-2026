@@ -54,5 +54,5 @@ structured records you can analyze.
 
 | | What you build |
 |---|---|
-| **Day 1** | A script that reads one filing, extracts fields with an LLM, and validates them. Then ten filings. |
+| **Day 1** | An extraction checkpoint: run a script on one filing, validate its fields, check the result against the source, and push your work. |
 | **Day 2** | The same work, profiled, submitted to Slurm, and scaled with a job array. Plus the README that makes it rerunnable. |

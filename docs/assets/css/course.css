@@ -486,7 +486,8 @@ tspan.personalize-token-unset {
    stuck — `scp` from inside an SSH session, `ssh` from the cluster. A third
    kind of block isn't a command at all: it's a prompt you type *to Claude*,
    which people paste at a shell prompt if nothing tells them otherwise. Tag a
-   fenced block with `{: .yens }`, `{: .laptop }` or `{: .claude }` (kramdown
+   fenced block with `{: .yens }`, `{: .laptop }`, `{: .claude }`,
+   `{: .file }` or `{: .notebook }` (kramdown
    puts the class on the highlighter-rouge container) to label it.
 
    The label is a folder tab reading YEN TERMINAL or LOCAL TERMINAL: same fill
@@ -501,6 +502,7 @@ tspan.personalize-token-unset {
 .main-content div.highlighter-rouge.yens,
 .main-content div.highlighter-rouge.laptop,
 .main-content div.highlighter-rouge.claude,
+.main-content div.highlighter-rouge.notebook,
 .main-content div.highlighter-rouge.file {
   border: 0;
   border-radius: 0;
@@ -509,6 +511,7 @@ tspan.personalize-token-unset {
 .main-content div.highlighter-rouge.yens::before,
 .main-content div.highlighter-rouge.laptop::before,
 .main-content div.highlighter-rouge.claude::before,
+.main-content div.highlighter-rouge.notebook::before,
 .main-content div.highlighter-rouge.file::before {
   display: inline-block;
   position: relative;
@@ -529,6 +532,7 @@ tspan.personalize-token-unset {
 .main-content div.highlighter-rouge.yens > div.highlight,
 .main-content div.highlighter-rouge.laptop > div.highlight,
 .main-content div.highlighter-rouge.claude > div.highlight,
+.main-content div.highlighter-rouge.notebook > div.highlight,
 .main-content div.highlighter-rouge.file > div.highlight {
   border-top-left-radius: 0;     /* the tab sits on this corner */
   border-left-width: 3px;
@@ -573,6 +577,18 @@ tspan.personalize-token-unset {
 }
 .main-content div.highlighter-rouge.file > div.highlight {
   border-left-color: #166534;
+}
+
+/* Python entered in a notebook cell. Purple distinguishes it from the
+   terminal and file tabs while keeping the same shape and spacing. */
+.main-content div.highlighter-rouge.notebook::before {
+  content: "In [ ]:  Jupyter Notebook Cell";
+  color: #6b21a8;
+  border-left-color: #6b21a8;
+}
+.main-content div.highlighter-rouge.notebook > div.highlight > pre.highlight {
+  border-top-left-radius: 0;
+  border-left: 3px solid #6b21a8;
 }
 
 /* The tab butts against the box's top-left corner, so that corner has to be

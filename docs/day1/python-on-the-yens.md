@@ -87,8 +87,8 @@ pwd    # confirm: /home/users/SUNetID/yens-onboarding-2026
 
 When you type a command, the shell walks these directories top to bottom and runs the **first** matching executable it finds.
 
-{: .optional }
-> **Exercise:** Using what you just learned, find `python3`.
+{: .exercise }
+> **Bonus:** Using what you just learned, find `python3`.
 
 <details> <summary>💡 Hint: find Python</summary>
 
@@ -232,12 +232,16 @@ A **notebook** runs code in *cells* you execute one at a time, with the results 
 
 ## Step 5: Run a Cell
 
+Blocks labeled **Jupyter Notebook Cell** go in a notebook code cell. Blocks labeled
+**Yen Terminal** go at the shell prompt, including when you use JupyterHub's Terminal tab.
+
 Type this into the first cell and run it with **Shift+Enter**:
 
 ```python
 numbers = [1, 2, 3, 4, 5]
 print(sum(numbers))
 ```
+{: .notebook }
 
 Expected output: `15`
 
@@ -254,6 +258,7 @@ ax.set_xlabel("x")
 ax.set_ylabel("y")
 plt.show()
 ```
+{: .notebook }
 
 The graph appears **right below the cell**. In a notebook, `plt.show()` displays the plot inline.
 
@@ -279,16 +284,16 @@ The script creates the same plot. Notebooks are useful for exploration; scripts 
 
 ---
 
-## Optional Practice
+## Bonus
 {: .note }
 > Finished early? Try any of these.
 
-### Open the Saved Plot
+**Bonus 1: Open the Saved Plot**
 
 In JupyterHub's **file browser**, find `my_plot.png` and **double-click** it to open the image viewer.
 
 
-### Edit the Plot
+**Bonus 2: Edit the Plot**
 
 Edit the plotting cell in your notebook, then run it again with **Shift+Enter**:
 
@@ -354,7 +359,7 @@ Starting Python from `~/yens-onboarding-2026` keeps the exercise's output in the
 </details>
 
 <details class="quiz" markdown="1">
-<summary><span class="qnum">3</span><span class="qtext">The plotting code ran over SSH, but no plot window appeared. Did it fail?</span></summary>
+<summary><span class="qnum">3</span><span class="qtext">You run <code>python3 plotting_code.py</code> from the shell in your Yen SSH terminal. The script finishes, but no plot window opens. Does that mean the script failed?</span></summary>
 
 **Not necessarily.** In this terminal session, there is no graphical display for
 `plt.show()` to open a window. Check whether `fig.savefig(...)` created `my_plot.png`,

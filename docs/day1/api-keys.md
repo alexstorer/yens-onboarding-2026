@@ -10,7 +10,7 @@ permalink: /day1/api-keys/
 # Managing API Keys
 
 An API key lets your code use a service and charge requests to an account. You'll copy
-the course's Anthropic key into a `.env` file in your repo on the Yens, check that Git
+the course API key into a `.env` file in your repo on the Yens, check that Git
 ignores it, and load it in Python.
 
 ---
@@ -18,9 +18,6 @@ ignores it, and load it in Python.
 {: .important }
 > **Start in your SSH terminal connected to the Yens.** A JupyterHub terminal works too.
 > You'll switch to a notebook in Step 5.
->
-> Use the course's **direct Anthropic API key**. Your Stanford education account and a
-> Stanford Gateway key are separate from this credential.
 
 ## Step 1: Keep Configuration Out of Code
 
@@ -45,9 +42,20 @@ Your code reads the value by name when it runs. Share the code and keep the cred
 file out of Git.
 
 {: .note }
-> A Python **virtual environment** is a directory containing an isolated interpreter and
-> packages. An **environment variable** is a named runtime setting. A `.env` file stores
-> settings that a library such as `python-dotenv` can load as environment variables.
+> **Three different meanings of “environment”**
+>
+> - **Virtual environment (`.venv/`):** A directory holding a project's Python interpreter
+>   and packages. It controls which Python and libraries your code uses.
+> - **Environment variable:** A named value available to a running program. For example,
+>   `PATH` tells the shell where to look for commands, and `ANTHROPIC_API_KEY` holds a key
+>   that the API client can read. Programs look up these values by name instead of
+>   hard-coding them into their source.
+> - **`.env` file:** A text file containing `NAME=value` lines. In this exercise,
+>   `load_dotenv()` reads those lines and makes the values available as environment
+>   variables in the running Python process.
+>
+> Activating `.venv` selects your Python environment. Loading `.env` supplies settings
+> such as your API key. They are separate steps.
 
 ## Step 2: Check the Shared Credential File
 
@@ -124,6 +132,7 @@ from dotenv import load_dotenv
 load_dotenv("../.env")
 print("ANTHROPIC_API_KEY loaded:", bool(os.getenv("ANTHROPIC_API_KEY")))
 ```
+{: .notebook }
 
 Expected output: `ANTHROPIC_API_KEY loaded: True`.
 
@@ -140,6 +149,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 ```
+{: .file }
 
 `python-dotenv` reads the file and adds its settings to the current Python process's
 environment. It does not change your source code or activate a virtual environment.
@@ -151,7 +161,7 @@ By default, it keeps any value already set in that process.
 > Viewing the file in your own terminal is fine. Keep the key out of shared screenshots,
 > chats, and notebook output, since notebook output is saved with the file.
 
-## Step 6: Initialize the Anthropic Client
+## Step 6: Initialize the API Client
 
 In the same notebook, run a new cell:
 
@@ -160,15 +170,17 @@ import anthropic
 
 client = anthropic.Anthropic()
 ```
+{: .notebook }
 
-The client reads `ANTHROPIC_API_KEY` from the environment and uses Anthropic's API
-endpoint. You do not need to put the key in the constructor.
+The client reads `ANTHROPIC_API_KEY` from the environment, so you do not need to put
+the key in the constructor.
 
 Confirm that the object exists without making a paid request:
 
 ```python
 print(type(client).__name__)
 ```
+{: .notebook }
 
 Expected output: `Anthropic`. Creating the client does not send a model request.
 
@@ -178,8 +190,8 @@ Expected output: `Anthropic`. Creating the client does not send a model request.
 >
 > Put a sticky note on your laptop lid so instructors can see where you are.
 
-Continue to [Extracting Data with an LLM]({{ '/day1/extracting-data-with-an-llm/' | relative_url }})
-to make the first API call.
+Continue to the [Part 2 checkpoint: Extracting Data with an LLM]({{ '/day1/extracting-data-with-an-llm/' | relative_url }})
+to make the first API call and check your setup.
 
 ### Common Errors
 
@@ -188,25 +200,6 @@ to make the first API call.
 | `ANTHROPIC_API_KEY loaded: False` | Wrong `.env` path or missing value | In a notebook cell, run `import os; print(os.getcwd())`. This notebook belongs in the repo's `day1/` folder and loads `../.env` |
 | HTTP `401` on the next section's API call | Invalid or revoked key | Ask the instructor to confirm the key. After replacing `.env`, restart the notebook kernel and rerun the setup cells |
 | `.env` appears in `git status` | Ignore rule missing or file was already tracked | Stop and ask an instructor before committing |
-
-## If You Share a Key Accidentally
-
-Tell the instructor or key owner so they can replace it. If it was committed to Git,
-removing it from the latest file does not remove it from earlier commits.
-
-<details markdown="1">
-<summary>What else belongs in .env?</summary>
-
-- API keys and access tokens
-- database connection credentials
-- cloud credentials
-- machine-specific paths or service endpoints
-- environment-specific settings such as an output directory
-
-Secrets always belong outside source. Non-secret settings may also live in environment
-variables when they differ between a laptop, the Yens, and a production job.
-
-</details>
 
 ---
 
@@ -240,13 +233,14 @@ programs from reading it.
 ```python
 load_dotenv("../.env")
 ```
+{: .notebook }
 
 You can keep one `.env` at the repo root instead of copying it into each notebook folder.
 
 </details>
 
 <details class="quiz" markdown="1">
-<summary><span class="qnum">4</span><span class="qtext">The notebook prints <code>ANTHROPIC_API_KEY loaded: True</code>. Have you confirmed that Anthropic accepts the key?</span></summary>
+<summary><span class="qnum">4</span><span class="qtext">The notebook prints <code>ANTHROPIC_API_KEY loaded: True</code>. Have you confirmed that the API accepts the key?</span></summary>
 
 **No. You have only confirmed that the variable has a value.** An invalid or revoked
 key can still produce `True`. Creating the client also does not test the key with the
@@ -284,8 +278,8 @@ unavailable to someone who already has a copy.
 
 ## Skills Learned
 
-- Keep `ANTHROPIC_API_KEY` in `.env`, not in code or notebook output
+- Keep API keys in `.env`, not in code or notebook output
 - Load the key from `.env` and check that Python can find it
 - Check that Git ignores `.env` before committing
-- Initialize the Anthropic client using the loaded environment variable
+- Initialize an API client using the loaded environment variable
 - Ask the key owner to replace a key if it is shared accidentally
