@@ -45,11 +45,21 @@ The Yens are available to all researchers at GSB — faculty, PhD students, post
 
 ---
 
+## What Is a SUNet ID?
+
+Your SUNet ID is your Stanford username — the part before `@stanford.edu`, not your full
+email address. It is how every Stanford system knows who you are, and on the Yens it is
+where your files live: your home directory is `/home/users/SUNetID/` and your scratch
+space is `/scratch/users/SUNetID/`. It is also the username in every `ssh` command you are
+about to run. (It is not your GitHub username — that one comes up in the next section.)
+
 {: .tip }
 > **Type your SUNet ID** and every command on these pages fills itself in, so you can copy
 > and paste them without editing. It stays in this browser.
 >
 > <span class="personalize-field"><input id="sunet-id" data-personalize="sunet" type="text" placeholder="jdoe" spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="off"><label class="personalize-affix personalize-affix-end" for="sunet-id">@stanford.edu</label></span> <span class="personalize-field-status" data-personalize-status></span>
+
+---
 
 ## What Are the Yens?
 
