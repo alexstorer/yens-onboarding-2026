@@ -2,20 +2,24 @@
  *
  * The pages are written with placeholders — SUNetID for the Stanford account,
  * YOUR_GITHUB_USERNAME (and YOUR_USERNAME in diagrams) for the GitHub one.
- * Typing a value once rewrites every one of them, so a student can copy a
+ * Setting a value once rewrites every one of them, so a student can copy a
  * command straight out of the page instead of pasting it and then editing it in
  * the terminal, which is where the typos happen.
  *
- * Three rules keep the substitution honest:
+ * Four rules keep the substitution honest:
  *
  *   1. Only inside code and SVG <text>. Running prose says things like "sign in
  *      with your SUNetID", meaning the term rather than the value; rewriting
  *      those to "sign in with your jdoe" would be nonsense.
- *   2. The original text of every node is kept, so clearing a field puts the
+ *   2. Each occurrence becomes its own element, so an unfilled one can be
+ *      clicked to jump to the field that fills it — which is how a student who
+ *      never noticed the sidebar finds it, at the moment they need it. HTML
+ *      gets a <span>; SVG gets a <tspan>, since a <text> cannot hold a span.
+ *   3. The literal token is kept on the element, so clearing a field puts the
  *      placeholders back rather than leaving a half-substituted page.
- *   3. A link whose href still holds a placeholder loses its href entirely —
+ *   4. A link whose href still holds a placeholder loses its href entirely —
  *      pointing at a literal YOUR_GITHUB_USERNAME account is worse than
- *      offering no link. personalize-pending in course.css styles that state.
+ *      offering no link.
  *
  * Values live in localStorage (this browser only, never sent anywhere), so the
  * other pages are already filled in when the student reaches them.
@@ -23,14 +27,23 @@
 (function () {
   'use strict';
 
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+
   var FIELDS = {
-    sunet:  { key: 'yens-sunet',        tokens: ['SUNetID'] },
+    sunet:  { key: 'yens-sunet',       label: 'SUNet ID',        tokens: ['SUNetID'] },
     // yens-gh-username predates this script; kept so anyone who already typed
     // their GitHub name on Git & GitHub does not have to type it again.
-    github: { key: 'yens-gh-username',  tokens: ['YOUR_GITHUB_USERNAME', 'YOUR_USERNAME'] }
+    github: { key: 'yens-gh-username', label: 'GitHub username', tokens: ['YOUR_GITHUB_USERNAME', 'YOUR_USERNAME'] }
   };
   var NAMES = Object.keys(FIELDS);
-  var PENDING = 'personalize-pending';
+
+  // Longest first, so YOUR_GITHUB_USERNAME is matched before YOUR_USERNAME
+  // would claim its tail.
+  var TOKENS = [];
+  NAMES.forEach(function (n) {
+    FIELDS[n].tokens.forEach(function (t) { TOKENS.push({ token: t, field: n }); });
+  });
+  TOKENS.sort(function (a, b) { return b.token.length - a.token.length; });
 
   function read(name) {
     try { return (window.localStorage.getItem(FIELDS[name].key) || '').trim(); }
@@ -44,45 +57,57 @@
     } catch (e) { /* private mode — substitution still works for this page */ }
   }
 
-  function values() {
-    var v = {};
-    NAMES.forEach(function (n) { v[n] = read(n); });
-    return v;
+  function firstToken(text) {
+    var best = null;
+    for (var i = 0; i < TOKENS.length; i++) {
+      var at = text.indexOf(TOKENS[i].token);
+      if (at > -1 && (!best || at < best.at)) best = { at: at, spec: TOKENS[i] };
+    }
+    return best;
   }
 
-  // ── What can be substituted ───────────────────────────────────────────────
+  // ── Wrapping: one element per occurrence, done once ───────────────────────
 
-  // Text nodes inside code, and SVG <text>. Deliberately not bare prose: see
-  // rule 1 above.
-  var nodes = null;
-
-  function collect() {
-    if (nodes) return nodes;
-    nodes = [];
+  function wrap() {
     var root = document.querySelector('.main-content');
-    if (!root) return nodes;
-    var hosts = root.querySelectorAll('code, pre, svg text, svg tspan');
+    if (!root) return;
+    var hosts = root.querySelectorAll('code, pre, svg text');
     Array.prototype.forEach.call(hosts, function (host) {
       // A <code> inside <pre> would otherwise be walked twice.
       if (host.tagName === 'CODE' && host.closest('pre')) return;
+      var isSvg = host.namespaceURI === SVG_NS;
       var walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT, null);
-      var n;
-      while ((n = walker.nextNode())) {
-        if (hasToken(n.nodeValue)) nodes.push({ node: n, original: n.nodeValue });
-      }
+      var texts = [];
+      while (walker.nextNode()) texts.push(walker.currentNode);
+      texts.forEach(function (node) {
+        if (node.parentNode && node.parentNode.dataset &&
+            node.parentNode.dataset.personalizeToken) return;      // already wrapped
+        var rest = node.nodeValue;
+        if (!firstToken(rest)) return;
+        var frag = document.createDocumentFragment();
+        var hit;
+        while ((hit = firstToken(rest))) {
+          if (hit.at) frag.appendChild(document.createTextNode(rest.slice(0, hit.at)));
+          var el = isSvg ? document.createElementNS(SVG_NS, 'tspan')
+                         : document.createElement('span');
+          el.setAttribute('data-personalize-token', hit.spec.token);
+          el.setAttribute('data-personalize-field', hit.spec.field);
+          frag.appendChild(el);
+          rest = rest.slice(hit.at + hit.spec.token.length);
+        }
+        if (rest) frag.appendChild(document.createTextNode(rest));
+        node.parentNode.replaceChild(frag, node);
+      });
     });
-    return nodes;
   }
 
-  function hasToken(text) {
-    for (var i = 0; i < NAMES.length; i++) {
-      var toks = FIELDS[NAMES[i]].tokens;
-      for (var j = 0; j < toks.length; j++) {
-        if (text.indexOf(toks[j]) > -1) return true;
-      }
-    }
-    return false;
+  function tokenEls() {
+    return Array.prototype.slice.call(
+      document.querySelectorAll('[data-personalize-token]')
+    );
   }
+
+  // ── Links ────────────────────────────────────────────────────────────────
 
   // Links whose href names the student's fork — the repo settings page, the
   // checkpoint branch. Substituting the visible label while leaving the href on
@@ -95,50 +120,59 @@
     var root = document.querySelector('.main-content');
     if (!root) return links;
     Array.prototype.forEach.call(root.querySelectorAll('a[href]'), function (a) {
-      if (hasToken(a.getAttribute('href'))) {
+      if (firstToken(a.getAttribute('href'))) {
         links.push({ el: a, original: a.getAttribute('href') });
       }
     });
     return links;
   }
 
-  // ── Substitution ──────────────────────────────────────────────────────────
-
-  function fill(text, vals) {
-    NAMES.forEach(function (n) {
-      if (!vals[n]) return;
-      FIELDS[n].tokens.forEach(function (t) { text = text.split(t).join(vals[n]); });
+  function fillText(text, vals) {
+    TOKENS.forEach(function (spec) {
+      if (vals[spec.field]) text = text.split(spec.token).join(vals[spec.field]);
     });
     return text;
   }
 
-  // A token this href needs is still unset, so the link cannot be honoured.
   function hrefIsIncomplete(href, vals) {
-    for (var i = 0; i < NAMES.length; i++) {
-      var toks = FIELDS[NAMES[i]].tokens;
-      for (var j = 0; j < toks.length; j++) {
-        if (href.indexOf(toks[j]) > -1 && !vals[NAMES[i]]) return true;
-      }
+    for (var i = 0; i < TOKENS.length; i++) {
+      if (href.indexOf(TOKENS[i].token) > -1 && !vals[TOKENS[i].field]) return true;
     }
     return false;
   }
 
-  function apply() {
-    var vals = values();
+  // ── Render ───────────────────────────────────────────────────────────────
 
-    collect().forEach(function (rec) {
-      rec.node.nodeValue = fill(rec.original, vals);
+  function render() {
+    var vals = {};
+    NAMES.forEach(function (n) { vals[n] = read(n); });
+
+    tokenEls().forEach(function (el) {
+      var field = el.getAttribute('data-personalize-field');
+      var token = el.getAttribute('data-personalize-token');
+      var value = vals[field];
+      el.textContent = value || token;
+      el.setAttribute('class', 'personalize-token' + (value ? '' : ' personalize-token-unset'));
+      if (value) {
+        el.removeAttribute('role');
+        el.removeAttribute('tabindex');
+        el.setAttribute('title', 'Your ' + FIELDS[field].label + ' — change it in the sidebar');
+      } else {
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('title', 'Click to set your ' + FIELDS[field].label);
+      }
     });
 
     collectLinks().forEach(function (rec) {
       if (hrefIsIncomplete(rec.original, vals)) {
         rec.el.removeAttribute('href');
-        rec.el.setAttribute('title', 'Enter your details in the sidebar to enable this link');
-        rec.el.classList.add(PENDING);
+        rec.el.setAttribute('title', 'Set your details in the sidebar to enable this link');
+        rec.el.classList.add('personalize-pending');
       } else {
-        rec.el.setAttribute('href', fill(rec.original, vals));
+        rec.el.setAttribute('href', fillText(rec.original, vals));
         rec.el.removeAttribute('title');
-        rec.el.classList.remove(PENDING);
+        rec.el.classList.remove('personalize-pending');
       }
     });
 
@@ -150,13 +184,11 @@
     var filled = NAMES.filter(function (n) { return vals[n]; }).length;
     Array.prototype.forEach.call(
       document.querySelectorAll('[data-personalize-status]'),
-      function (box) {
-        box.textContent = filled ? '✓ commands updated' : '';
-      }
+      function (box) { box.textContent = filled ? '✓ commands updated' : ''; }
     );
   }
 
-  // ── Inputs ────────────────────────────────────────────────────────────────
+  // ── Inputs ───────────────────────────────────────────────────────────────
 
   // Every input bound to a field, wherever it lives: the sidebar renders twice
   // (desktop and mobile), and Git & GitHub has one inline in a callout.
@@ -166,14 +198,44 @@
     );
   }
 
+  // Prefer one the student can actually see — the desktop sidebar copy is
+  // display:none on narrow screens and the mobile copy is hidden on wide ones.
+  function focusField(name) {
+    var all = inputs().filter(function (i) {
+      return i.getAttribute('data-personalize') === name;
+    });
+    var target = all.filter(function (i) { return i.offsetParent !== null; })[0] || all[0];
+    if (!target) return;
+    target.scrollIntoView({ block: 'center' });
+    target.focus();
+    target.select();
+  }
+
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest ? e.target.closest('.personalize-token-unset') : null;
+    if (!el) return;
+    e.preventDefault();
+    focusField(el.getAttribute('data-personalize-field'));
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var el = e.target.classList && e.target.classList.contains('personalize-token-unset')
+      ? e.target : null;
+    if (!el) return;
+    e.preventDefault();
+    focusField(el.getAttribute('data-personalize-field'));
+  });
+
   inputs().forEach(function (input) {
     input.addEventListener('input', function () {
       var name = input.getAttribute('data-personalize');
       if (!FIELDS[name]) return;
       write(name, input.value.trim());
-      apply();
+      render();
     });
   });
 
-  apply();   // also what strips the placeholder hrefs when nothing is set yet
+  wrap();
+  render();   // also what strips the placeholder hrefs when nothing is set yet
 })();

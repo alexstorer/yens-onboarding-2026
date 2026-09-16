@@ -275,13 +275,14 @@
   border: 1px solid #e8e3db;
   border-radius: 6px;
 }
-/* ── Username field ───────────────────────────────────────────────────────
-   Lives inside a Tip callout on Git & GitHub; typing a username rewrites the
-   YOUR_GITHUB_USERNAME placeholders in every command and link on the page
-   (assets/js/username-fill.js). The prefix is a <label>, so clicking
-   "github.com/" focuses the field, and the pair reads as the one URL it is
-   completing rather than as a stray form control. */
-.main-content .username-fill-field {
+/* ── Inline identifier field ───────────────────────────────────────────────
+   The in-page twin of the sidebar fields, used in a Tip callout where a page
+   first needs the value: GitHub on Git & GitHub, SUNet ID on Connecting to the
+   Yens. Both feed assets/js/personalize.js. The affix is a <label>, so
+   clicking "github.com/" or "@stanford.edu" focuses the field, and the pair
+   reads as the one identifier it is completing rather than as a stray form
+   control. */
+.main-content .personalize-field {
   display: inline-flex;
   align-items: stretch;
   overflow: hidden;
@@ -290,11 +291,11 @@
   border-radius: 5px;
   background: #fff;
 }
-.main-content .username-fill-field:focus-within {
+.main-content .personalize-field:focus-within {
   border-color: #8c1515;
   box-shadow: 0 0 0 2px rgba(140, 21, 21, 0.14);
 }
-.main-content .username-fill-prefix {
+.main-content .personalize-affix {
   display: flex;
   align-items: center;
   padding: 0.25rem 0.5rem;
@@ -305,7 +306,7 @@
   font-size: 0.85rem;
   cursor: text;
 }
-.main-content .username-fill-field input {
+.main-content .personalize-field input {
   width: 11rem;
   padding: 0.25rem 0.55rem;
   border: 0;
@@ -314,15 +315,21 @@
   font-size: 0.9rem;
   color: #1c1e21;
 }
-.main-content .username-fill-field input:focus { outline: none; }
-.main-content .username-fill-status {
+.main-content .personalize-field input:focus { outline: none; }
+/* A trailing affix — @stanford.edu on the SUNet field — is the same chip with
+   its divider on the other side. */
+.main-content .personalize-affix-end {
+  border-right: 0;
+  border-left: 1px solid #e7e3dc;
+}
+.main-content .personalize-field-status {
   margin-left: 0.4rem;
   font-size: 0.85rem;
   font-weight: 600;
   color: #1a7f5a;
   white-space: nowrap;
 }
-.main-content .username-fill-status:empty { display: none; }
+.main-content .personalize-field-status:empty { display: none; }
 
 /* A link waiting on a value has had its href stripped by personalize.js, so it
    must not keep inviting a click. Reads as body text with a dotted underline,
@@ -405,6 +412,37 @@
   margin: 0;
   font-size: 0.7rem;
   color: #8a857c;
+}
+
+/* A placeholder personalize.js has not been able to fill yet. Marked and
+   clickable, because a student who never noticed the sidebar finds it here, in
+   the command they were about to copy. Amber rather than any of the code-block
+   tab colours: this is "you still have to do something", not a category. */
+.personalize-token-unset {
+  background: rgba(214, 138, 42, 0.16);
+  border-radius: 2px;
+  padding: 0 1px;
+  color: #8a5a12;
+  cursor: pointer;
+  text-decoration: underline dashed rgba(138, 90, 18, 0.6);
+  text-underline-offset: 0.15em;
+}
+.personalize-token-unset:hover,
+.personalize-token-unset:focus {
+  background: rgba(214, 138, 42, 0.3);
+  outline: none;
+}
+/* Inside an SVG diagram the token is a <tspan>, where background does not
+   paint — carry the signal on the fill colour instead. */
+text .personalize-token-unset,
+tspan.personalize-token-unset {
+  fill: #8a5a12;
+  font-style: italic;
+}
+/* Filled in: no call to action, just a hint that the value came from the
+   sidebar rather than being literal page text. */
+.personalize-token {
+  text-underline-offset: 0.15em;
 }
 
 /* ── Where does this go? ──────────────────────────────────────────────────

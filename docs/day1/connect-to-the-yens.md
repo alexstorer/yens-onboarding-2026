@@ -45,6 +45,12 @@ The Yens are available to all researchers at GSB — faculty, PhD students, post
 
 ---
 
+{: .tip }
+> **Type your SUNet ID** and every command on these pages fills itself in, so you can copy
+> and paste them without editing. It stays in this browser.
+>
+> <span class="personalize-field"><input id="sunet-id" data-personalize="sunet" type="text" placeholder="jdoe" spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="off"><label class="personalize-affix personalize-affix-end" for="sunet-id">@stanford.edu</label></span> <span class="personalize-field-status" data-personalize-status></span>
+
 ## What Are the Yens?
 
 The Yens are a 17-node shared research computing cluster: 5 interactive nodes you SSH into directly, and 12 nodes accessible only through the SLURM scheduler (Day 2). All 17 nodes share the same file system — a file you write on yen1 is instantly visible on every other node.
@@ -156,9 +162,9 @@ ls /yen/projects/                 # shared project storage
 > Both are features of the **shell**, not of the Yens, so they work the same in a terminal on your laptop. More in [Command Line Basics]({{ '/reference/command-line-basics/' | relative_url }}).
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 ---
 
