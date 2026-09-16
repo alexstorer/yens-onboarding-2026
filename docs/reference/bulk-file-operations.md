@@ -17,9 +17,9 @@ It is **optional background reading** — nothing in class depends on it. Work t
 your own laptop whenever you like; it takes about 25 minutes.
 
 {: .note }
-> This page assumes you have already done [Command Line Basics]({{ '/reference/command-line-basics/' | relative_url }}) —
-> `pwd`, `ls`, `cd`, `mkdir`, `cp`, `mv`, `rm`, and the difference between an
-> absolute and a relative path.
+> This page assumes you are comfortable with the basics — `pwd`, `ls`, `cd`, `mkdir`,
+> `cp`, `mv`, `rm`, and the difference between an absolute and a relative path. If not,
+> start with <a href="https://gsbdarc.github.io/gsb-research-computing-ai-skills/day1/command-spire/" target="_blank" rel="noopener noreferrer">the command line walkthrough</a>.
 
 ---
 

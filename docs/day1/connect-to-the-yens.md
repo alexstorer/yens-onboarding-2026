@@ -24,6 +24,13 @@ first time. Where your files go once you are there is the next section,
 > that was never provisioned is the one problem on this page you cannot solve on your own —
 > flag it and an instructor will come to you.
 
+{: .tip }
+> **New to the terminal, or lost partway through?** Work through
+> <a href="https://gsbdarc.github.io/gsb-research-computing-ai-skills/day1/command-spire/" target="_blank" rel="noopener noreferrer">the command line walkthrough</a>
+> from our research computing course, at your own pace — `pwd`, `ls`, `cd`, and the
+> difference between an absolute and a relative path. Nothing here depends on finishing it
+> first.
+
 ---
 
 ## Why Use a Server at All?
@@ -169,7 +176,7 @@ ls /yen/projects/                 # shared project storage
 >
 > <kbd>Tab</kbd> is also the fastest way to check a path *before* you run something. If it refuses to complete, what you have typed so far doesn't exist — a wrong directory caught in a keystroke instead of in an error message. Try it now: type `ls /yen/pro` and press <kbd>Tab</kbd>.
 >
-> Both are features of the **shell**, not of the Yens, so they work the same in a terminal on your laptop. More in [Command Line Basics]({{ '/reference/command-line-basics/' | relative_url }}).
+> Both are features of the **shell**, not of the Yens, so they work the same in a terminal on your laptop. More in <a href="https://gsbdarc.github.io/gsb-research-computing-ai-skills/day1/command-spire/" target="_blank" rel="noopener noreferrer">the command line walkthrough</a>.
 
 {: .note }
 > 🔴 **Red sticky** = I need help

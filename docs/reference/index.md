@@ -11,7 +11,6 @@ permalink: /reference/
 
 | Page | What it covers |
 |---|---|
-| [Command Line Basics]({{ '/reference/command-line-basics/' | relative_url }}) | `pwd`, `ls`, `cd`, `mkdir`, `cp`, `mv`, `rm`; absolute vs. relative paths |
 | [Transferring Files (scp)]({{ '/reference/transferring-files/' | relative_url }}) | Copying files between your laptop and the cluster |
 | [Bulk File Operations]({{ '/reference/bulk-file-operations/' | relative_url }}) | Wildcards, pipes, `grep`, `cut`, `sort`, `uniq`, and auditing a data delivery |
 | [Handling LLM Failure Modes]({{ '/reference/llm-failure-modes/' | relative_url }}) | Hallucination, inconsistency, and validating output at scale |
