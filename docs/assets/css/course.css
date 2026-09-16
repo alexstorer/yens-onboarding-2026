@@ -226,6 +226,41 @@
   background: #a4001d;
 }
 
+/* ── Exercise headings ────────────────────────────────────────────────────
+   Part 1 alternates reading and doing, and the doing is the part a student
+   cannot skip. Mark it with the same 3px cardinal rail the callouts and the
+   terminal tabs already use, so the heading and the .exercise callout beneath
+   it read as one block rather than two unrelated things.
+
+   Keyed off the id, not a class: any heading that starts with "Exercise" picks
+   this up, so the convention holds without an author remembering to tag it.
+   h3 is included for exercises that belong to a parent section — the
+   .gitignore one sits under Never Commit a Password. */
+.main-content h2[id^="exercise"],
+.main-content h3[id^="exercise"] {
+  padding: 0.3rem 0 0.35rem 0.9rem;
+  border-left: 6px solid #1c1e21;
+  color: #8c1515;
+}
+/* In CSS rather than the heading text, so the emoji stays out of the anchor
+   id and out of the sidebar nav. */
+.main-content h2[id^="exercise"]::before,
+.main-content h3[id^="exercise"]::before {
+  content: "\01F449";
+  margin-right: 0.45rem;
+}
+
+/* Quiz headings get the same rail in cardinal — the colour the quiz already
+   uses for its numbered discs, so the heading belongs to the questions under
+   it. Inverted against the exercise heading on purpose: exercise is a black
+   rail with cardinal type, quiz is a cardinal rail with body type, so the two
+   never read as the same thing at a glance. */
+.main-content h2[id^="quiz"],
+.main-content h3[id^="quiz"] {
+  padding: 0.3rem 0 0.35rem 0.9rem;
+  border-left: 6px solid #8c1515;
+}
+
 /* ── Sidebar section accents ──────────────────────────────────────────────
    Day 1, Day 2 and Reference each get their spine colour from the deck's
    Agenda. Matching on the permalink means the stripe follows the section's

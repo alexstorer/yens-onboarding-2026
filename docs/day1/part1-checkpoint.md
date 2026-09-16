@@ -72,7 +72,7 @@ Inside Claude, confirm the skill took:
 {: .claude }
 
 If `gh auth status` reports you are not logged in, your token never landed — go back to
-[Step 3 of the Git exercise]({{ '/day1/git-and-github/#exercise' | relative_url }}). The
+[Step 3 of the Git exercise]({{ '/day1/git-and-github/#exercise--fork-clone-and-push' | relative_url }}). The
 push in check 3 proves the other half: if it asks you for a password, you ran
 `gh auth login` but not `gh auth setup-git`.
 

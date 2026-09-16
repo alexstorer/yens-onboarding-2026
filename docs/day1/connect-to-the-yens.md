@@ -138,8 +138,8 @@ The **CPU** is the processor chip. **Cores** are the individual workers inside i
 
 Log in to the Yens for the first time and get your bearings.
 
-{: .important }
-> **Task:** Connect to the Yens cluster over SSH, identify which interactive Yen you landed on, and read the login banner.
+{: .exercise }
+> Connect to the Yens cluster over SSH, identify which interactive Yen you landed on, and read the login banner.
 
 **Connect:**
 ```bash
@@ -163,7 +163,7 @@ whoami        # confirm you are logged in as yourself
 ```bash
 ls ~                              # your home directory on the Yens
 pwd                               # /home/users/SUNetID
-ls /scratch/users/$USER           # your personal scratch — created for you automatically
+ls /scratch/users/SUNetID         # your personal scratch — created for you automatically
 ls /yen/projects/                 # shared project storage
 ```
 {: .yens }
