@@ -333,22 +333,27 @@ bash scripts/install_github_for_research_skill.sh
 {: .note }
 > This is a one-time setup. Not sure if it's already installed? Just ask Claude Code — `> do you have the github-for-research skill?` — or run the command again; it's safe to re-run. The skill's home is `gsbdarc/claude-skill-github-for-research`.
 
-{: .tip }
-> **See it for yourself — Claude lives in hidden files.** Look at the last thing the installer printed:
->
-> ```
-> Skill installed at: /home/users/SUNetID/.claude/skills/github-for-research
-> ```
->
-> That `.claude` is a **dotfile** — the hidden names from Command Line Basics, the ones a plain `ls` won't show you. It's where Claude Code keeps its settings, skills, and memory. Go and look:
->
-> ```bash
-> ls -a ~
-> ls ~/.claude
-> ls ~/.claude/skills
-> ```
->
-> The first reveals the hidden `.claude` folder among the other dotfiles; the second shows settings, skills, and memory; the third shows the skill you just installed, sitting there as an ordinary folder. Open one up — `cat ~/.claude/skills/github-for-research/SKILL.md` is the very text Claude will follow. Nothing here is magic: it's plain text in hidden files, readable and editable like anything else you've touched today.
+<details markdown="1">
+<summary>See it for yourself — Claude lives in hidden files</summary>
+
+Look at the last thing the installer printed:
+
+```
+Skill installed at: /home/users/SUNetID/.claude/skills/github-for-research
+```
+
+That `.claude` is a **dotfile** — a name starting with a dot, which a plain `ls` won't show you. It's where Claude Code keeps its settings, skills, and memory. Go and look:
+
+```bash
+ls -a ~
+ls ~/.claude
+ls ~/.claude/skills
+```
+{: .yens }
+
+The first reveals the hidden `.claude` folder among the other dotfiles; the second shows settings, skills, and memory; the third shows the skill you just installed, sitting there as an ordinary folder. Open one up — `cat ~/.claude/skills/github-for-research/SKILL.md` is the very text Claude will follow. Nothing here is magic: it's plain text in hidden files, readable and editable like anything else you've touched today.
+
+</details>
 
 {: .note }
 > 🔴 **Red sticky** = I need help
