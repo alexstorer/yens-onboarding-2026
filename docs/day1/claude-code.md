@@ -20,6 +20,13 @@ In **Git & GitHub for Research** you worked through fork, clone, branch, commit,
 
 **Claude Code** is an AI assistant that lives in your terminal: you describe what you want in plain English, and it does the work — running commands, editing files, and handling git for you.
 
+{: .note }
+> **We teach Claude Code, but we have no preference.** OpenAI's **Codex** is the other
+> widely used terminal assistant, and it is on the Yens too — `ml codex`. Almost
+> everything in this section is about how tools of this kind work, what they can reach,
+> and what you must not feed them; that carries over. We picked one so the exercises could
+> give you exact commands to follow. Use whichever you prefer, or both.
+
 You just saw *why* keeping your work in GitHub is worth the trouble (see [Git & GitHub for Research]({{ '/day1/git-and-github/' | relative_url }})) — and those are exactly the habits Claude Code can handle for you. You will **not** memorize the commands for any of it. You say *"log this as an issue"* or *"try this on a branch,"* and Claude Code does it. Git is one of the most heavily documented tools in existence — decades of commands, error messages, and public questions and answers — so its workflow is something Claude knows cold rather than something you have to spell out. It can also read the repository's actual state as it goes, so it checks where it is instead of guessing.
 
 **Getting access.** You don't need a personal account. Stanford runs **Claude for Education** — a secure, university-managed environment — and it's **free for everyone at Stanford**.
@@ -301,9 +308,9 @@ cd ~/yens-onboarding-2026
 {: .yens }
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 ---
 
@@ -326,27 +333,32 @@ bash scripts/install_github_for_research_skill.sh
 {: .note }
 > This is a one-time setup. Not sure if it's already installed? Just ask Claude Code — `> do you have the github-for-research skill?` — or run the command again; it's safe to re-run. The skill's home is `gsbdarc/claude-skill-github-for-research`.
 
-{: .tip }
-> **See it for yourself — Claude lives in hidden files.** Look at the last thing the installer printed:
->
-> ```
-> Skill installed at: /home/users/SUNetID/.claude/skills/github-for-research
-> ```
->
-> That `.claude` is a **dotfile** — the hidden names from Command Line Basics, the ones a plain `ls` won't show you. It's where Claude Code keeps its settings, skills, and memory. Go and look:
->
-> ```bash
-> ls -a ~
-> ls ~/.claude
-> ls ~/.claude/skills
-> ```
->
-> The first reveals the hidden `.claude` folder among the other dotfiles; the second shows settings, skills, and memory; the third shows the skill you just installed, sitting there as an ordinary folder. Open one up — `cat ~/.claude/skills/github-for-research/SKILL.md` is the very text Claude will follow. Nothing here is magic: it's plain text in hidden files, readable and editable like anything else you've touched today.
+<details markdown="1">
+<summary>See it for yourself — Claude lives in hidden files</summary>
+
+Look at the last thing the installer printed:
+
+```
+Skill installed at: /home/users/SUNetID/.claude/skills/github-for-research
+```
+
+That `.claude` is a **dotfile** — a name starting with a dot, which a plain `ls` won't show you. It's where Claude Code keeps its settings, skills, and memory. Go and look:
+
+```bash
+ls -a ~
+ls ~/.claude
+ls ~/.claude/skills
+```
+{: .yens }
+
+The first reveals the hidden `.claude` folder among the other dotfiles; the second shows settings, skills, and memory; the third shows the skill you just installed, sitting there as an ordinary folder. Open one up — `cat ~/.claude/skills/github-for-research/SKILL.md` is the very text Claude will follow. Nothing here is magic: it's plain text in hidden files, readable and editable like anything else you've touched today.
+
+</details>
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 
 ### Bonus — investigate a well-kept repo

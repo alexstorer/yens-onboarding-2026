@@ -24,7 +24,7 @@ Version control tracks every change you make to a project — who changed what, 
 > **Type your GitHub username** and every command on these pages fills itself in, so you can
 > copy and paste them without editing. It stays in this browser.
 >
-> <span class="username-fill-field"><label class="username-fill-prefix" for="gh-username">github.com/</label><input id="gh-username" type="text" placeholder="username" spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="off"></span> <span id="gh-username-status" class="username-fill-status"></span>
+> <span class="personalize-field"><label class="personalize-affix" for="gh-username">github.com/</label><input id="gh-username" data-personalize="github" type="text" placeholder="username" spellcheck="false" autocapitalize="none" autocorrect="off" autocomplete="off"></span> <span class="personalize-field-status" data-personalize-status></span>
 
 <svg viewBox="0 0 760 176" role="img" aria-labelledby="gd1-title" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;max-width:680px;height:auto;margin:1.5rem auto" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
   <title id="gd1-title">Git saves snapshots on your machine; GitHub stores them in the cloud. You push commits up to your fork and pull updates back down.</title>
@@ -282,9 +282,9 @@ git push -u origin experiment
 > Each day's capstone is handed in the same way — a `git push` to your fork. Come back to these steps whenever you need to save work.
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 ---
 

@@ -33,16 +33,14 @@ fast, do the bonus exercises to level up (rather than moving ahead to future sec
 
 Work through them in order — each builds on the one before.
 
-| Section | Format | Give it about | What you'll learn |
-|---|---|---|---|
-| [Connecting to the Yens]({{ '/day1/connect-to-the-yens/' | relative_url }}) | 💻 Hands-on | 10 min | Log in over SSH, and understand what a remote server is and why research uses one |
-| [Your Data on the Yens]({{ '/day1/your-data/' | relative_url }}) | 💻 Hands-on | 5 min | Home, projects and scratch — which are backed up, how to check your quota, and what's eating it |
-| [Git & GitHub for Research]({{ '/day1/git-and-github/' | relative_url }}) | 💻 Hands-on | 13 min | Fork, clone, branch, commit, push — and why a research project wants version control |
-| [Working with Claude Code]({{ '/day1/claude-code/' | relative_url }}) | 📖 Read + 💻 hands-on | 22 min | Concepts first, then you set it up, learn the controls, and give it a real task |
-| [Part 1 Checkpoint]({{ '/day1/part1-checkpoint/' | relative_url }}) | ✅ Checkpoint | 10 min | Ten minutes proving the four things the rest of the course depends on actually work |
+{: .tip }
+> There's lots of prose on these pages! If you're running low on time, feel free to skim
+> it. Make sure you finish the checkpoint by 10:30.
 
-{: .note }
-> The checkpoint closes Part 1, and everything in
-> [Part 2]({{ '/day1/part2/' | relative_url }}) assumes all four of its items work — so run
-> it before you move on, while there is still someone circulating who can help with
-> whatever is broken.
+| Section | Format | What you'll learn |
+|---|---|---|
+| [Connecting to the Yens]({{ '/day1/connect-to-the-yens/' | relative_url }}) | 💻 Hands-on | Log in over SSH, and understand what a remote server is and why research uses one |
+| [Your Data on the Yens]({{ '/day1/your-data/' | relative_url }}) | 💻 Hands-on | Home, projects and scratch — which are backed up, how to check your quota, and what's eating it |
+| [Git & GitHub for Research]({{ '/day1/git-and-github/' | relative_url }}) | 💻 Hands-on | Fork, clone, branch, commit, push — and why a research project wants version control |
+| [Working with Claude Code]({{ '/day1/claude-code/' | relative_url }}) | 📖 Read + 💻 hands-on | Concepts first, then you set it up, learn the controls, and give it a real task |
+| [Part 1 Checkpoint]({{ '/day1/part1-checkpoint/' | relative_url }}) | ✅ Checkpoint | Ten minutes proving the four things the rest of the course depends on actually work |

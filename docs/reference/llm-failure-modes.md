@@ -30,7 +30,7 @@ Let's crowdsource your experiences with LLM failure modes. What are some differe
   > *Source: [Minnesota Reformer](https://minnesotareformer.com/2024/12/02/misinformation-expert-used-ai-to-draft-testimony-containing-misinformation-about-ai/).*
 
 - **Inconsistency** — ask the same question twice and you may get two different answers (model outputs are probabilistic). Downstream tasks also often depend on the output having a consistent format or type, and that is not something you get for free.
-- **A lack of guardrails** — this matters most for **agentic** LLMs (like Claude Code), which don't just answer but act on your system. An agent inherits the permissions you give it, so be deliberate about which ones you hand over: some actions can't be taken back, and — as you saw with `rm` on [Day 1]({{ '/reference/command-line-basics/' | relative_url }}) — deleting or overwriting a file on the command line leaves nothing to recover.
+- **A lack of guardrails** — this matters most for **agentic** LLMs (like Claude Code), which don't just answer but act on your system. An agent inherits the permissions you give it, so be deliberate about which ones you hand over: some actions can't be taken back, and — as you saw with `rm` — deleting or overwriting a file on the command line leaves nothing to recover.
 
   {: .aside }
   > **Real-world case:** in early 2026 a user asked Claude to organize a desktop, and it deleted a folder holding roughly 15 years of family photos — thousands of files — with irreversible terminal commands.

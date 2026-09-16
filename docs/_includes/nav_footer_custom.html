@@ -1,0 +1,33 @@
+<!-- Sidebar personalization: the student's SUNet ID and GitHub username, filled
+     into every command on the site by assets/js/personalize.js.
+
+     This include lands in BOTH components/sidebar.html (desktop) and
+     components/footer.html (mobile), so it renders twice on every page — hence
+     data-personalize attributes rather than ids, which would collide. The
+     script treats every input carrying the same data-personalize value as a
+     view onto one stored value and keeps them in step. -->
+
+<div class="personalize">
+  <p class="personalize-title">Your details</p>
+  <p class="personalize-blurb">Set these once and the commands on every page fill
+    themselves in. Stored in this browser.</p>
+
+  <label class="personalize-row">
+    <span class="personalize-name">SUNet ID</span>
+    <input class="personalize-input" data-personalize="sunet" type="text"
+           placeholder="e.g. jdoe" spellcheck="false" autocapitalize="none"
+           autocorrect="off" autocomplete="off">
+  </label>
+
+  <label class="personalize-row">
+    <span class="personalize-name">GitHub</span>
+    <input class="personalize-input" data-personalize="github" type="text"
+           placeholder="e.g. jane-doe" spellcheck="false" autocapitalize="none"
+           autocorrect="off" autocomplete="off">
+  </label>
+
+  <p class="personalize-status" data-personalize-status></p>
+</div>
+
+<p class="personalize-credit">Built with
+  <a href="https://github.com/just-the-docs/just-the-docs" target="_blank" rel="noopener noreferrer">Just the Docs</a>.</p>
