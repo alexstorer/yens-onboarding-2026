@@ -163,7 +163,7 @@ whoami        # confirm you are logged in as yourself
 ```bash
 ls ~                              # your home directory on the Yens
 pwd                               # /home/users/SUNetID
-ls /scratch/users/$USER           # your personal scratch — created for you automatically
+ls /scratch/users/SUNetID         # your personal scratch — created for you automatically
 ls /yen/projects/                 # shared project storage
 ```
 {: .yens }
