@@ -224,9 +224,15 @@ to GitHub, it is already somewhere else.
 Knowing where data goes is half of it; putting it there is the other half. Three routes,
 depending on where the data is coming from — you will practice the first one below:
 
-- **From your laptop** — `scp`, covered in [Transferring Files]({{ '/reference/transferring-files/' | relative_url }}). Run it *from the laptop*, in its own terminal, not from inside your SSH session.
-- **From GitHub** — `git clone`, which is how the course repo gets here in [Git & GitHub]({{ '/day1/git-and-github/' | relative_url }}).
-- **Moving a lot of files at once** — [Bulk File Operations]({{ '/reference/bulk-file-operations/' | relative_url }}).
+- **From your laptop** — `scp`. Run it *from the laptop*, in its own terminal, not from inside your SSH session.
+- **From GitHub** — `git clone`, which is how the course repo gets here in Git & GitHub.
+- **Moving a lot of files at once** — wildcards and pipes: `*`, `grep`, `cut`, `sort`, `uniq`.
+
+{: .tip }
+> If you're unfamiliar with the command line, check out our
+> [reference guide]({{ '/reference/command-line/' | relative_url }}). This compressed class
+> can't teach you everything you need to know, but our longer self-paced course may provide
+> some helpful tools.
 
 ---
 
