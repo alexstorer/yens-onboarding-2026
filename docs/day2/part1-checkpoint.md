@@ -29,5 +29,20 @@ scheduler instead of holding a terminal open.
 {: .note }
 > 🔴 **Red sticky** = something on the list is missing.
 >
-> 🟢 **Green sticky** = you have completed all 5. Feel free to go back to the bonus
-> exercises if you still have time, or help your table.
+> 🟢 **Green sticky** = you have all five. Put it up, then **ask whether anyone at your table
+> is still working** — explaining a thing you just learned is the fastest way to find out
+> whether you actually learned it.
+
+---
+
+## Bonus Work
+
+Checkpoint passed and your table sorted? Everything Part 1 folded away is here, so you do
+not have to go hunting back through the pages:
+
+| Page | Bonus |
+|---|---|
+| [1. Profile]({{ '/day2/profiling/' | relative_url }}) | [Profile two more scripts]({{ '/day2/profiling/#bonus-more-scripts' | relative_url }}) · [explore real cluster usage data]({{ '/day2/profiling/#bonus-cluster-usage' | relative_url }}) · [size up your own machine]({{ '/day2/profiling/#bonus-your-machine' | relative_url }}) |
+| [2. Document]({{ '/day2/resource-profile/' | relative_url }}) | [Let Claude write it into the README]({{ '/day2/resource-profile/#bonus-claude-readme' | relative_url }}) |
+| [3. Submit]({{ '/day2/submit-a-slurm-job/' | relative_url }}) | [Other ways to run and inspect jobs]({{ '/day2/submit-a-slurm-job/#bonus-other-ways' | relative_url }}) · [turn this into a Claude skill]({{ '/day2/submit-a-slurm-job/#bonus-claude-skill' | relative_url }}) |
+| [4. Read Logs]({{ '/day2/debug-a-failed-job/' | relative_url }}) | [Three more broken jobs]({{ '/day2/debug-a-failed-job/#bonus-more-broken-jobs' | relative_url }}) · [let Claude read the log for you]({{ '/day2/debug-a-failed-job/#bonus-claude-reads-log' | relative_url }}) |

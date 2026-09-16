@@ -194,7 +194,7 @@ time python scripts/mystery_script.py
 
 As the script runs, watch new `python` rows appear — that's it spawning work. Count them to answer "how many processes did it run?"
 
-Answer each one in your head, then open it to check.
+Answer each one from your own output, then open it to check.
 
 <details class="quiz" markdown="1">
 <summary><span class="qnum">1</span><span class="qtext">How long did it take, and how much RAM did it peak at?</span></summary>
@@ -214,9 +214,9 @@ processes** in `htop` — one process per core.
 </details>
 
 <details class="quiz" markdown="1">
-<summary><span class="qnum">3</span><span class="qtext">Serial or parallel, and what decided it?</span></summary>
+<summary><span class="qnum">3</span><span class="qtext">Serial or parallel, and how do you know?</span></summary>
 
-**Parallel, and the script decided.** Open `scripts/mystery_script.py` and you will find
+**Parallel.** Open `scripts/mystery_script.py` and you will find
 `num_cores = 4`: it deliberately starts four worker processes, one per core, which is exactly
 what made it a multi-core program.
 
@@ -294,7 +294,7 @@ Watch Terminal 2 as the 10 filings process one after another.
 > - **`user`** — CPU time your code used across all cores (if `user` > `real`, it ran on multiple cores in parallel)
 > - **`sys`** — CPU time spent on OS-level work (file I/O, memory allocation)
 
-Answer each one in your head, then open it to check.
+Answer each one from your own output, then open it to check.
 
 <details class="quiz" markdown="1">
 <summary><span class="qnum">1</span><span class="qtext">You watched <code>userload</code> through the whole run. What did Cores and % Mem do?</span></summary>
@@ -307,9 +307,9 @@ Answer each one in your head, then open it to check.
 <details class="quiz" markdown="1">
 <summary><span class="qnum">2</span><span class="qtext">Ten filings took about 20 seconds, yet Cores stayed near 0. Where did the time go?</span></summary>
 
-**Into waiting on the network.** The job spends almost all its time waiting for the Anthropic
-API to answer, so it barely touches the CPU. That makes it **I/O-bound** — unlike the mystery
-script, which was **CPU-bound** and doing real math.
+**Into waiting on the Anthropic API.** The job sends a filing, then sits idle until the
+answer comes back — so it barely touches the CPU. That is the opposite of the mystery script,
+which was **CPU-bound**: four cores doing real math, with nothing to wait for.
 
 The `time` output is the fingerprint. A typical run: `real 0m22.5s`, `user 0m1.9s`,
 `sys 0m0.5s` — roughly 2 seconds of actual work against 20 of waiting. Whenever `real` ≫ `user`,
@@ -317,6 +317,15 @@ you are looking at a job that mostly waits.
 
 Per-filing times vary too: each takes however long the API takes, so ten filings is not exactly
 ten times one.
+
+**Every script has a bottleneck.** When you optimize code, optimize the bottleneck first:
+
+| Bottleneck | The job is waiting on | Typical fingerprint |
+|---|---|---|
+| **CPU-bound** | computation — cores doing math | `user` ≥ `real`, cores pegged |
+| **I/O-bound** | the file system — reading and writing data | low CPU, and it gets worse with more files |
+| **Memory-bound** | RAM it does not have, so it keeps returning to storage | RAM at the ceiling, and the job crawls |
+| **Network-bound** | a reply from another machine — here, the Anthropic API | `real` ≫ `user`, cores near 0 |
 
 </details>
 
@@ -357,7 +366,11 @@ inside your limits.
 
 </details>
 
-<details markdown="1">
+{: .important }
+> **Finish all four pages before you start any bonus.** The numbers you write down on one
+> page are the inputs to the next, and Part 2 assumes all four are done.
+
+<details id="bonus-more-scripts" markdown="1">
 <summary>⭐ Bonus — profile two more scripts</summary>
 
 **Bonus — Vectorized vs. Non-Vectorized**
@@ -392,7 +405,7 @@ Document what changes:
 
 </details>
 
-<details markdown="1">
+<details id="bonus-cluster-usage" markdown="1">
 <summary>⭐ Bonus — explore real cluster usage data</summary>
 
 You have just measured one script. A live Yen node is running dozens of other people's
@@ -406,7 +419,7 @@ real `yenstop` capture, explored with Claude.
 
 </details>
 
-<details markdown="1">
+<details id="bonus-your-machine" markdown="1">
 <summary>⭐ Bonus — size up your own machine</summary>
 
 Put your own machine's numbers against a Yen node's, and price the same work in the

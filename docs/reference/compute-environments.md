@@ -2,7 +2,7 @@
 layout: default
 title: "Compute Environments"
 parent: "Reference"
-nav_order: 11
+nav_order: 6
 permalink: /reference/compute-environments/
 ---
 

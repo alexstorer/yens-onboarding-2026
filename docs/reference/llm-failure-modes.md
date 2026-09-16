@@ -2,7 +2,7 @@
 layout: default
 title: "Handling LLM Failure Modes"
 parent: "Reference"
-nav_order: 10
+nav_order: 4
 permalink: /reference/llm-failure-modes/
 ---
 
