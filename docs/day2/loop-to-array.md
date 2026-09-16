@@ -127,9 +127,8 @@ does a task work out which part of the work is its own?
 <details markdown="1">
 <summary>💡 Where does the array start?</summary>
 
-Did you start the index at 0 or at 1? For 100 filings the directive is `--array=0-99`.
-
-Whichever you pick has to agree with how you index the filing list.
+Did you start the index at 0 or at 1? Whichever you pick has to agree with how you index the
+filing list.
 
 </details>
 

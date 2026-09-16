@@ -2,7 +2,7 @@
 layout: default
 title: "Bulk File Operations"
 parent: "Reference"
-nav_order: 2
+nav_order: 3
 permalink: /reference/bulk-file-operations/
 ---
 

@@ -113,7 +113,11 @@ You'll also want a completion email, so ask Claude to add the notification lines
 
 Then resubmit — **keep debugging and resubmitting until the Slurm email says the job succeeded** (exit status `0`).
 
-<details markdown="1">
+{: .important }
+> **Finish all four pages before you start any bonus.** The numbers you write down on one
+> page are the inputs to the next, and Part 2 assumes all four are done.
+
+<details id="bonus-more-broken-jobs" markdown="1">
 <summary>⭐ Bonus — three more broken jobs</summary>
 
 **Bonus — Debug `fix_me_2.slurm`**
@@ -148,7 +152,7 @@ The trickiest one: it hides *two* bugs — one in the Slurm script and one in th
 
 </details>
 
-<details markdown="1">
+<details id="bonus-claude-reads-log" markdown="1">
 <summary>⭐ Bonus — let Claude read the log for you</summary>
 
 *Print mode — `claude -p`.*

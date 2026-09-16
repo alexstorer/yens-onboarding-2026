@@ -81,12 +81,9 @@ bounds in a fresh array exactly as it was in the first one.
 | | What it limits | Where to see it |
 |---|---|---|
 | **`MaxArraySize`** | The highest task **index** — so also the largest array | `scontrol show config \| grep MaxArraySize` |
-| **`%` throttle** | How many tasks run **at once**, without changing how many exist — `--array=0-511%20` keeps 20 running | your own directive |
+| **`%` throttle** | How many tasks run **at once**, without changing how many exist — `--array=0-511%20` still submits all 512, but never more than 20 at a time. Not to be confused with a step, which is `:` — `--array=0-511:20` submits **26** tasks, indices 0, 20, 40 … 500 | your own directive |
 | **QoS caps** | How much of a partition **one user** may hold — running jobs, submitted jobs, total cores | `sacctmgr show qos normal` |
 | **`--time`** | Per **task**, not per array. A hundred tasks each get the full allowance | your own directive |
-
-The `%` throttle is the one people wish they had known about sooner: it is how you run a
-large array without taking the whole partition, and it costs you nothing but wall-clock.
 
 ---
 
@@ -98,12 +95,6 @@ tasks per submission.
 Work out how to process all 992. You have everything you need — page 2's array, page 3's
 rerun-safety, and the limit above. Hints are at the bottom if you want them; use Claude to
 think it through or work it out on paper, but be able to explain the route you chose.
-
-{: .warning }
-> **992 API calls is real money, and the whole room is submitting at once.** Work the cost
-> out from your 100-filing numbers *before* you submit, and **check the number with an
-> instructor**. This is the one job today where getting the arithmetic wrong is expensive
-> rather than merely slow.
 
 ## Size it
 

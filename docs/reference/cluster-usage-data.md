@@ -2,7 +2,7 @@
 layout: default
 title: "Exploring Cluster Usage Data"
 parent: "Reference"
-nav_order: 4
+nav_order: 5
 permalink: /reference/cluster-usage-data/
 ---
 
