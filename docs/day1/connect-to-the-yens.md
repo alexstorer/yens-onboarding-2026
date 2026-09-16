@@ -176,7 +176,7 @@ ls /yen/projects/                 # shared project storage
 >
 > <kbd>Tab</kbd> is also the fastest way to check a path *before* you run something. If it refuses to complete, what you have typed so far doesn't exist — a wrong directory caught in a keystroke instead of in an error message. Try it now: type `ls /yen/pro` and press <kbd>Tab</kbd>.
 >
-> Both are features of the **shell**, not of the Yens, so they work the same in a terminal on your laptop. More in <a href="https://gsbdarc.github.io/gsb-research-computing-ai-skills/day1/command-spire/" target="_blank" rel="noopener noreferrer">the command line walkthrough</a>.
+> Both are features of the **shell**, not of the Yens, so they work the same in a terminal on your laptop.
 
 {: .note }
 > 🔴 **Red sticky** = I need help
