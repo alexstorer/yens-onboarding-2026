@@ -149,12 +149,12 @@ Version control isn't just bookkeeping — it offers a few concrete advantages f
 
 ---
 
-## Exercise
+## Exercise — Fork, Clone and Push
 
 Set up your copy of the course repo and make your first commit now.
 
-{: .important }
-> **Exercise:** Fork the course repo, clone it to the Yens, authenticate with GitHub, create a branch, commit a file, and push it back to your fork.
+{: .exercise }
+> Fork the course repo, clone it to the Yens, authenticate with GitHub, create a branch, commit a file, and push it back to your fork.
 
 **Step 1 — Fork the course repo**
 {: #fork-and-clone }
@@ -304,9 +304,11 @@ So keep secrets out of the repository from the start. The mechanism is a **`.git
 list of paths git should refuse to track. Write it *before* the file exists, because a
 `.gitignore` added afterwards does nothing about a secret you already committed.
 
-### Exercise — write a `.gitignore`
+### Exercise — Write a `.gitignore`
 
-In your clone, create a `.gitignore` and commit it:
+{: .exercise }
+> Create a `.gitignore` in your clone and commit it, so the files that hold secrets can
+> never be staged by accident.
 
 ```bash
 cd ~/yens-onboarding-2026

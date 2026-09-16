@@ -235,13 +235,13 @@ That has a blunt consequence: **Claude Code can do anything you can do.** It can
 
 Everything above is reading; everything below is on the keyboard. Budget about **20
 minutes**, and work through it in order — each step assumes the one before it. If you are
-running short, [Take It for a Spin](#take-it-for-a-spin) and
+running short, [Take Claude Code for a Spin](#exercise--take-claude-code-for-a-spin) and
 [The github-for-research Skill](#the-github-for-research-skill) are the two that Part 2
 and the checkpoint actually need.
 
-## Take It for a Spin
+## Exercise — Take Claude Code for a Spin
 
-{: .important }
+{: .exercise }
 > **Do this now.** On the Yens, load Claude Code, sign in through Stanford, and give it a first real task. This is the one Claude Code step everyone should complete.
 
 You've been working on the Yens all along — Claude Code runs there too. Connect the way you did in [Connecting to the Yens]({{ '/day1/connect-to-the-yens/' | relative_url }}) if you're not already on:

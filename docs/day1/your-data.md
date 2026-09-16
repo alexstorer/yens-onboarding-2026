@@ -110,10 +110,10 @@ that probably belongs in a project folder.
 
 ---
 
-## Exercise
+## Exercise — Check Your Space
 
-{: .important }
-> **Task:** Find out where you are, how much room you have, and what is using it.
+{: .exercise }
+> Find out where you are, how much room you have, and what is using it.
 
 ```bash
 gsbquota                     # how full is your home directory?
@@ -238,8 +238,9 @@ depending on where the data is coming from — you will practice the first one b
 
 ## Exercise — Copy a File with scp
 
-Get the logo below onto your laptop, then copy it to your scratch space on the Yens with
-`scp`.
+{: .exercise }
+> Get the logo below onto your laptop, then copy it to your scratch space on the Yens with
+> `scp`.
 
 <img src="{{ '/assets/images/gsb-logo.png' | relative_url }}"
      alt="Stanford Graduate School of Business logo" width="220">

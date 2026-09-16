@@ -138,8 +138,8 @@ The **CPU** is the processor chip. **Cores** are the individual workers inside i
 
 Log in to the Yens for the first time and get your bearings.
 
-{: .important }
-> **Task:** Connect to the Yens cluster over SSH, identify which interactive Yen you landed on, and read the login banner.
+{: .exercise }
+> Connect to the Yens cluster over SSH, identify which interactive Yen you landed on, and read the login banner.
 
 **Connect:**
 ```bash
