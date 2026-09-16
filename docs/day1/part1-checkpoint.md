@@ -129,8 +129,13 @@ but not *why*, tell it so and have it try again.
 
 ## Before You Move On
 
-**Be back and ready at 10:30** for the next lecture. If you finish early, the bonus
-exercises are the place to go rather than starting Part 2:
+{: .note }
+> 🟢 **Green sticky** = all four checks ran
+>
+> Put one on your laptop lid so we can see you are through the checkpoint.
+
+**Be back and ready at 10:30** for the next lecture. If you have time before then, have a
+go at the bonus exercises rather than starting Part 2:
 
 - [Skip the repeated logins with SSH multiplexing]({{ '/day1/connect-to-the-yens/#bonus' | relative_url }}) — authenticate once instead of on every connection
 - [Investigate a well-kept repo]({{ '/day1/claude-code/#bonus--investigate-a-well-kept-repo' | relative_url }}) — ask Claude Code questions about a project you have never seen

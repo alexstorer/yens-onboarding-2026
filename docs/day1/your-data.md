@@ -213,9 +213,9 @@ to GitHub, it is already somewhere else.
 </details>
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 ---
 
@@ -265,7 +265,7 @@ ls -lh /scratch/users/SUNetID/gsb-logo.png
 You should see the file and its size — about 89K.
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 
 ---
 

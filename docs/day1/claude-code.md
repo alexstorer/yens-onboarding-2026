@@ -301,9 +301,9 @@ cd ~/yens-onboarding-2026
 {: .yens }
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 ---
 
@@ -344,9 +344,9 @@ bash scripts/install_github_for_research_skill.sh
 > The first reveals the hidden `.claude` folder among the other dotfiles; the second shows settings, skills, and memory; the third shows the skill you just installed, sitting there as an ordinary folder. Open one up — `cat ~/.claude/skills/github-for-research/SKILL.md` is the very text Claude will follow. Nothing here is magic: it's plain text in hidden files, readable and editable like anything else you've touched today.
 
 {: .note }
-> 🟢 **Green sticky** = I'm done and ready &nbsp;&nbsp; 🔴 **Red sticky** = I need help
+> 🔴 **Red sticky** = I need help
 >
-> Put a sticky note on your laptop lid so instructors can see where you are.
+> Put one on your laptop lid if you are stuck and an instructor will come to you.
 
 
 ### Bonus — investigate a well-kept repo
